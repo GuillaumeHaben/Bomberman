@@ -1,6 +1,8 @@
 #include <stdio.h>
 
+using namespace std;
+
 int main(){
-	printf("Bomberman");
+
 	return 0;
 }
