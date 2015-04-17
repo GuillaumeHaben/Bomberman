@@ -1,8 +1,6 @@
 #ifndef PERSONNAGE_H
 #define PERSONNAGE_H
 
-using namespace std;
-
 class Personnage {
 
 public:
