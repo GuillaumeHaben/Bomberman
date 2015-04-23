@@ -24,14 +24,49 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 
 	switch (direction){
 
-		case UP: 
+	case UP: if (p_line - 1 < 0) break;
+			 else{
+				 if (jeu[p_colone][p_line - 1] == MUR) break;
+				 else{
+					 jeu[p_colone][p_line] = VIDE;
+					 jeu[p_colone][p_line - 1] == JOUEUR;
+					 return 0;
+				 }
+			 }
 
-		case DOWN:
+	case DOWN:
+		if (p_line + 1 > 20) break;
+		else{
+			if (jeu[p_colone][p_line + 1] == MUR) break;
+			else{
+				jeu[p_colone][p_line] = VIDE;
+				jeu[p_colone][p_line + 1] == JOUEUR;
+				return 0;
+			}
+		}
 
-		case RIGHT:
+	case RIGHT:
+		if (p_colone + 1 > 20) break;
+		else{
+			if (jeu[p_colone + 1 ][p_line] == MUR) break;
+			else{
+				jeu[p_colone][p_line] = VIDE;
+				jeu[p_colone + 1][p_line] == JOUEUR;
+				return 0;
+			}
+		}
 
-		case LEFT:
-
+	case LEFT:
+		if (p_colone + 1 < 0) break;
+		else{
+			if (jeu[p_colone + 1][p_line] == MUR) break;
+			else{
+				jeu[p_colone][p_line] = VIDE;
+				jeu[p_colone + 1][p_line] == JOUEUR;
+				return 0;
+			}
+		}
 
 	}
+	return -1;
 }

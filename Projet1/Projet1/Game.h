@@ -14,6 +14,7 @@ public:
 
 private:
 	bool end, pause;
+	Case_plateau jeu[TAILLE_JEU][TAILLE_JEU];
 
 };
 #endif

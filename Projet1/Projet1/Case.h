@@ -8,7 +8,8 @@
 enum Case_plateau {
 	VIDE,
 	MUR,
-	BOMBE
+	BOMBE,
+	JOUEUR
 };
 
 const int TAILLE_JEU = 20;
