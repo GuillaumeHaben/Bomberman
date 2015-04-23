@@ -11,7 +11,7 @@ Personnage::Personnage(int pos_x, int pos_y){
 	p_line = pos_y;
 }
 
-/* Destructeur (on verra ça plus tard c'est pas essentiel pour l'instant ) */
+/* Destructeur */
 Personnage::~Personnage(){
 
 }
