@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "Case.h";
+
 class Game {
 
 public:
