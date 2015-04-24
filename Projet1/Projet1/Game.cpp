@@ -26,7 +26,3 @@ bool Game::getPause(){
 Joueur Game::getPrincipal(){
 	return principal;
 }
-
-Case_plateau Game::getJeu(){
-	return jeu;
-}

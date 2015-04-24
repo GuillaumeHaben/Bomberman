@@ -40,15 +40,14 @@ int main( int argc, char* args[] )
 			SDL_UpdateWindowSurface( window );
 
 			// Create game
-			Game plateau = Game();
-			Joueur prncp = plateau.getPrincipal();
+		//	Game plateau = Game();
+		//	Joueur prncp = plateau.getPrincipal();
 
 			//While user hasn't quit
 			while (quit == false)
 			{
 				SDL_WaitEvent(&evn);
-				switch (evn.type)
-				{
+				switch (evn.type){
 				case SDL_QUIT: //Quit Window with X
 					quit = true;
 					break;
@@ -59,6 +58,9 @@ int main( int argc, char* args[] )
 						quit = true;
 						break;
 					}
+					break;
+				default:
+					// prncp.event(plateau.jeu);
 					break;
 				}
 			}
