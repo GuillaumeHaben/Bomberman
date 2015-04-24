@@ -1,8 +1,8 @@
 #ifndef JOUEUR_H
 #define JOUEUR_H
 
-#include "Personnage.h";
-#include "Case.h";
+#include "Personnage.h"
+#include "Case.h"
 
 extern SDL_Event evn;
 

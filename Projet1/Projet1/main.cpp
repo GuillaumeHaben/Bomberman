@@ -14,12 +14,6 @@ SDL_Surface* screenSurface = NULL;
 //Event system
 SDL_Event evn;
 
-void clean_up()
-{
-	SDL_DestroyWindow(window);
-	SDL_Quit();
-}
-
 int main( int argc, char* args[] )
 {
 	bool quit = false;
@@ -39,10 +33,6 @@ int main( int argc, char* args[] )
 			SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
 			SDL_UpdateWindowSurface( window );
 
-			// Create game
-		//	Game plateau = Game();
-		//	Joueur prncp = plateau.getPrincipal();
-
 			//While user hasn't quit
 			while (quit == false)
 			{
@@ -60,10 +50,15 @@ int main( int argc, char* args[] )
 					}
 					break;
 				default:
-					// prncp.event(plateau.jeu);
+					Game plateau();
+					Joueur prncp = plateau.getPrincipal();
+				//	 prncp.event(plateau->jeu);
 					break;
 				}
 			}
+
+			SDL_DestroyWindow(window);
+			SDL_Quit();
 		}
 	}
 

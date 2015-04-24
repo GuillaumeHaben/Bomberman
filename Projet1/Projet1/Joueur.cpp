@@ -29,7 +29,7 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 				 if (jeu[p_colone][p_line - 1] == MUR) break;
 				 else{
 					 jeu[p_colone][p_line] = VIDE;
-					 jeu[p_colone][p_line - 1] == JOUEUR;
+					 jeu[p_colone][p_line - 1] = JOUEUR;
 					 return 0;
 				 }
 			 }
@@ -40,7 +40,7 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 			if (jeu[p_colone][p_line + 1] == MUR) break;
 			else{
 				jeu[p_colone][p_line] = VIDE;
-				jeu[p_colone][p_line + 1] == JOUEUR;
+				jeu[p_colone][p_line + 1] = JOUEUR;
 				return 0;
 			}
 		}
@@ -51,7 +51,7 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 			if (jeu[p_colone + 1 ][p_line] == MUR) break;
 			else{
 				jeu[p_colone][p_line] = VIDE;
-				jeu[p_colone + 1][p_line] == JOUEUR;
+				jeu[p_colone + 1][p_line] = JOUEUR;
 				return 0;
 			}
 		}
@@ -62,7 +62,7 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 			if (jeu[p_colone + 1][p_line] == MUR) break;
 			else{
 				jeu[p_colone][p_line] = VIDE;
-				jeu[p_colone + 1][p_line] == JOUEUR;
+				jeu[p_colone + 1][p_line] = JOUEUR;
 				return 0;
 			}
 		}

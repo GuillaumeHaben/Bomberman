@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Case.h";
+#include "Case.h"
 #include "Joueur.h"
 
 class Game {
