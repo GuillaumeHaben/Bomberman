@@ -40,16 +40,15 @@ int main( int argc, char* args[] )
 			SDL_UpdateWindowSurface( window );
 
 			// Create game
-			Game plateau();
-			//Joueur * prncp = plateau->*principal;
+			Game plateau = Game();
+			Joueur prncp = plateau.getPrincipal();
 
 			//While user hasn't quit
 			while (quit == false)
 			{
 				while (SDL_PollEvent(&evn))
 				{
-					if (evn.type == SDL_QUIT)
-					{
+					if (evn.type == SDL_QUIT){
 						quit = true;
 					}
 					

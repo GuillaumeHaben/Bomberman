@@ -12,11 +12,11 @@ public:
 
 	bool getPause();
 	void setPause(bool p);
+	Joueur getPrincipal();
+	Case_plateau getJeu();
 
 private:
 	bool end, pause;
-
-public:
 	Case_plateau jeu[TAILLE_JEU][TAILLE_JEU];
 	Joueur principal;
 

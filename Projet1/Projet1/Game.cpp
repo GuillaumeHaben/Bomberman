@@ -22,3 +22,11 @@ void Game::setPause(bool p){
 bool Game::getPause(){
 	return pause;
 }
+
+Joueur Game::getPrincipal(){
+	return principal;
+}
+
+Case_plateau Game::getJeu(){
+	return jeu;
+}
