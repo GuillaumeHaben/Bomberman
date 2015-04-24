@@ -15,7 +15,10 @@ public:
 
 private:
 	bool end, pause;
+
+public:
 	Case_plateau jeu[TAILLE_JEU][TAILLE_JEU];
+	Joueur principal;
 
 };
 #endif

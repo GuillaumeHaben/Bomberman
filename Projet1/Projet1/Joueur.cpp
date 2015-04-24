@@ -71,14 +71,15 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 	return -1;
 }
 
-int Joueur::event(Case_plateau jeu[TAILLE_JEU][TAILLE_JEU]){
+void Joueur::event(Case_plateau jeu[TAILLE_JEU][TAILLE_JEU]){
 
 	if (evn.type == SDL_KEYDOWN){
 		switch (evn.key.keysym.sym)
 		{
 		case SDLK_UP:
+			printf("?");
 			if (this->deplacement(UP, jeu) != -1){
-				// Traitement
+				printf("up");
 			}
 			break;
 

@@ -12,7 +12,7 @@ SDL_Window* window = NULL;
 SDL_Surface* screenSurface = NULL;
 
 //Event system
-SDL_Event event;
+SDL_Event evn;
 
 void clean_up()
 {
@@ -41,16 +41,18 @@ int main( int argc, char* args[] )
 
 			// Create game
 			Game plateau();
+			//Joueur * prncp = plateau->*principal;
 
 			//While user hasn't quit
 			while (quit == false)
 			{
-				while (SDL_PollEvent(&event))
+				while (SDL_PollEvent(&evn))
 				{
-					if (event.type == SDL_QUIT)
+					if (evn.type == SDL_QUIT)
 					{
 						quit = true;
 					}
+					
 				}
 			}
 
