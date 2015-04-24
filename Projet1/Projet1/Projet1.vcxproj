@@ -72,6 +72,7 @@
     <ClCompile Include="Personnage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Case.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Joueur.h" />
     <ClInclude Include="Menu.h" />
