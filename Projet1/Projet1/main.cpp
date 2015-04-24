@@ -16,52 +16,39 @@ SDL_Event event;
 
 void clean_up()
 {
-	//Destroy the window
 	SDL_DestroyWindow(window);
-
-	//Quit SDL
 	SDL_Quit();
 }
 
 int main( int argc, char* args[] )
 {
-	//Waiting for user to quit
 	bool quit = false;
 
 	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-	{
+	if( SDL_Init( SDL_INIT_VIDEO ) < 0 ){
 		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
-	}
-	else
-	{
+	} else {
+
 		//Create window
 		window = SDL_CreateWindow( "Bomberman", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( window == NULL )
-		{
+		if( window == NULL ){
 			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
-		}
-		else
-		{
-			//Get window surface
-			screenSurface = SDL_GetWindowSurface( window );
+		} else {
 
-			//Fill the surface white
+			screenSurface = SDL_GetWindowSurface( window );
 			SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
-			
-			//Update the surface
 			SDL_UpdateWindowSurface( window );
+
+			// Create game
+			Game plateau();
 
 			//While user hasn't quit
 			while (quit == false)
 			{
-				//While there is an event
 				while (SDL_PollEvent(&event))
 				{
-					//If user has click on the X of the window
 					if (event.type == SDL_QUIT)
 					{
-						//We close the program
 						quit = true;
 					}
 				}

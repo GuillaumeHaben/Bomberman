@@ -7,6 +7,8 @@ Game::Game(){
 	for (int i = 0; i < 29; i++)
 		for (int j = 0; j < 29; j++)
 			jeu[i][j] = VIDE;
+
+	Joueur principal(0,0);
 }
 
 Game::~Game(){
