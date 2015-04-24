@@ -46,16 +46,22 @@ int main( int argc, char* args[] )
 			//While user hasn't quit
 			while (quit == false)
 			{
-				while (SDL_PollEvent(&evn))
+				SDL_WaitEvent(&evn);
+				switch (evn.type)
 				{
-					if (evn.type == SDL_QUIT){
+				case SDL_QUIT: //Quit Window with X
+					quit = true;
+					break;
+				case SDL_KEYDOWN:
+					switch (evn.key.keysym.sym)
+					{
+					case SDLK_ESCAPE: //Quit Window with escape
 						quit = true;
+						break;
 					}
-					
+					break;
 				}
 			}
-
-			clean_up();
 		}
 	}
 
