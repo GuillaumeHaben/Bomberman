@@ -35,7 +35,7 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 			 }
 
 	case DOWN:
-		if (p_line + 1 > 20) break;
+		if (p_line + 1 > TAILLE_JEU) break;
 		else{
 			if (jeu[p_colone][p_line + 1] == MUR) break;
 			else{
@@ -46,7 +46,7 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 		}
 
 	case RIGHT:
-		if (p_colone + 1 > 20) break;
+		if (p_colone + 1 > TAILLE_JEU) break;
 		else{
 			if (jeu[p_colone + 1 ][p_line] == MUR) break;
 			else{
@@ -69,4 +69,39 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 
 	}
 	return -1;
+}
+
+int Joueur::event(Case_plateau jeu[TAILLE_JEU][TAILLE_JEU]){
+
+	if (evn.type == SDL_KEYDOWN){
+		switch (evn.key.keysym.sym)
+		{
+		case SDLK_UP:
+			if (this->deplacement(UP, jeu) != -1){
+				// Traitement
+			}
+			break;
+
+		case SDLK_DOWN:
+			if (this->deplacement(DOWN, jeu) != -1){
+				// Traitement
+			}
+			break;
+
+		case SDLK_LEFT:
+			if (this->deplacement(LEFT, jeu) != -1){
+				// Traitement
+			}
+			break;
+
+		case SDLK_RIGHT:
+			if (this->deplacement(RIGHT, jeu) != -1){
+				// Traitement
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
 }

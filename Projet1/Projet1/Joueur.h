@@ -4,6 +4,8 @@
 #include "Personnage.h";
 #include "Case.h";
 
+extern SDL_Event evn;
+
 class Joueur : public Personnage{
 
 public:
