@@ -14,8 +14,8 @@ public:
 	~Joueur();
 	void init_var();
 
-	int deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU]);
-	void event(Case_plateau jeu[TAILLE_JEU][TAILLE_JEU]);
+	int deplacement(int direction, Case_plateau* * jeu);
+	void event(Case_plateau* * jeu);
 
 private:
 	int nb_bombes, nb_bombes_max;

@@ -20,7 +20,7 @@ void Joueur::init_var(){
 	nb_bombes_max = 2;
 }
 
-int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU]){
+int Joueur::deplacement(int direction, Case_plateau* * jeu){
 
 	switch (direction){
 
@@ -30,6 +30,7 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 				 else{
 					 jeu[p_colone][p_line] = VIDE;
 					 jeu[p_colone][p_line - 1] = JOUEUR;
+					 --p_line;
 					 return 0;
 				 }
 			 }
@@ -41,6 +42,7 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 			else{
 				jeu[p_colone][p_line] = VIDE;
 				jeu[p_colone][p_line + 1] = JOUEUR;
+				++p_line;
 				return 0;
 			}
 		}
@@ -52,17 +54,19 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 			else{
 				jeu[p_colone][p_line] = VIDE;
 				jeu[p_colone + 1][p_line] = JOUEUR;
+				++p_colone;
 				return 0;
 			}
 		}
 
 	case LEFT:
-		if (p_colone + 1 < 0) break;
+		if (p_colone - 1 < 0) break;
 		else{
-			if (jeu[p_colone + 1][p_line] == MUR) break;
+			if (jeu[p_colone - 1][p_line] == MUR) break;
 			else{
 				jeu[p_colone][p_line] = VIDE;
-				jeu[p_colone + 1][p_line] = JOUEUR;
+				jeu[p_colone - 1][p_line] = JOUEUR;
+				--p_colone;
 				return 0;
 			}
 		}
@@ -71,15 +75,14 @@ int Joueur::deplacement(int direction, Case_plateau jeu[TAILLE_JEU][TAILLE_JEU])
 	return -1;
 }
 
-void Joueur::event(Case_plateau jeu[TAILLE_JEU][TAILLE_JEU]){
+void Joueur::event(Case_plateau* * jeu){
 
 	if (evn.type == SDL_KEYDOWN){
 		switch (evn.key.keysym.sym)
 		{
 		case SDLK_UP:
-			printf("?");
 			if (this->deplacement(UP, jeu) != -1){
-				printf("up");
+				//Traitement
 			}
 			break;
 

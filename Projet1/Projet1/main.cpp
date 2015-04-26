@@ -5,6 +5,9 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+Game plateau;
+Joueur prncp;
+
 //The window we'll be rendering to
 SDL_Window* window = NULL;
 
@@ -17,6 +20,7 @@ SDL_Event evn;
 int main( int argc, char* args[] )
 {
 	bool quit = false;
+	prncp = plateau.getPrincipal();
 
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 ){
@@ -47,12 +51,12 @@ int main( int argc, char* args[] )
 					case SDLK_ESCAPE: //Quit Window with escape
 						quit = true;
 						break;
+					default:
+						prncp.event(plateau.jeu);
+						break;
 					}
 					break;
 				default:
-					Game plateau();
-					Joueur prncp = plateau.getPrincipal();
-				//	 prncp.event(plateau->jeu);
 					break;
 				}
 			}

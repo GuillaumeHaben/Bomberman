@@ -13,7 +13,7 @@ public:
 	bool getPause();
 	void setPause(bool p);
 	Joueur getPrincipal();
-	Case_plateau jeu[TAILLE_JEU][TAILLE_JEU];
+	Case_plateau* * jeu = 0;
 
 private:
 	bool end, pause;
