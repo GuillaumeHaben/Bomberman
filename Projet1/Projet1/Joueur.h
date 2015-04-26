@@ -2,6 +2,9 @@
 #define JOUEUR_H
 
 #include "Personnage.h"
+#include "Case.h"
+
+extern SDL_Event evn;
 
 class Joueur : public Personnage{
 
@@ -9,8 +12,13 @@ public:
 	Joueur();
 	Joueur(int pos_x, int pos_y);
 	~Joueur();
+	void init_var();
 
-	/* Gestion évènements d'un joueur poser bombe, déplacement..*/
+	int deplacement(int direction, Case_plateau* * jeu);
+	void event(Case_plateau* * jeu);
+
+private:
+	int nb_bombes, nb_bombes_max;
 };
 
 #endif
