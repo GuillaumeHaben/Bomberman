@@ -78,6 +78,7 @@
     <ClInclude Include="Joueur.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Personnage.h" />
+    <ClInclude Include="Time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
