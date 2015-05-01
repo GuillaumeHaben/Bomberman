@@ -4,7 +4,7 @@
 #include <SDL/SDL_rect.h>
 #include "Game.h"
 
-const int SCREEN_WIDTH = 640;
+const int SCREEN_WIDTH = 675;
 const int SCREEN_HEIGHT = 480;
 
 //The window we'll be rendering to
@@ -15,6 +15,7 @@ SDL_Surface *screenSurface = NULL;
 
 //Event system
 SDL_Event evn;
+SDL_Renderer* renderer;
 
 int main( int argc, char* args[] )
 {
@@ -33,12 +34,13 @@ int main( int argc, char* args[] )
 
 			screenSurface = SDL_GetWindowSurface(window);
 			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
+			renderer = SDL_CreateRenderer(window, -1, 0);
 
 			Game plateau;
 			Joueur prncp;
 			prncp = plateau.getPrincipal();
 
-			SDL_UpdateWindowSurface(window);
+			SDL_RenderPresent(renderer);
 
 			//While user hasn't quit
 			while (quit == false)
@@ -56,6 +58,7 @@ int main( int argc, char* args[] )
 						break;
 					default:
 						prncp.event(plateau.jeu);
+						SDL_RenderPresent(renderer);
 						break;
 					}
 					break;

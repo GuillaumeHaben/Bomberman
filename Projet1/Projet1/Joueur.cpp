@@ -4,9 +4,11 @@
 Joueur::Joueur() : Personnage(){
 	init_var();
 
-	SDL_Rect dest = { 0, 0, 640, 480 };
+	dest = {0, 0, 640, 480 };
 	background = SDL_LoadBMP("perso.bmp");
-	SDL_BlitSurface(background, NULL, screenSurface, &dest);
+	
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
+	SDL_RenderCopy(renderer, texture, NULL, &dest);
 }
 
 /* Appel au super en C++ */
@@ -86,25 +88,33 @@ void Joueur::event(Case_plateau* * jeu){
 		{
 		case SDLK_UP:
 			if (this->deplacement(UP, jeu) != -1){
-				//Traitement
+				dest.x = p_colone*32;
+				dest.y = p_line * 45;
 			}
 			break;
 
 		case SDLK_DOWN:
 			if (this->deplacement(DOWN, jeu) != -1){
-				// Traitement
+				dest.x = p_colone * 32;
+				dest.y = p_line * 45;
 			}
 			break;
 
 		case SDLK_LEFT:
 			if (this->deplacement(LEFT, jeu) != -1){
-				// Traitement
+				dest.x = p_colone * 32;
+				dest.y = p_line * 45;
 			}
 			break;
 
 		case SDLK_RIGHT:
 			if (this->deplacement(RIGHT, jeu) != -1){
-				// Traitement
+				dest.x = p_colone * 32;
+				dest.y = p_line * 45;
+
+				SDL_RenderClear(renderer);
+				SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
+				SDL_RenderCopy(renderer, texture, NULL, &dest);
 			}
 			break;
 

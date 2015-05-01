@@ -5,7 +5,9 @@
 #include "Case.h"
 
 extern SDL_Event evn;
-extern SDL_Surface *screenSurface;
+extern SDL_Surface* screenSurface;
+extern SDL_Window* window;
+extern SDL_Renderer * renderer;
 
 class Joueur : public Personnage{
 
@@ -20,7 +22,8 @@ public:
 
 private:
 	int nb_bombes, nb_bombes_max;
-	SDL_Surface *background;
+	SDL_Surface* background;
+	SDL_Rect dest;
 };
 
 #endif
