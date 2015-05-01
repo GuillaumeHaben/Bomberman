@@ -7,9 +7,6 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-Game plateau;
-Joueur prncp;
-
 //The window we'll be rendering to
 SDL_Window* window = NULL;
 
@@ -22,7 +19,6 @@ SDL_Event evn;
 int main( int argc, char* args[] )
 {
 	bool quit = false;
-	prncp = plateau.getPrincipal();
 
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 ){
@@ -37,7 +33,11 @@ int main( int argc, char* args[] )
 
 			screenSurface = SDL_GetWindowSurface(window);
 			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-			
+
+			Game plateau;
+			Joueur prncp;
+			prncp = plateau.getPrincipal();
+
 			SDL_UpdateWindowSurface(window);
 
 			//While user hasn't quit
