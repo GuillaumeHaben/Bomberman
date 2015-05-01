@@ -35,3 +35,13 @@ bool Time::isOn() {
 	if (on) return true;
 	else return false;
 }
+
+/* To get startDate. */
+int Time::getStartDate() {
+	return startDate;
+}
+
+/* To get stopDate. */
+int Time::getStopDate() {
+	return stopDate;
+}

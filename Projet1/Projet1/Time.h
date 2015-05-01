@@ -16,6 +16,8 @@ public :
 	// Getters.
 	int getTime();
 	bool isOn();
+	int getStartDate();
+	int getStopDate();
 
 private :
 	int startDate;

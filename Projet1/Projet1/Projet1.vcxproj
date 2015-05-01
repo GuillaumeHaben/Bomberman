@@ -68,6 +68,7 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Joueur.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Personnage.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="Case.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Joueur.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Personnage.h" />
     <ClInclude Include="Time.h" />
