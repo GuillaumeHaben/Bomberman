@@ -41,9 +41,19 @@ for (int i = 4; i <= TAILLE_JEU - 3; i++)
 for (int i = 2; i <= TAILLE_JEU - 5; i++)
 	plateau->jeu[i][12] = MUR;
 for (int j = 5; j <= 9; j++) {
-	plateau->jeu[2][j] = MUR;
 	plateau->jeu[4][j] = MUR;
+	plateau->jeu[TAILLE_JEU - 5][j] = MUR;
 }
+for (int j = 4; j <= TAILLE_JEU - 4; j++)
+	plateau->jeu[2][j] = MUR;
+for (int j = 4; j <= 8; j++)
+	plateau->jeu[TAILLE_JEU - 3][j] = MUR;
+plateau->jeu[2][2] = MUR;
+plateau->jeu[TAILLE_JEU - 3][12] = MUR;
+plateau->jeu[6][7] = MUR;
+plateau->jeu[8][7] = MUR;
+plateau->jeu[7][TAILLE_JEU - 2] = MUR;
+plateau->jeu[TAILLE_JEU - 2][7] = MUR;
 
 // Joueur.
 plateau->jeu[1][1] = JOUEUR;
