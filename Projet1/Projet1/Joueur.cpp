@@ -3,6 +3,10 @@
 /* Constructeur */
 Joueur::Joueur() : Personnage(){
 	init_var();
+
+	SDL_Rect dest = { 0, 0, 640, 480 };
+	background = SDL_LoadBMP("perso.bmp");
+	SDL_BlitSurface(background, NULL, screenSurface, &dest);
 }
 
 /* Appel au super en C++ */
