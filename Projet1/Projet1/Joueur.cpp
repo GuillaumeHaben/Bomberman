@@ -9,6 +9,12 @@ Joueur::Joueur() : Personnage(){
 	
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
+
+	/**
+	
+	ICI création texture
+	
+	*/
 }
 
 /* Appel au super en C++ */
@@ -115,6 +121,14 @@ void Joueur::event(Case_plateau* * jeu){
 				SDL_RenderClear(renderer);
 				SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
 				SDL_RenderCopy(renderer, texture, NULL, &dest);
+
+				/*
+
+				ICI bouger vers la droite
+
+				Je suis sur que dest.x change c'est une certitude.
+
+				*/
 			}
 			break;
 
