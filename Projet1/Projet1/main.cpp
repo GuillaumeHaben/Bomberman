@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_rect.h>
 #include "Game.h"
 
 const int SCREEN_WIDTH = 640;
@@ -12,7 +14,7 @@ Joueur prncp;
 SDL_Window* window = NULL;
 
 //The surface contained by the window
-SDL_Surface* screenSurface = NULL;
+SDL_Surface *screenSurface = NULL;
 
 //Event system
 SDL_Event evn;
@@ -33,9 +35,10 @@ int main( int argc, char* args[] )
 			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
 		} else {
 
-			screenSurface = SDL_GetWindowSurface( window );
-			SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
-			SDL_UpdateWindowSurface( window );
+			screenSurface = SDL_GetWindowSurface(window);
+			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
+			
+			SDL_UpdateWindowSurface(window);
 
 			//While user hasn't quit
 			while (quit == false)
