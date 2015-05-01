@@ -13,6 +13,7 @@ public:
 
 	// Setters.
 	void setUpGame(int niveau);
+	void niveau1();
 
 private:
 	Game* plateau;
