@@ -4,8 +4,8 @@
 Joueur::Joueur() : Personnage(){
 	init_var();
 
-	dest = {0, 0, 640, 480 };
-	background = SDL_LoadBMP("perso.bmp");
+	dest = {0, 0, 23, 36 };
+	background = SDL_LoadBMP("persoTest.bmp");
 	
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
@@ -118,9 +118,9 @@ void Joueur::event(Case_plateau* * jeu){
 				dest.x = p_colone * 32;
 				dest.y = p_line * 45;
 
-				SDL_RenderClear(renderer);
-				SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
-				SDL_RenderCopy(renderer, texture, NULL, &dest);
+				//SDL_RenderClear(renderer);
+				//SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
+				//SDL_RenderCopy(renderer, texture, NULL, &dest);
 
 				/*
 
