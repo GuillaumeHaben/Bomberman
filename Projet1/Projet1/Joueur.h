@@ -9,6 +9,8 @@ extern SDL_Surface* screenSurface;
 extern SDL_Window* window;
 extern SDL_Renderer * renderer;
 
+/* ICI Renderer */
+
 class Joueur : public Personnage{
 
 public:

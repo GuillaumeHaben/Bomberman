@@ -36,6 +36,8 @@ int main( int argc, char* args[] )
 			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 			renderer = SDL_CreateRenderer(window, -1, 0);
 
+			/* ICI CREATION RENDERER*/
+
 			Game plateau;
 			Joueur prncp;
 			prncp = plateau.getPrincipal();
@@ -59,6 +61,8 @@ int main( int argc, char* args[] )
 					default:
 						prncp.event(plateau.jeu);
 						SDL_RenderPresent(renderer);
+
+						/*ICI UPDATE FRAME */
 						break;
 					}
 					break;
