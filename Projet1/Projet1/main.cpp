@@ -15,7 +15,7 @@ SDL_Surface *screenSurface = NULL;
 
 //Event system
 SDL_Event evn;
-SDL_Renderer* renderer;
+SDL_Renderer* renderer = NULL;
 
 int main( int argc, char* args[] )
 {
@@ -33,8 +33,13 @@ int main( int argc, char* args[] )
 		} else {
 
 			screenSurface = SDL_GetWindowSurface(window);
-			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-			renderer = SDL_CreateRenderer(window, -1, 0);
+
+			SDL_Surface * background = SDL_LoadBMP("back.bmp");
+			SDL_Rect fond = { 0, 0, 675, 480 };
+			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+			SDL_Texture * text = SDL_CreateTextureFromSurface(renderer, background);
+			SDL_RenderCopy(renderer, text, NULL, &fond);
+
 
 			/* ICI CREATION RENDERER*/
 
@@ -60,9 +65,7 @@ int main( int argc, char* args[] )
 						break;
 					default:
 						prncp.event(plateau.jeu);
-						SDL_RenderPresent(renderer);
-
-						/*ICI UPDATE FRAME */
+						SDL_RenderPresent(renderer); // Update Frame
 						break;
 					}
 					break;

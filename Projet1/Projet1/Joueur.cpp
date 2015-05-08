@@ -4,7 +4,7 @@
 Joueur::Joueur() : Personnage(){
 	init_var();
 
-	dest = {0, 0, 23, 36 };
+	dest = {0, 0, 32, 32 };
 	background = SDL_LoadBMP("persoTest.bmp");
 	
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
@@ -117,6 +117,8 @@ void Joueur::event(Case_plateau* * jeu){
 			if (this->deplacement(RIGHT, jeu) != -1){
 				dest.x = p_colone * 32;
 				dest.y = p_line * 45;
+				dest.w = 23;
+				dest.h = 36;
 
 				//SDL_RenderClear(renderer);
 				//SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
