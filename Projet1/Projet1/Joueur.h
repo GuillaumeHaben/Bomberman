@@ -21,11 +21,12 @@ public:
 
 	int deplacement(int direction, Case_plateau* * jeu);
 	void event(Case_plateau* * jeu);
+	void draw();
 
 private:
 	int nb_bombes, nb_bombes_max;
-	SDL_Surface* background;
-	SDL_Rect dest;
+	SDL_Texture* texture;
+	SDL_Rect src, dest;
 };
 
 #endif

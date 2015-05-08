@@ -4,22 +4,28 @@
 Joueur::Joueur() : Personnage(){
 	init_var();
 
-	dest = {0, 0, 32, 32 };
-	background = SDL_LoadBMP("persoTest.bmp");
-	
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
-	SDL_RenderCopy(renderer, texture, NULL, &dest);
+	SDL_Surface* background = SDL_LoadBMP("persoTest.bmp");
+	texture = SDL_CreateTextureFromSurface(renderer, background);
+	src = { 0, 0, 32, 32 };
+	dest = { 0, 0, 32, 32 };
 
-	/**
-	
-	ICI création texture
-	
-	*/
+	this->draw();
+
+	SDL_FreeSurface(background);
 }
 
 /* Appel au super en C++ */
 Joueur::Joueur(int pos_x, int pos_y) : Personnage(pos_x, pos_y) {
 	init_var();
+
+	SDL_Surface* background = SDL_LoadBMP("persoTest.bmp");
+	texture = SDL_CreateTextureFromSurface(renderer, background);
+	src = { 0, 0, 32, 32 };
+	dest = { 0, 0, 32, 32 };
+
+	this->draw();
+
+	SDL_FreeSurface(background);
 }
 
 /* Destructeur */
@@ -90,47 +96,34 @@ int Joueur::deplacement(int direction, Case_plateau* * jeu){
 void Joueur::event(Case_plateau* * jeu){
 
 	if (evn.type == SDL_KEYDOWN){
+
 		switch (evn.key.keysym.sym)
 		{
 		case SDLK_UP:
 			if (this->deplacement(UP, jeu) != -1){
 				dest.x = p_colone*32;
-				dest.y = p_line * 45;
+				dest.y = p_line * 32;
 			}
 			break;
 
 		case SDLK_DOWN:
 			if (this->deplacement(DOWN, jeu) != -1){
 				dest.x = p_colone * 32;
-				dest.y = p_line * 45;
+				dest.y = p_line * 32;
 			}
 			break;
 
 		case SDLK_LEFT:
 			if (this->deplacement(LEFT, jeu) != -1){
 				dest.x = p_colone * 32;
-				dest.y = p_line * 45;
+				dest.y = p_line * 32;
 			}
 			break;
 
 		case SDLK_RIGHT:
 			if (this->deplacement(RIGHT, jeu) != -1){
 				dest.x = p_colone * 32;
-				dest.y = p_line * 45;
-				dest.w = 23;
-				dest.h = 36;
-
-				//SDL_RenderClear(renderer);
-				//SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, background);
-				//SDL_RenderCopy(renderer, texture, NULL, &dest);
-
-				/*
-
-				ICI bouger vers la droite
-
-				Je suis sur que dest.x change c'est une certitude.
-
-				*/
+				dest.y = p_line * 32;
 			}
 			break;
 
@@ -138,4 +131,9 @@ void Joueur::event(Case_plateau* * jeu){
 			break;
 		}
 	}
+}
+
+void Joueur::draw(){
+
+	SDL_RenderCopy(renderer, texture, NULL, &dest);
 }

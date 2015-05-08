@@ -33,10 +33,10 @@ int main( int argc, char* args[] )
 		} else {
 
 			screenSurface = SDL_GetWindowSurface(window);
+			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 			SDL_Surface * background = SDL_LoadBMP("back.bmp");
 			SDL_Rect fond = { 0, 0, 675, 480 };
-			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 			SDL_Texture * text = SDL_CreateTextureFromSurface(renderer, background);
 			SDL_RenderCopy(renderer, text, NULL, &fond);
 
@@ -44,8 +44,7 @@ int main( int argc, char* args[] )
 			/* ICI CREATION RENDERER*/
 
 			Game plateau;
-			Joueur prncp;
-			prncp = plateau.getPrincipal();
+			Joueur prncp = plateau.getPrincipal();
 
 			SDL_RenderPresent(renderer);
 
@@ -65,6 +64,10 @@ int main( int argc, char* args[] )
 						break;
 					default:
 						prncp.event(plateau.jeu);
+
+						SDL_RenderClear(renderer);
+						prncp.draw();
+
 						SDL_RenderPresent(renderer); // Update Frame
 						break;
 					}
@@ -74,6 +77,7 @@ int main( int argc, char* args[] )
 				}
 			}
 
+			SDL_FreeSurface(background);
 			SDL_DestroyWindow(window);
 			SDL_Quit();
 		}

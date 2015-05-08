@@ -4,6 +4,8 @@ Game::Game(){
 	pause = 0;
 	end = 0;
 	 
+	principal = Joueur(0, 0);
+	
 	jeu = new Case_plateau *[TAILLE_JEU];
 
 	int dim_allouee;
@@ -16,7 +18,6 @@ Game::Game(){
 		for (int j = 0; j < TAILLE_JEU; j++)
 			jeu[i][j] = VIDE;
 
-	principal = Joueur(0, 0);
 }
 
 Game::~Game(){
