@@ -7,7 +7,7 @@ Bombe::Bombe(){
 	puissance = 1;
 	retardement = 5;
 	explosee = false;
-	appartient = nullptr;
+	appartient = NULL;
 }
 
 Bombe::Bombe(int pos_x, int pos_y, int power, int time, bool boom, Joueur* J){
