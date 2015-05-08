@@ -15,6 +15,7 @@ public:
 	void draw(SDL_Renderer * renderer);
 	Joueur getPrincipal();
 	Case_plateau* * jeu = 0;
+	void init(int i);
 
 private:
 	bool end, pause;

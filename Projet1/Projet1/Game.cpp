@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Level.h"
 
 Game::Game(){
 	pause = 0;
@@ -15,9 +16,10 @@ Game::Game(){
 
 	for (int i = 0; i < TAILLE_JEU; i++)
 		for (int j = 0; j < TAILLE_JEU; j++)
-			jeu[i][j] = VIDE;
-
+			jeu[i][j] = INIT;
 	fond = { 0, 0, 675, 480 };
+
+
 }
 
 Game::~Game(){
@@ -42,4 +44,9 @@ void Game::draw(SDL_Renderer * renderer){
 	SDL_Texture * text = SDL_CreateTextureFromSurface(renderer, background);
 	SDL_RenderCopy(renderer, text, NULL, &fond);
 	SDL_FreeSurface(background);
+}
+
+void Game::init(int i) {
+	Level l(this);
+	l.setUpGame(i);
 }

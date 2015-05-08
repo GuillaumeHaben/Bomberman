@@ -66,6 +66,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bombe.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Joueur.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -75,6 +76,7 @@
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bombe.h" />
     <ClInclude Include="Case.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Joueur.h" />

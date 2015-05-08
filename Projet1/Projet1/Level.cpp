@@ -1,5 +1,6 @@
 #include "Level.h"
 
+
 /* Constructor */
 Level::Level(Game* plateauVide) {
 	plateau = plateauVide;
@@ -11,6 +12,21 @@ void Level::setUpGame(int niveau) {
 	case 1:
 		niveau1();
 		break;
+	}
+}
+
+void Level::generateurCaisses(int nombreCaisses) {
+	srand(time(NULL));
+	int k = 0;
+	int i = 0;
+	int j = 0;
+	while (k < nombreCaisses) {
+		i = rand() % 15;
+		j = rand() % 15;
+		if (plateau->jeu[i][j] != MUR && plateau->jeu[i][j] != VIDE && plateau->jeu[i][j] != JOUEUR) {
+			plateau->jeu[i][j] = CAISSE;
+			k++;
+		}
 	}
 }
 
@@ -32,7 +48,7 @@ for (int i = 8; i <= TAILLE_JEU - 5; i++) {
 	plateau->jeu[i][4] = MUR;
 	plateau->jeu[i][10] = MUR;
 }
-for (int i = 8; i <= TAILLE_JEU - 7; i++) {
+for (int i = 6; i <= TAILLE_JEU - 7; i++) {
 	plateau->jeu[i][6] = MUR;
 	plateau->jeu[i][8] = MUR;
 }
@@ -46,16 +62,30 @@ for (int j = 5; j <= 9; j++) {
 }
 for (int j = 4; j <= TAILLE_JEU - 4; j++)
 	plateau->jeu[2][j] = MUR;
-for (int j = 4; j <= 8; j++)
+for (int j = 3; j <= TAILLE_JEU - 5; j++)
 	plateau->jeu[TAILLE_JEU - 3][j] = MUR;
 plateau->jeu[2][2] = MUR;
-plateau->jeu[TAILLE_JEU - 3][12] = MUR;
+plateau->jeu[12][12] = MUR;
 plateau->jeu[6][7] = MUR;
 plateau->jeu[8][7] = MUR;
-plateau->jeu[7][TAILLE_JEU - 2] = MUR;
-plateau->jeu[TAILLE_JEU - 2][7] = MUR;
+plateau->jeu[TAILLE_JEU - 2][10] = MUR;
+plateau->jeu[1][4] = MUR;
 
-// Joueur.
+// Player.
 plateau->jeu[1][1] = JOUEUR;
 
+// Empty cases.
+for (int i = 2; i < 4; i++) {
+	plateau->jeu[i][1] = VIDE;
+	plateau->jeu[1][i] = VIDE;
 }
+for (int i = 11; i < 13; i++){
+	plateau->jeu[i][13] = MUR;
+	plateau->jeu[13][i] = MUR;
+}
+
+// CAISSES.
+generateurCaisses(30);
+
+}
+

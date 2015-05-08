@@ -6,6 +6,7 @@
 #include <SDL/SDL.h>
 
 enum Case_plateau {
+	INIT,
 	VIDE,
 	MUR,
 	BOMBE,
