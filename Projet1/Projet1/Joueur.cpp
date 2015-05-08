@@ -3,29 +3,15 @@
 /* Constructeur */
 Joueur::Joueur() : Personnage(){
 	init_var();
-
-	SDL_Surface* background = SDL_LoadBMP("persoTest.bmp");
-	texture = SDL_CreateTextureFromSurface(renderer, background);
-	src = { 0, 0, 32, 32 };
-	dest = { 0, 0, 32, 32 };
-
-	this->draw();
-
-	SDL_FreeSurface(background);
+	init_load();
+	this->draw();	
 }
 
 /* Appel au super en C++ */
 Joueur::Joueur(int pos_x, int pos_y) : Personnage(pos_x, pos_y) {
 	init_var();
-
-	SDL_Surface* background = SDL_LoadBMP("persoTest.bmp");
-	texture = SDL_CreateTextureFromSurface(renderer, background);
-	src = { 0, 0, 32, 32 };
-	dest = { 0, 0, 32, 32 };
-
+	init_load();
 	this->draw();
-
-	SDL_FreeSurface(background);
 }
 
 /* Destructeur */
@@ -36,6 +22,13 @@ Joueur::~Joueur(){
 void Joueur::init_var(){
 	nb_bombes = 0;
 	nb_bombes_max = 2;
+}
+
+void Joueur::init_load(){
+	SDL_Surface* background = SDL_LoadBMP("persoTest.bmp");
+	texture = SDL_CreateTextureFromSurface(renderer, background);
+	dest = { 0, 0, 32, 32 };
+	SDL_FreeSurface(background);
 }
 
 int Joueur::deplacement(int direction, Case_plateau* * jeu){
@@ -54,7 +47,7 @@ int Joueur::deplacement(int direction, Case_plateau* * jeu){
 			 }
 
 	case DOWN:
-		if (p_line + 1 > TAILLE_JEU) break;
+		if (p_line + 1 >= TAILLE_JEU) break;
 		else{
 			if (jeu[p_colone][p_line + 1] == MUR) break;
 			else{
@@ -66,7 +59,7 @@ int Joueur::deplacement(int direction, Case_plateau* * jeu){
 		}
 
 	case RIGHT:
-		if (p_colone + 1 > TAILLE_JEU) break;
+		if (p_colone + 1 >= TAILLE_JEU) break;
 		else{
 			if (jeu[p_colone + 1 ][p_line] == MUR) break;
 			else{

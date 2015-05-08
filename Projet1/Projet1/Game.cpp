@@ -4,8 +4,7 @@ Game::Game(){
 	pause = 0;
 	end = 0;
 	 
-	principal = Joueur(0, 0);
-	
+	principal = Joueur(0, 0);	
 	jeu = new Case_plateau *[TAILLE_JEU];
 
 	int dim_allouee;
@@ -18,6 +17,7 @@ Game::Game(){
 		for (int j = 0; j < TAILLE_JEU; j++)
 			jeu[i][j] = VIDE;
 
+	fond = { 0, 0, 675, 480 };
 }
 
 Game::~Game(){
@@ -34,4 +34,12 @@ bool Game::getPause(){
 
 Joueur Game::getPrincipal(){
 	return principal;
+}
+
+void Game::draw(SDL_Renderer * renderer){
+
+	SDL_Surface * background = SDL_LoadBMP("back.bmp");
+	SDL_Texture * text = SDL_CreateTextureFromSurface(renderer, background);
+	SDL_RenderCopy(renderer, text, NULL, &fond);
+	SDL_FreeSurface(background);
 }

@@ -10,9 +10,6 @@ const int SCREEN_HEIGHT = 480;
 //The window we'll be rendering to
 SDL_Window* window = NULL;
 
-//The surface contained by the window
-SDL_Surface *screenSurface = NULL;
-
 //Event system
 SDL_Event evn;
 SDL_Renderer* renderer = NULL;
@@ -32,19 +29,15 @@ int main( int argc, char* args[] )
 			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
 		} else {
 
-			screenSurface = SDL_GetWindowSurface(window);
 			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-			SDL_Surface * background = SDL_LoadBMP("back.bmp");
-			SDL_Rect fond = { 0, 0, 675, 480 };
-			SDL_Texture * text = SDL_CreateTextureFromSurface(renderer, background);
-			SDL_RenderCopy(renderer, text, NULL, &fond);
-
 
 			/* ICI CREATION RENDERER*/
 
 			Game plateau;
 			Joueur prncp = plateau.getPrincipal();
+
+			plateau.draw(renderer);
+			prncp.draw();
 
 			SDL_RenderPresent(renderer);
 
@@ -66,8 +59,8 @@ int main( int argc, char* args[] )
 						prncp.event(plateau.jeu);
 
 						SDL_RenderClear(renderer);
+						plateau.draw(renderer);
 						prncp.draw();
-
 						SDL_RenderPresent(renderer); // Update Frame
 						break;
 					}
@@ -77,7 +70,6 @@ int main( int argc, char* args[] )
 				}
 			}
 
-			SDL_FreeSurface(background);
 			SDL_DestroyWindow(window);
 			SDL_Quit();
 		}
