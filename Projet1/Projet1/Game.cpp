@@ -38,7 +38,7 @@ Joueur Game::getPrincipal(){
 
 void Game::draw(SDL_Renderer * renderer){
 
-	SDL_Surface * background = SDL_LoadBMP("back.bmp");
+	SDL_Surface * background = SDL_LoadBMP("sprite/back.bmp");
 	SDL_Texture * text = SDL_CreateTextureFromSurface(renderer, background);
 	SDL_RenderCopy(renderer, text, NULL, &fond);
 	SDL_FreeSurface(background);

@@ -1,4 +1,5 @@
 #include "Joueur.h"
+#include <SDL/SDL_image.h>
 
 /* Constructeur */
 Joueur::Joueur() : Personnage(){
@@ -25,7 +26,8 @@ void Joueur::init_var(){
 }
 
 void Joueur::init_load(){
-	SDL_Surface* background = SDL_LoadBMP("persoTest.bmp");
+	SDL_Surface* background = SDL_LoadBMP("Sprite/Bomberman/Front.bmp");
+	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 223, 223, 223));
 	texture = SDL_CreateTextureFromSurface(renderer, background);
 	dest = { 0, 0, 32, 32 };
 	SDL_FreeSurface(background);
@@ -115,7 +117,7 @@ void Joueur::event(Case_plateau* * jeu){
 
 		case SDLK_RIGHT:
 			if (this->deplacement(RIGHT, jeu) != -1){
-				dest.x = p_colone * 32;
+				dest.x = p_colone +1;
 				dest.y = p_line * 32;
 			}
 			break;
