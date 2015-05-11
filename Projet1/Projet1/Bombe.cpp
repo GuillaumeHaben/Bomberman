@@ -2,26 +2,34 @@
 
 /* Constructeur */
 Bombe::Bombe(){
-	b_colone = 0;
-	b_line = 0;
-	puissance = 1;
-	retardement = 5;
-	explosee = false;
-	appartient = NULL;
+	this->init(0, 0, 2, NULL);
 }
 
-Bombe::Bombe(int pos_x, int pos_y, int power, int time, bool boom, Joueur* J){
-	b_colone = pos_x;
-	b_line = pos_y;
-	puissance = power;
-	retardement = time;
-	explosee = boom;
-	appartient = J;
+Bombe::Bombe(int pos_x, int pos_y, int power, Joueur* J){
+	this->init(pos_x, pos_y, power, J);
 }
 
 /* Destructeur */
 Bombe::~Bombe(){
 
+}
+
+/* Intialise la bombe */
+void Bombe::init(int x, int y, int power, Joueur* J){
+	b_colone = x;
+	b_line = y;
+	puissance = power;
+	retardement.start();
+	explosee = false;
+	appartient = J;
+}
+
+/* Gère les evenements bombes */
+void event(Case_plateau* * jeu){
+
+	// CHECK TIMER 
+	// keep temps comparer 
+	// explossee -> vrai -> lancer methode 
 }
 
 /* Getters */
@@ -47,25 +55,4 @@ int Bombe::getExplosee(){
 
 Joueur* Bombe::getJoueur(){
 	return appartient;
-}
-
-/* Setters */
-void Bombe::setColone(int pos_x){
-	b_colone = pos_x;
-}
-
-void Bombe::setLine(int pos_y){
-	b_line = pos_y;
-}
-
-void Bombe::setPuissance(int power){
-	puissance = power;
-}
-
-void Bombe::setRetardement(int time){
-	retardement = time;
-}
-
-void Bombe::setExplosee(bool boom){
-	explosee = boom;
 }

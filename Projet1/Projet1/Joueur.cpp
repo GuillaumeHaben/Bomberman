@@ -26,10 +26,10 @@ void Joueur::init_var(){
 }
 
 void Joueur::init_load(){
-	SDL_Surface* background = SDL_LoadBMP("Sprite/Bomberman/Front.bmp");
-	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 223, 223, 223));
+	SDL_Surface* background = SDL_LoadBMP("Sprite/test.bmp");
+	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 0, 0, 255));
 	texture = SDL_CreateTextureFromSurface(renderer, background);
-	dest = { 0, 0, 32, 32 };
+	dest = { 0, 0, 35, 35 };
 	SDL_FreeSurface(background);
 }
 
@@ -96,29 +96,29 @@ void Joueur::event(Case_plateau* * jeu){
 		{
 		case SDLK_UP:
 			if (this->deplacement(UP, jeu) != -1){
-				dest.x = p_colone*32;
-				dest.y = p_line * 32;
+				dest.x = p_colone*35;
+				dest.y = p_line * 35;
 			}
 			break;
 
 		case SDLK_DOWN:
 			if (this->deplacement(DOWN, jeu) != -1){
-				dest.x = p_colone * 32;
-				dest.y = p_line * 32;
+				dest.x = p_colone * 35;
+				dest.y = p_line * 35;
 			}
 			break;
 
 		case SDLK_LEFT:
 			if (this->deplacement(LEFT, jeu) != -1){
-				dest.x = p_colone * 32;
-				dest.y = p_line * 32;
+				dest.x = p_colone * 35;
+				dest.y = p_line * 35;
 			}
 			break;
 
 		case SDLK_RIGHT:
 			if (this->deplacement(RIGHT, jeu) != -1){
-				dest.x = p_colone +1;
-				dest.y = p_line * 32;
+				dest.x = p_colone *35;
+				dest.y = p_line * 35;
 			}
 			break;
 

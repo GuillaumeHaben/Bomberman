@@ -18,9 +18,12 @@ public:
 	void setUpGame(int niveau);
 	void niveau1();
 	void generateurCaisses(int nombreCaisses);
+	void dessiner();
 
 private:
 	Game* plateau;
+	SDL_Surface *img[3];
+	int niveau;
 };
 
 #endif;

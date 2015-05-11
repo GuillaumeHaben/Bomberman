@@ -20,6 +20,7 @@ public:
 private:
 	bool end, pause;
 	Joueur principal;
+	Level l;
 	SDL_Rect fond;
 };
 #endif

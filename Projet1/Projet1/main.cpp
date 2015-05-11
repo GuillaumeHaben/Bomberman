@@ -5,7 +5,7 @@
 #include "Game.h"
 
 const int SCREEN_WIDTH = 675;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_HEIGHT = 525;
 
 //The window we'll be rendering to
 SDL_Window* window = NULL;
@@ -19,7 +19,7 @@ int main( int argc, char* args[] )
 	bool quit = false;
 
 	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 ){
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0){
 		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
 	} else {
 
@@ -57,17 +57,17 @@ int main( int argc, char* args[] )
 						break;
 					default:
 						prncp.event(plateau.jeu);
-
-						SDL_RenderClear(renderer);
-						plateau.draw(renderer);
-						prncp.draw();
-						SDL_RenderPresent(renderer); // Update Frame
 						break;
 					}
 					break;
 				default:
 					break;
 				}
+
+				// Update Frame
+				plateau.draw(renderer);
+				prncp.draw();
+				SDL_RenderPresent(renderer); 
 			}
 
 			SDL_DestroyWindow(window);
