@@ -2,11 +2,23 @@
 
 
 /* Constructor */
-Level::Level(Game* plateauVide) {
-	plateau = plateauVide;
+Level::Level() {
 
 	img[0] = SDL_LoadBMP("Sprite/caisse.bmp");
 	img[1] = SDL_LoadBMP("Sprite/mur.bmp");
+}
+
+Level::Level(Case_plateau* * jeu) {
+	this->jeu = jeu;
+
+	img[0] = SDL_LoadBMP("Sprite/caisse.bmp");
+	img[1] = SDL_LoadBMP("Sprite/mur.bmp");
+}
+
+Level::~Level() {
+	for (int i = 0; i < 2; i++){
+		SDL_FreeSurface(img[i]);
+	}
 }
 
 /* To setup the game */
@@ -17,7 +29,11 @@ void Level::setUpGame(int niveau) {
 	case 1:
 		niveau1();
 		break;
+	default:
+		niveau1();
+		break;
 	}
+	
 }
 
 void Level::generateurCaisses(int nombreCaisses) {
@@ -28,8 +44,8 @@ void Level::generateurCaisses(int nombreCaisses) {
 	while (k < nombreCaisses) {
 		i = rand() % 15;
 		j = rand() % 15;
-		if (plateau->jeu[i][j] != MUR && plateau->jeu[i][j] != VIDE && plateau->jeu[i][j] != JOUEUR) {
-			plateau->jeu[i][j] = CAISSE;
+		if (jeu[i][j] != MUR && jeu[i][j] != VIDE && jeu[i][j] != JOUEUR) {
+			jeu[i][j] = CAISSE;
 			k++;
 		}
 	}
@@ -38,56 +54,56 @@ void Level::generateurCaisses(int nombreCaisses) {
 void Level::niveau1() {
 	// Walls
 	for (int i = 0; i < TAILLE_JEU; i++) {
-		plateau->jeu[i][0] = MUR;
-		plateau->jeu[i][TAILLE_JEU - 1] = MUR;
+		jeu[i][0] = MUR;
+		jeu[i][TAILLE_JEU - 1] = MUR;
 	}
 	for (int j = 0; j < TAILLE_JEU; j++) {
-		plateau->jeu[0][j] = MUR;
-		plateau->jeu[TAILLE_JEU - 1][j] = MUR;
+		jeu[0][j] = MUR;
+		jeu[TAILLE_JEU - 1][j] = MUR;
 	}
 	for (int i = 4; i <= 6; i++) {
-		plateau->jeu[i][4] = MUR;
-		plateau->jeu[i][10] = MUR;
+		jeu[i][4] = MUR;
+		jeu[i][10] = MUR;
 	}
 	for (int i = 8; i <= TAILLE_JEU - 5; i++) {
-		plateau->jeu[i][4] = MUR;
-		plateau->jeu[i][10] = MUR;
+		jeu[i][4] = MUR;
+		jeu[i][10] = MUR;
 	}
 	for (int i = 6; i <= TAILLE_JEU - 7; i++) {
-		plateau->jeu[i][6] = MUR;
-		plateau->jeu[i][8] = MUR;
+		jeu[i][6] = MUR;
+		jeu[i][8] = MUR;
 	}
 	for (int i = 4; i <= TAILLE_JEU - 3; i++)
-		plateau->jeu[i][2] = MUR;
+		jeu[i][2] = MUR;
 	for (int i = 2; i <= TAILLE_JEU - 5; i++)
-		plateau->jeu[i][12] = MUR;
+		jeu[i][12] = MUR;
 	for (int j = 5; j <= 9; j++) {
-		plateau->jeu[4][j] = MUR;
-		plateau->jeu[TAILLE_JEU - 5][j] = MUR;
+		jeu[4][j] = MUR;
+		jeu[TAILLE_JEU - 5][j] = MUR;
 	}
 	for (int j = 4; j <= TAILLE_JEU - 4; j++)
-		plateau->jeu[2][j] = MUR;
+		jeu[2][j] = MUR;
 	for (int j = 3; j <= TAILLE_JEU - 5; j++)
-		plateau->jeu[TAILLE_JEU - 3][j] = MUR;
+		jeu[TAILLE_JEU - 3][j] = MUR;
 
-	plateau->jeu[2][2] = MUR;
-	plateau->jeu[12][12] = MUR;
-	plateau->jeu[6][7] = MUR;
-	plateau->jeu[8][7] = MUR;
-	plateau->jeu[TAILLE_JEU - 2][10] = MUR;
-	plateau->jeu[1][4] = MUR;
+	jeu[2][2] = MUR;
+	jeu[12][12] = MUR;
+	jeu[6][7] = MUR;
+	jeu[8][7] = MUR;
+	jeu[TAILLE_JEU - 2][10] = MUR;
+	jeu[1][4] = MUR;
 
 	// Player.
-	plateau->jeu[1][1] = JOUEUR;
+	jeu[1][1] = JOUEUR;
 
 	// Empty cases.
 	for (int i = 2; i < 4; i++) {
-		plateau->jeu[i][1] = VIDE;
-		plateau->jeu[1][i] = VIDE;
+		jeu[i][1] = VIDE;
+		jeu[1][i] = VIDE;
 	}
 	for (int i = 11; i < 13; i++){
-		plateau->jeu[i][13] = MUR;
-		plateau->jeu[13][i] = MUR;
+		jeu[i][13] = MUR;
+		jeu[13][i] = MUR;
 	}
 
 	// CAISSES.
@@ -97,6 +113,23 @@ void Level::niveau1() {
 
 
 void Level::dessiner(){
+
+	SDL_Rect rect = { 0, 0, 35, 35 };
+	SDL_Texture* texture;
+
+	for (int i = 0; i < TAILLE_JEU; i++){
+		for (int j = 0; j < TAILLE_JEU; j++){
+			rect.x = i * 35;
+			rect.y = j * 35;
+
+			switch (jeu[i][j]){
+			case MUR: 
+				texture = SDL_CreateTextureFromSurface(renderer, img[1]);
+				SDL_RenderCopy(renderer, texture, NULL, &rect);
+			}
+		}
+	}
+
 
 }
 /* DESSINER : Associer chaque fois les images au case

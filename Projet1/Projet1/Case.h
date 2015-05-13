@@ -16,9 +16,9 @@ enum Case_plateau {
 };
 
 const int TAILLE_JEU = 15;
-const int const UP = 0;
-const int const DOWN = 1;
-const int const RIGHT = 2;
-const int const LEFT = 3;
+const int  UP = 0;
+const int  DOWN = 1;
+const int  RIGHT = 2;
+const int  LEFT = 3;
 
 #endif

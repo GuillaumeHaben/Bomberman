@@ -9,7 +9,7 @@ Time::Time() {
 
 /* To start the object Time. */
 void Time::start() {
-	if (~isOn()) {
+	if (!isOn()) {
 		startDate = SDL_GetTicks() - stopDate;
 		stopDate = 0;
 		on = true;

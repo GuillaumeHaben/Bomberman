@@ -3,8 +3,9 @@
 
 #include "Case.h"
 #include "Joueur.h"
+#include "Level.h"
 
-class Game {
+class Game{
 
 public:
 	Game();
@@ -14,8 +15,10 @@ public:
 	void setPause(bool p);
 	void draw(SDL_Renderer * renderer);
 	Joueur getPrincipal();
-	Case_plateau* * jeu = 0;
+	Level getLevel();
 	void init(int i);
+
+	Case_plateau* * jeu = 0;
 
 private:
 	bool end, pause;
@@ -23,4 +26,5 @@ private:
 	Level l;
 	SDL_Rect fond;
 };
+
 #endif

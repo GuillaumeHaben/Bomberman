@@ -33,7 +33,7 @@ void Joueur::init_load(){
 	SDL_FreeSurface(background);
 }
 
-int Joueur::deplacement(int direction, Case_plateau* * jeu){
+int Personnage::deplacement(int direction, Case_plateau* * jeu){
 
 	switch (direction){
 

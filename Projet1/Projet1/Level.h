@@ -3,16 +3,20 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <Time.h>
+
 #include "Case.h"
-#include "Game.h"
+
+extern SDL_Renderer * renderer;
 
 class Level {
 
 public:
 
 	// Constructor.
-	Level(Game* plateauVide);
+	Level();
+	Level(Case_plateau* * jeu);
+	~Level();
 
 	// Setters.
 	void setUpGame(int niveau);
@@ -21,7 +25,7 @@ public:
 	void dessiner();
 
 private:
-	Game* plateau;
+	Case_plateau* * jeu;
 	SDL_Surface *img[3];
 	int niveau;
 };

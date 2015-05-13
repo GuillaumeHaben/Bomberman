@@ -1,3 +1,5 @@
+#ifndef BOMBE_H
+#define BOMBE_H
 
 #include "Case.h"
 #include "Joueur.h"
@@ -34,3 +36,5 @@ private:
 
 	SDL_Texture* texture;
 };
+
+#endif;

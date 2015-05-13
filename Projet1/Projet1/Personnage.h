@@ -1,6 +1,8 @@
 #ifndef PERSONNAGE_H
 #define PERSONNAGE_H
 
+#include "Case.h"
+
 class Personnage {
 
 public:
@@ -16,7 +18,7 @@ public:
 	void setColone(int pos_x);
 	void setLine(int pos_y);
 
-	// Methode pour deplacer le personnage [...]
+	int deplacement(int direction, Case_plateau* * jeu);
 
 protected:
 	int p_colone, p_line;

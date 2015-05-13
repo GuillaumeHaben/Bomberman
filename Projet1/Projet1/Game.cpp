@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Level.h"
 
 Game::Game(){
 	pause = 0;
@@ -38,6 +37,10 @@ Joueur Game::getPrincipal(){
 	return principal;
 }
 
+Level Game::getLevel(){
+	return l;
+}
+
 void Game::draw(SDL_Renderer * renderer){
 
 	SDL_Surface * background = SDL_LoadBMP("sprite/back.bmp");
@@ -50,6 +53,7 @@ void Game::draw(SDL_Renderer * renderer){
 }
 
 void Game::init(int i) {
-	l = Level(this);
+	l = Level(this->jeu);
 	l.setUpGame(i);
+	l.dessiner();
 }

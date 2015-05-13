@@ -1,8 +1,8 @@
 #ifndef JOUEUR_H
 #define JOUEUR_H
 
-#include "Personnage.h"
 #include "Case.h"
+#include "Personnage.h"
 
 extern SDL_Event evn;
 extern SDL_Renderer * renderer;
@@ -17,8 +17,6 @@ public:
 	~Joueur();
 	void init_var();
 	void init_load();
-
-	int deplacement(int direction, Case_plateau* * jeu);
 	void event(Case_plateau* * jeu);
 	void draw();
 
