@@ -2,8 +2,8 @@
 
 /* Constructeur */
 Personnage::Personnage(){
-	p_colone = 0;
-	p_line = 0;
+	p_colone = 1;
+	p_line = 1;
 }
 
 Personnage::Personnage(int pos_x, int pos_y){

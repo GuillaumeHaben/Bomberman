@@ -5,6 +5,8 @@
 #include "Joueur.h"
 #include "Level.h"
 
+extern SDL_Renderer * renderer;
+
 class Game{
 
 public:
@@ -13,7 +15,7 @@ public:
 
 	bool getPause();
 	void setPause(bool p);
-	void draw(SDL_Renderer * renderer);
+	void draw();
 	Joueur getPrincipal();
 	Level getLevel();
 	void init(int i);

@@ -29,7 +29,7 @@ void Joueur::init_load(){
 	SDL_Surface* background = SDL_LoadBMP("Sprite/test.bmp");
 	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 0, 0, 255));
 	texture = SDL_CreateTextureFromSurface(renderer, background);
-	dest = { 0, 0, 35, 35 };
+	dest = { 35, 35, 35, 35 };
 	SDL_FreeSurface(background);
 }
 

@@ -4,7 +4,7 @@ Game::Game(){
 	pause = 0;
 	end = 0;
 	 
-	principal = Joueur(0, 0);	
+	principal = Joueur(1, 1);	
 	jeu = new Case_plateau *[TAILLE_JEU];
 
 	int dim_allouee;
@@ -41,7 +41,7 @@ Level Game::getLevel(){
 	return l;
 }
 
-void Game::draw(SDL_Renderer * renderer){
+void Game::draw(){
 
 	SDL_Surface * background = SDL_LoadBMP("sprite/back.bmp");
 	SDL_Texture * text = SDL_CreateTextureFromSurface(renderer, background);

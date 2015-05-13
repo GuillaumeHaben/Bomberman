@@ -36,7 +36,7 @@ int main( int argc, char* args[] )
 			Game plateau;
 			Joueur prncp = plateau.getPrincipal();
 
-			plateau.draw(renderer);
+			plateau.draw();
 			prncp.draw();
 
 			SDL_RenderPresent(renderer);
@@ -65,7 +65,7 @@ int main( int argc, char* args[] )
 				}
 
 				// Update Frame
-				plateau.draw(renderer);
+				plateau.draw();
 				prncp.draw();
 				SDL_RenderPresent(renderer); 
 			}

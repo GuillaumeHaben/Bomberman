@@ -27,6 +27,7 @@ public:
 private:
 	Case_plateau* * jeu;
 	SDL_Surface *img[3];
+	SDL_Texture* mur;
 	int niveau;
 };
 
