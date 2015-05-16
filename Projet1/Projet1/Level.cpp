@@ -13,6 +13,7 @@ Level::Level(Case_plateau* * jeu) {
 	img[0] = SDL_LoadBMP("Sprite/caisse.bmp");
 	img[1] = SDL_LoadBMP("Sprite/mur.bmp");
 	mur = SDL_CreateTextureFromSurface(renderer, img[1]);
+	caisse = SDL_CreateTextureFromSurface(renderer, img[0]);
 }
 
 Level::~Level() {
@@ -121,9 +122,13 @@ void Level::dessiner(){
 
 			switch (jeu[i][j]){
 			case MUR:
-
 				SDL_RenderCopy(renderer, mur, NULL, &rect);
+				break;
+			case CAISSE: 
+				SDL_RenderCopy(renderer, caisse, NULL, &rect);
+				break;
 			}
+
 		}
 	}
 }

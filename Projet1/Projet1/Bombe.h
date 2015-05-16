@@ -35,6 +35,7 @@ private:
 	Joueur* appartient;
 
 	SDL_Texture* texture;
+	SDL_Rect dest;
 };
 
 #endif;

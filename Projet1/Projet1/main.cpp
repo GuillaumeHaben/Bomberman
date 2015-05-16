@@ -31,8 +31,6 @@ int main( int argc, char* args[] )
 
 			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-			/* ICI CREATION RENDERER*/
-
 			Game plateau;
 			Joueur prncp = plateau.getPrincipal();
 
@@ -44,30 +42,30 @@ int main( int argc, char* args[] )
 			//While user hasn't quit
 			while (quit == false)
 			{
-				SDL_WaitEvent(&evn);
-				switch (evn.type){
-				case SDL_QUIT: //Quit Window with X
-					quit = true;
-					break;
-				case SDL_KEYDOWN:
-					switch (evn.key.keysym.sym)
-					{
-					case SDLK_ESCAPE: //Quit Window with escape
+				while (SDL_PollEvent(&evn)){
+					switch (evn.type){
+					case SDL_QUIT: //Quit Window with X
 						quit = true;
 						break;
+					case SDL_KEYDOWN:
+						switch (evn.key.keysym.sym){
+						case SDLK_ESCAPE: //Quit Window with escape
+							quit = true;
+							break;
+						default:
+							prncp.event(plateau.jeu);
+							break;
+						}
+						break;
 					default:
-						prncp.event(plateau.jeu);
 						break;
 					}
-					break;
-				default:
-					break;
-				}
 
-				// Update Frame
-				plateau.draw();
-				prncp.draw();
-				SDL_RenderPresent(renderer); 
+					// Update Frame
+					plateau.draw();
+					prncp.draw();
+					SDL_RenderPresent(renderer);
+				}
 			}
 
 			SDL_DestroyWindow(window);

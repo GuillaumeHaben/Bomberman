@@ -7,6 +7,12 @@ Bombe::Bombe(){
 
 Bombe::Bombe(int pos_x, int pos_y, int power, Joueur* J){
 	this->init(pos_x, pos_y, power, J);
+
+	SDL_Surface* background = SDL_LoadBMP("Sprite/bombe.bmp");
+	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 0, 0, 255));
+	texture = SDL_CreateTextureFromSurface(renderer, background);
+	dest = { 35, 35, 35, 35 };
+	SDL_FreeSurface(background);
 }
 
 /* Destructeur */
