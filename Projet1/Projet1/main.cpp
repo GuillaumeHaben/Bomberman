@@ -18,7 +18,7 @@ SDL_Renderer* renderer = NULL;
 int main( int argc, char* args[] )
 {
 	bool quit = false;
-	bool menu = true;
+	bool IsMenu = true;
 
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0){
@@ -38,8 +38,7 @@ int main( int argc, char* args[] )
 			Menu menu;
 
 			/* MENU AFFICHER A LA PLACE */
-			plateau.draw();
-			prncp.draw();
+			menu.draw();
 
 			SDL_RenderPresent(renderer);
 
@@ -63,6 +62,7 @@ int main( int argc, char* args[] )
 						break;
 					case SDL_MOUSEBUTTONUP:
 						// plateau.clic(event.button.x, event.button.y);
+						IsMenu = false;
 						break;
 					default:
 						break;
@@ -70,8 +70,8 @@ int main( int argc, char* args[] )
 
 					// Update Frame
 					SDL_RenderClear(renderer);
-					if (menu){
-
+					if (IsMenu){
+						menu.draw();
 					}else{
 						plateau.draw();
 						prncp.draw();

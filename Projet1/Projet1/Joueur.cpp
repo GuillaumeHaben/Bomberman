@@ -5,14 +5,12 @@
 Joueur::Joueur() : Personnage(){
 	init_var();
 	init_load();
-	this->draw();	
 }
 
 /* Appel au super en C++ */
 Joueur::Joueur(int pos_x, int pos_y) : Personnage(pos_x, pos_y) {
 	init_var();
 	init_load();
-	this->draw();
 }
 
 /* Destructeur */
@@ -141,6 +139,5 @@ void Joueur::event(Case_plateau* * jeu){
 }
 
 void Joueur::draw(){
-
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
 }

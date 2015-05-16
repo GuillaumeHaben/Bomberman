@@ -5,9 +5,7 @@
 #include "Personnage.h"
 
 extern SDL_Event evn;
-extern SDL_Renderer * renderer;
-
-/* ICI Renderer */
+extern SDL_Renderer* renderer;
 
 class Joueur : public Personnage{
 
