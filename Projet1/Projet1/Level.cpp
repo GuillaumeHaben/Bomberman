@@ -16,9 +16,7 @@ Level::Level(Case_plateau* * jeu) {
 }
 
 Level::~Level() {
-	for (int i = 0; i < 2; i++){
-		SDL_FreeSurface(img[i]);
-	}
+
 }
 
 /* To setup the game */
@@ -122,16 +120,10 @@ void Level::dessiner(){
 			rect.y = j * 35;
 
 			switch (jeu[i][j]){
-			case MUR: 
-				
+			case MUR:
+
 				SDL_RenderCopy(renderer, mur, NULL, &rect);
 			}
 		}
 	}
-
-
 }
-/* DESSINER : Associer chaque fois les images au case
-penser que cette methode sera en continue, tout le temps refresh
-
-là qu'on fera l'appel au methdoe genre bombe evenement*/
