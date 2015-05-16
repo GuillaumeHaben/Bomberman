@@ -1,22 +1,26 @@
 #include "Level.h"
 
-
 /* Constructor */
 Level::Level() {
-
 
 }
 
 Level::Level(Case_plateau* * jeu) {
 	this->jeu = jeu;
 
+	fond = { 0, 0, 675, 525 };
+
 	img[0] = SDL_LoadBMP("Sprite/caisse.bmp");
 	img[1] = SDL_LoadBMP("Sprite/mur.bmp");
+
 	mur = SDL_CreateTextureFromSurface(renderer, img[1]);
 	caisse = SDL_CreateTextureFromSurface(renderer, img[0]);
+
+	SDL_FreeSurface(img[0]);
+	SDL_FreeSurface(img[1]);
 }
 
-Level::~Level() {
+Level::~Level(){
 
 }
 
@@ -26,16 +30,20 @@ void Level::setUpGame(int niveau) {
 
 	switch (niveau) {
 	case 1:
-		niveau1();
+		lvl1();
+		break;
+	case 2:
+		break;
+	case 3:
 		break;
 	default:
-		niveau1();
+		lvl1();
 		break;
 	}
-	
 }
 
-void Level::generateurCaisses(int nombreCaisses) {
+/* Init the map with random block */
+void Level::generate(int nombreCaisses) {
 	srand(time(NULL));
 	int k = 0;
 	int i = 0;
@@ -50,7 +58,9 @@ void Level::generateurCaisses(int nombreCaisses) {
 	}
 }
 
-void Level::niveau1() {
+/* Build the first level */
+void Level::lvl1() {
+
 	// Walls
 	for (int i = 0; i < TAILLE_JEU; i++) {
 		jeu[i][0] = MUR;
@@ -74,14 +84,18 @@ void Level::niveau1() {
 	}
 	for (int i = 4; i <= TAILLE_JEU - 3; i++)
 		jeu[i][2] = MUR;
+
 	for (int i = 2; i <= TAILLE_JEU - 5; i++)
 		jeu[i][12] = MUR;
+
 	for (int j = 5; j <= 9; j++) {
 		jeu[4][j] = MUR;
 		jeu[TAILLE_JEU - 5][j] = MUR;
 	}
+
 	for (int j = 4; j <= TAILLE_JEU - 4; j++)
 		jeu[2][j] = MUR;
+
 	for (int j = 3; j <= TAILLE_JEU - 5; j++)
 		jeu[TAILLE_JEU - 3][j] = MUR;
 
@@ -92,10 +106,10 @@ void Level::niveau1() {
 	jeu[TAILLE_JEU - 2][10] = MUR;
 	jeu[1][4] = MUR;
 
-	// Player.
+	// Player
 	jeu[1][1] = JOUEUR;
 
-	// Empty cases.
+	// Empty cases
 	for (int i = 2; i < 4; i++) {
 		jeu[i][1] = VIDE;
 		jeu[1][i] = VIDE;
@@ -105,13 +119,18 @@ void Level::niveau1() {
 		jeu[13][i] = MUR;
 	}
 
-	// CAISSES.
-	generateurCaisses(30);
+	// Block
+	generate(60);
 
+	// Chargement du sprite
+	SDL_Surface * background = SDL_LoadBMP("Sprite/lvl1.bmp");
+	niveaux = SDL_CreateTextureFromSurface(renderer, background);
+	SDL_FreeSurface(background);
 }
 
-
-void Level::dessiner(){
+/* Draw the level */
+void Level::draw(){
+	SDL_RenderCopy(renderer, niveaux, NULL, &fond);
 
 	SDL_Rect rect = { 0, 0, 35, 35 };
 
@@ -124,11 +143,16 @@ void Level::dessiner(){
 			case MUR:
 				SDL_RenderCopy(renderer, mur, NULL, &rect);
 				break;
-			case CAISSE: 
+			case CAISSE:
 				SDL_RenderCopy(renderer, caisse, NULL, &rect);
 				break;
+			case BOMBE:
+				//SDL_RenderCopy(renderer, GET BOMBE, NULL, &rect);
+				break;
+			case JOUEUR_BOMBE:
+				//SDL_RenderCopy(renderer, GET BOMBE, NULL, &rect);
+				break;
 			}
-
 		}
 	}
 }

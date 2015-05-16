@@ -13,23 +13,27 @@ class Level {
 
 public:
 
-	// Constructor.
 	Level();
 	Level(Case_plateau* * jeu);
 	~Level();
 
-	// Setters.
 	void setUpGame(int niveau);
-	void niveau1();
-	void generateurCaisses(int nombreCaisses);
-	void dessiner();
+	void lvl1();
+	void lvl2();
+	void generate(int nombreCaisses);
+	void draw();
 
 private:
+	int niveau;
 	Case_plateau* * jeu;
-	SDL_Surface *img[3];
+
+	SDL_Surface* img[3];
+
+	SDL_Texture* niveaux;
 	SDL_Texture* mur;
 	SDL_Texture* caisse;
-	int niveau;
+
+	SDL_Rect fond;
 };
 
 #endif;

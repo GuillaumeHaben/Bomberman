@@ -26,9 +26,6 @@ private:
 	bool end, pause;
 	Joueur principal;
 	Level l;
-
-	SDL_Texture* text;
-	SDL_Rect fond;
 };
 
 #endif
