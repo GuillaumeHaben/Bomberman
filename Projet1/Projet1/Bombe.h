@@ -33,7 +33,6 @@ private:
 	Time retardement;
 	bool explosee;
 	Joueur* appartient;
-
 	SDL_Texture* texture;
 	SDL_Rect dest;
 };

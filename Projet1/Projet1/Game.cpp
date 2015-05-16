@@ -1,8 +1,8 @@
 #include "Game.h"
 
 Game::Game(){
-	pause = 0;
-	end = 0;
+	pause = false;
+	end = false;
 	 
 	principal = Joueur(1, 1);	
 	jeu = new Case_plateau *[TAILLE_JEU];

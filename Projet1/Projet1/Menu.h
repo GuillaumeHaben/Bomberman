@@ -7,8 +7,6 @@ public:
 	Menu();
 	~Menu();
 
-	/* Voir avec la SDL : gestion clic, affichage */
-
 };
 
 #endif

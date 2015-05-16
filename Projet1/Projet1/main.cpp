@@ -3,6 +3,7 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_rect.h>
 #include "Game.h"
+#include "Menu.h"
 
 const int SCREEN_WIDTH = 675;
 const int SCREEN_HEIGHT = 525;
@@ -17,6 +18,7 @@ SDL_Renderer* renderer = NULL;
 int main( int argc, char* args[] )
 {
 	bool quit = false;
+	bool menu = true;
 
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0){
@@ -33,7 +35,9 @@ int main( int argc, char* args[] )
 
 			Game plateau;
 			Joueur prncp = plateau.getPrincipal();
+			Menu menu;
 
+			/* MENU AFFICHER A LA PLACE */
 			plateau.draw();
 			prncp.draw();
 
@@ -57,14 +61,21 @@ int main( int argc, char* args[] )
 							break;
 						}
 						break;
+					case SDL_MOUSEBUTTONUP:
+						// plateau.clic(event.button.x, event.button.y);
+						break;
 					default:
 						break;
 					}
 
 					// Update Frame
 					SDL_RenderClear(renderer);
-					plateau.draw();
-					prncp.draw();
+					if (menu){
+
+					}else{
+						plateau.draw();
+						prncp.draw();
+					}
 					SDL_RenderPresent(renderer);
 				}
 			}

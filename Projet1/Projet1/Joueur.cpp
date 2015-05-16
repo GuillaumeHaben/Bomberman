@@ -41,7 +41,10 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 			 else{
 				 if (jeu[p_colone][p_line - 1] == MUR || jeu[p_colone][p_line - 1] == CAISSE) break;
 				 else{
-					 jeu[p_colone][p_line] = VIDE;
+					 if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
+						 jeu[p_colone][p_line] = BOMBE;
+					 }else jeu[p_colone][p_line] = VIDE;
+
 					 jeu[p_colone][p_line - 1] = JOUEUR;
 					 --p_line;
 					 return 0;
@@ -53,7 +56,10 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 		else{
 			if (jeu[p_colone][p_line + 1] == MUR || jeu[p_colone][p_line + 1] == CAISSE) break;
 			else{
-				jeu[p_colone][p_line] = VIDE;
+				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
+					jeu[p_colone][p_line] = BOMBE;
+				}else jeu[p_colone][p_line] = VIDE;
+
 				jeu[p_colone][p_line + 1] = JOUEUR;
 				++p_line;
 				return 0;
@@ -65,7 +71,10 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 		else{
 			if (jeu[p_colone + 1][p_line] == MUR || jeu[p_colone + 1][p_line] == CAISSE) break;
 			else{
-				jeu[p_colone][p_line] = VIDE;
+				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
+					jeu[p_colone][p_line] = BOMBE;
+				}else jeu[p_colone][p_line] = VIDE;
+				
 				jeu[p_colone + 1][p_line] = JOUEUR;
 				++p_colone;
 				return 0;
@@ -77,7 +86,10 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 		else{
 			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone -1 ][p_line] == CAISSE) break;
 			else{
-				jeu[p_colone][p_line] = VIDE;
+				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
+					jeu[p_colone][p_line] = BOMBE;
+				}else jeu[p_colone][p_line] = VIDE;
+
 				jeu[p_colone - 1][p_line] = JOUEUR;
 				--p_colone;
 				return 0;
