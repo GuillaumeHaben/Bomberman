@@ -115,8 +115,8 @@ void Level::lvl1() {
 		jeu[1][i] = VIDE;
 	}
 	for (int i = 11; i < 13; i++){
-		jeu[i][13] = MUR;
-		jeu[13][i] = MUR;
+		jeu[i][13] = VIDE;
+		jeu[13][i] = VIDE;
 	}
 
 	// Block
