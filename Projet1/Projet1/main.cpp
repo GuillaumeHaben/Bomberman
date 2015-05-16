@@ -62,6 +62,7 @@ int main( int argc, char* args[] )
 					}
 
 					// Update Frame
+					SDL_RenderClear(renderer);
 					plateau.draw();
 					prncp.draw();
 					SDL_RenderPresent(renderer);
