@@ -1,5 +1,4 @@
 #include "Level.h"
-#include "Joueur.h"
 
 /* Constructor */
 Level::Level() {
