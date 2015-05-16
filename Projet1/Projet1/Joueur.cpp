@@ -127,9 +127,13 @@ void Joueur::event(Case_plateau* * jeu){
 
 		case SDLK_RIGHT:
 			if (this->deplacement(RIGHT, jeu) != -1){
-				dest.x = p_colone *35;
+				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 			}
+			break;
+
+		case SDLK_SPACE:
+				jeu[p_colone][p_line] = BOMBE;
 			break;
 
 		default:

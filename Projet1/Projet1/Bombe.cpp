@@ -17,7 +17,7 @@ Bombe::Bombe(int pos_x, int pos_y, int power, Joueur* J){
 
 /* Destructeur */
 Bombe::~Bombe(){
-
+	
 }
 
 /* Intialise la bombe */
@@ -31,8 +31,12 @@ void Bombe::init(int x, int y, int power, Joueur* J){
 }
 
 /* Gère les evenements bombes */
-void event(Case_plateau* * jeu){
-
+bool Bombe::event(Case_plateau* * jeu){
+	if (retardement.getTime >= 3000) {
+		explosee = true;
+		return true;
+	}
+	return false;
 	// CHECK TIMER 
 	// keep temps comparer 
 	// explossee -> vrai -> lancer methode 
@@ -51,8 +55,8 @@ int Bombe::getPuissance(){
 	return puissance;
 }
 
-int Bombe::getRetardement(){
-	return puissance;
+Time Bombe::getRetardement(){
+	return retardement;
 }
 
 int Bombe::getExplosee(){

@@ -20,11 +20,11 @@ public:
 	int getColone();
 	int getLine();
 	int getPuissance();
-	int getRetardement();
+	Time getRetardement();
 	int getExplosee();
 	Joueur* getJoueur();
 
-	void event(Case_plateau* * jeu);
+	bool event(Case_plateau* * jeu);
 	void init(int x, int y, int power, Joueur* J);
 
 private:
