@@ -6,8 +6,8 @@ Level::Level() {
 
 }
 
-Level::Level(Case_plateau* * jeu, Joueur* J) {
-	this->jeu = jeu;
+Level::Level(Case_plateau* * plat, Joueur* J) {
+	jeu = plat;
 	prncp = J;
 
 	fond = { 0, 0, 675, 525 };

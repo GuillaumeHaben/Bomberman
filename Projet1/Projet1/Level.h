@@ -6,6 +6,7 @@
 #include <Time.h>
 
 #include "Case.h"
+#include "Joueur.h"
 
 extern SDL_Renderer * renderer;
 
@@ -14,7 +15,7 @@ class Level {
 public:
 
 	Level();
-	Level(Case_plateau* * jeu, Joueur* J);
+	Level(Case_plateau** jeu, Joueur* J);
 	~Level();
 
 	void setUpGame(int niveau);

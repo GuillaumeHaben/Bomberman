@@ -2,7 +2,6 @@
 #define BOMBE_H
 
 #include "Case.h"
-#include "Joueur.h"
 #include "Time.h"
 
 extern SDL_Event evn;
@@ -12,7 +11,7 @@ class Bombe {
 
 public:
 	Bombe();
-	Bombe(int pos_x, int pos_y, int power, Joueur* J);
+	Bombe(int pos_x, int pos_y, int power);
 	~Bombe();
 
 
@@ -22,17 +21,15 @@ public:
 	int getPuissance();
 	Time getRetardement();
 	int getExplosee();
-	Joueur* getJoueur();
 
 	bool event(Case_plateau* * jeu);
-	void init(int x, int y, int power, Joueur* J);
+	void init(int x, int y, int power);
 
 private:
 	int b_colone, b_line;
 	int puissance;
 	Time retardement;
 	bool explosee;
-	Joueur* appartient;
 	SDL_Texture* texture;
 	SDL_Rect dest;
 };

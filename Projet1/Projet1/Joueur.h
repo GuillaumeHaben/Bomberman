@@ -23,7 +23,7 @@ private:
 	int nb_bombes, nb_bombes_max;
 	SDL_Texture* texture;
 	SDL_Rect dest;
-	Bombe bombes_tab[8];
+	Bombe bombes_tab[2];
 };
 
 #endif

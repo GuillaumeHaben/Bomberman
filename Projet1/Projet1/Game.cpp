@@ -45,7 +45,7 @@ void Game::draw(){
 }
 
 void Game::init(int i) {
-	l = Level(this->jeu, this->getPrincipal);
+	l = Level(this->jeu, &this->getPrincipal());
 	l.setUpGame(i);
 	draw();
 }
