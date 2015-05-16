@@ -1,12 +1,14 @@
 #include "Level.h"
+#include "Joueur.h"
 
 /* Constructor */
 Level::Level() {
 
 }
 
-Level::Level(Case_plateau* * jeu) {
+Level::Level(Case_plateau* * jeu, Joueur* J) {
 	this->jeu = jeu;
+	prncp = J;
 
 	fond = { 0, 0, 675, 525 };
 

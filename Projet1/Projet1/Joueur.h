@@ -3,6 +3,7 @@
 
 #include "Case.h"
 #include "Personnage.h"
+#include "Bombe.h"
 
 extern SDL_Event evn;
 extern SDL_Renderer * renderer;
@@ -24,6 +25,7 @@ private:
 	int nb_bombes, nb_bombes_max;
 	SDL_Texture* texture;
 	SDL_Rect dest;
+	Bombe bombes_tab[8];
 };
 
 #endif

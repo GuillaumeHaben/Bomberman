@@ -70,12 +70,8 @@ int main( int argc, char* args[] )
 
 					// Update Frame
 					SDL_RenderClear(renderer);
-					if (menu){
-
-					}else{
-						plateau.draw();
-						prncp.draw();
-					}
+					plateau.draw();
+					prncp.draw();
 					SDL_RenderPresent(renderer);
 				}
 			}
