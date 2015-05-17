@@ -21,9 +21,9 @@ public:
 	int getLine();
 	int getPuissance();
 	Time getRetardement();
-	bool getExplosee();
+	int getExplosee();
 
-	bool event(Case_plateau* * jeu);
+	int event(Case_plateau* * jeu);
 	void init(int x, int y, int power);
 
 	SDL_Texture* texture[2];
@@ -33,7 +33,7 @@ private:
 	int b_colone, b_line;
 	int puissance;
 	Time retardement;
-	bool explosee;
+	int explosee; //0 = pas explosée | 1 = prête à exploser | 2 = explosée
 };
 
 #endif;

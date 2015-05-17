@@ -27,13 +27,20 @@ void Bombe::init(int x, int y, int power){
 	b_line = y;
 	puissance = power;
 	retardement.start();
-	explosee = false;
+	explosee = 0;
 }
 
 /* Gère les evenements bombes */
-bool Bombe::event(Case_plateau* * jeu){
+//0 = pas explosée | 1 = prête à exploser | 2 = explosée
+int Bombe::event(Case_plateau* * jeu){
 	if (retardement.getTime() >= 3000) {
-		explosee = true;
+		explosee = 2;
+		retardement.stop();
+		return explosee;
+	}
+	if (retardement.getTime >= 2000) {
+		explosee = 1;
+		return explosee;
 	}
 	return explosee;
 }
@@ -55,6 +62,6 @@ Time Bombe::getRetardement(){
 	return retardement;
 }
 
-bool Bombe::getExplosee(){
-	return explosee;
+int Bombe::getExplosee(){
+	return explosee; //0 = pas explosée | 1 = prête à exploser | 2 = explosée
 }
