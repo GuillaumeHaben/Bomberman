@@ -33,7 +33,7 @@ private:
 	int b_colone, b_line;
 	int puissance;
 	Time retardement;
-	int explosee; //0 = pas explosée | 1 = prête à exploser | 2 = explosée
+	int explosee; //0 = pas explosee | 1 = prête à exploser | 2 = explosée
 };
 
 #endif;

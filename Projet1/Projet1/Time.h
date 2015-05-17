@@ -8,6 +8,7 @@ class Time{
 public :
 	// Constructor.
 	Time();
+	~Time();
 
 	// Setters.
 	void start();
