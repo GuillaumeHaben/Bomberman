@@ -8,9 +8,10 @@ Bombe::Bombe(){
 Bombe::Bombe(int pos_x, int pos_y, int power){
 	this->init(pos_x, pos_y, power);
 
-	SDL_Surface* background = SDL_LoadBMP("Sprite/bombe.bmp");
-	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 0, 0, 255));
-	texture = SDL_CreateTextureFromSurface(renderer, background);
+	SDL_Surface* background = IMG_Load("Sprite/bombe_1.png");
+	SDL_Surface* background2 = IMG_Load("Sprite/bombe_2.png");
+	texture[0] = SDL_CreateTextureFromSurface(renderer, background);
+	texture[1] = SDL_CreateTextureFromSurface(renderer, background2);
 	dest = { 35, 35, 35, 35 };
 	SDL_FreeSurface(background);
 }
