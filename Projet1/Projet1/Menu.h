@@ -11,6 +11,7 @@ public:
 	Menu();
 	~Menu();
 
+	void clic(int x, int y);
 	void draw();
 
 private:
