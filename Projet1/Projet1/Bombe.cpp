@@ -54,6 +54,6 @@ Time Bombe::getRetardement(){
 	return retardement;
 }
 
-int Bombe::getExplosee(){
+bool Bombe::getExplosee(){
 	return explosee;
 }

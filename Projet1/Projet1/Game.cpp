@@ -3,7 +3,7 @@
 Game::Game(){
 	pause = false;
 	end = false;
-	 
+	
 	principal = Joueur(1, 1);	
 	jeu = new Case_plateau *[TAILLE_JEU];
 

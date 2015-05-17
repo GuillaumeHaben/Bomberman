@@ -18,6 +18,10 @@ Joueur::~Joueur(){
 
 }
 
+Bombe* Joueur::getBombes_tab() {
+	return bombes_tab;
+}
+
 void Joueur::init_var(){
 	nb_bombes = 0;
 	nb_bombes_max = 2;
