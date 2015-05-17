@@ -32,8 +32,8 @@ bool Game::getPause(){
 	return pause;
 }
 
-Joueur Game::getPrincipal(){
-	return principal;
+Joueur* Game::getPrincipal(){
+	return &principal;
 }
 
 Level Game::getLevel(){
@@ -45,7 +45,7 @@ void Game::draw(){
 }
 
 void Game::init(int i) {
-	l = Level(this->jeu, &this->getPrincipal());
+	l = Level(this->jeu, this->getPrincipal());
 	l.setUpGame(i);
 	draw();
 }

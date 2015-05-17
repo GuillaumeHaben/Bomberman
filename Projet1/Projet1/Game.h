@@ -16,7 +16,7 @@ public:
 	bool getPause();
 	void setPause(bool p);
 	void draw();
-	Joueur getPrincipal();
+	Joueur* getPrincipal();
 	Level getLevel();
 	void init(int i);
 

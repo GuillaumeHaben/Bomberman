@@ -24,7 +24,7 @@ Bombe* Joueur::getBombes_tab() {
 
 void Joueur::init_var(){
 	nb_bombes = 0;
-	nb_bombes_max = 2;
+	nb_bombes_max = NB_BOMBES_MAX;
 }
 
 void Joueur::init_load(){
@@ -137,7 +137,12 @@ void Joueur::event(Case_plateau* * jeu){
 			break;
 
 		case SDLK_SPACE:
+			if (nb_bombes < nb_bombes_max) {
 				jeu[p_colone][p_line] = BOMBE;
+				Bombe nouvelle_bombe(p_colone, p_line, 1);
+				bombes_tab[nb_bombes] = nouvelle_bombe;
+				nb_bombes++;
+			}
 			break;
 
 		default:

@@ -34,7 +34,7 @@ int main( int argc, char* args[] )
 			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 			Game plateau;
-			Joueur prncp = plateau.getPrincipal();
+			Joueur* prncp = plateau.getPrincipal();
 			Menu menu;
 
 			/* MENU AFFICHER A LA PLACE */
@@ -56,7 +56,7 @@ int main( int argc, char* args[] )
 							quit = true;
 							break;
 						default:
-							prncp.event(plateau.jeu);
+							prncp->event(plateau.jeu);
 							break;
 						}
 						break;
@@ -74,7 +74,7 @@ int main( int argc, char* args[] )
 						menu.draw();
 					}else{
 						plateau.draw();
-						prncp.draw();
+						prncp->draw();
 					}
 					SDL_RenderPresent(renderer);
 				}

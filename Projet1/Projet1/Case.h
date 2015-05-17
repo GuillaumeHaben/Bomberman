@@ -21,4 +21,6 @@ const int  DOWN = 1;
 const int  RIGHT = 2;
 const int  LEFT = 3;
 
+const int NB_BOMBES_MAX = 2;
+
 #endif

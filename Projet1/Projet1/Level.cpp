@@ -149,13 +149,15 @@ void Level::draw(){
 				break;
 			case BOMBE: case JOUEUR_BOMBE:
 				Bombe* bombes = prncp->getBombes_tab();
-				for (i = 0; i < 1; i++) {
-					if (rect.x == bombes[i].getLine() && rect.y == bombes[i].getColone()) {
-						if (!bombes[i].getExplosee()) {
-							SDL_RenderCopy(renderer, bombes[i].texture, NULL, &rect);
-						}
-						else {
-							//supprimer cette bombe
+				for (i = 0; i < NB_BOMBES_MAX; i++) {
+					if (&bombes[i] != NULL) {
+						if (rect.x == (bombes[i].getColone()*35) && rect.y == (bombes[i].getLine()*35)) {
+							if (!bombes[i].getExplosee()) {
+								SDL_RenderCopy(renderer, bombes[i].texture, NULL, &rect);
+							}
+							else {
+								//supprimer cette bombe
+							}
 						}
 					}
 				}
