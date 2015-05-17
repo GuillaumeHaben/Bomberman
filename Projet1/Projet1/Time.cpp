@@ -7,6 +7,9 @@ Time::Time() {
 	on = false;
 }
 
+/* Destructeur. */
+Time::~Time(){}
+
 /* To start the object Time. */
 void Time::start() {
 	if (!isOn()) {
