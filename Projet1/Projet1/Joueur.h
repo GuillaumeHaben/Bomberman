@@ -14,6 +14,9 @@ public:
 	Joueur();
 	Joueur(int pos_x, int pos_y);
 	~Joueur();
+
+	Bombe* getBombes_tab();
+
 	void init_var();
 	void init_load();
 	void event(Case_plateau* * jeu);
