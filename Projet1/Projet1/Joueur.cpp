@@ -1,5 +1,6 @@
 #include "Joueur.h"
-#include <SDL/SDL_image.h>
+#include "SDL/SDL_image.h"
+
 
 /* Constructeur */
 Joueur::Joueur() : Personnage(){
@@ -24,7 +25,8 @@ void Joueur::init_var(){
 }
 
 void Joueur::init_load(){
-	SDL_Surface* background = SDL_LoadBMP("Sprite/test.bmp");
+	SDL_Surface* background = SDL_LoadBMP("Sprite/bombe.bmp");
+
 	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 0, 0, 255));
 	texture = SDL_CreateTextureFromSurface(renderer, background);
 	dest = { 35, 35, 35, 35 };

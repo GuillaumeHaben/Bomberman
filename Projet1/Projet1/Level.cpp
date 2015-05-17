@@ -121,7 +121,7 @@ void Level::lvl1() {
 	}
 
 	// Block
-	generate(60);
+	generate(80);
 
 	// Chargement du sprite
 	SDL_Surface * background = SDL_LoadBMP("Sprite/lvl1.bmp");

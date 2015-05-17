@@ -13,6 +13,10 @@ Menu::~Menu(){
 
 }
 
+void Menu::clic(int x, int y){
+	
+}
+
 void Menu::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
 }
