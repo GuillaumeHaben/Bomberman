@@ -48,7 +48,9 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 						 jeu[p_colone][p_line] = BOMBE;
 					 }else jeu[p_colone][p_line] = VIDE;
 
-					 jeu[p_colone][p_line - 1] = JOUEUR;
+					 if (jeu[p_colone][p_line - 1] == BOMBE){
+						 jeu[p_colone][p_line - 1] = JOUEUR_BOMBE;
+					 } else jeu[p_colone][p_line - 1] = JOUEUR;
 					 --p_line;
 					 return 0;
 				 }
@@ -63,7 +65,9 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 					jeu[p_colone][p_line] = BOMBE;
 				}else jeu[p_colone][p_line] = VIDE;
 
-				jeu[p_colone][p_line + 1] = JOUEUR;
+				if (jeu[p_colone][p_line + 1] == BOMBE){
+					jeu[p_colone][p_line + 1] = JOUEUR_BOMBE;
+				}else jeu[p_colone][p_line + 1] = JOUEUR;
 				++p_line;
 				return 0;
 			}
@@ -78,7 +82,9 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 					jeu[p_colone][p_line] = BOMBE;
 				}else jeu[p_colone][p_line] = VIDE;
 				
-				jeu[p_colone + 1][p_line] = JOUEUR;
+				if (jeu[p_colone + 1][p_line] == BOMBE){
+					jeu[p_colone + 1][p_line] = JOUEUR_BOMBE;
+				} else jeu[p_colone + 1][p_line] = JOUEUR;
 				++p_colone;
 				return 0;
 			}
@@ -93,7 +99,10 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 					jeu[p_colone][p_line] = BOMBE;
 				}else jeu[p_colone][p_line] = VIDE;
 
-				jeu[p_colone - 1][p_line] = JOUEUR;
+				if (jeu[p_colone - 1][p_line] == BOMBE){
+					jeu[p_colone - 1][p_line] = JOUEUR_BOMBE;
+				}
+				else jeu[p_colone - 1][p_line] = JOUEUR;
 				--p_colone;
 				return 0;
 			}
@@ -139,7 +148,7 @@ void Joueur::event(Case_plateau* * jeu){
 
 		case SDLK_SPACE:
 			if (nb_bombes < nb_bombes_max) {
-				jeu[p_colone][p_line] = BOMBE;
+				jeu[p_colone][p_line] = JOUEUR_BOMBE;
 				Bombe nouvelle_bombe(p_colone, p_line, 1);
 				bombes_tab[nb_bombes] = nouvelle_bombe;
 				nb_bombes++;
