@@ -68,18 +68,18 @@ int main( int argc, char* args[] )
 						break;
 					}
 
-
-
-					// Update Frame
-					SDL_RenderClear(renderer);
-					if (IsMenu){
-						menu.draw();
-					}else{
-						plateau.draw();
-						prncp->draw();
-					}
-					SDL_RenderPresent(renderer);
 				}
+
+				// Update Frame
+				SDL_RenderClear(renderer);
+				if (IsMenu){
+					menu.draw();
+				}else{
+					plateau.draw();
+					prncp->draw();
+				}
+				SDL_RenderPresent(renderer);
+				
 			}
 
 			SDL_DestroyWindow(window);
