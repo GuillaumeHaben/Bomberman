@@ -36,7 +36,7 @@ void Adversaire::init_load(){
 	SDL_FreeSurface(background);
 }
 
-int Personnage::deplacement(int direction, Case_plateau* * jeu){
+int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 
 	switch (direction){
 
