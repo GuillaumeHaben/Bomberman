@@ -135,29 +135,36 @@ void Level::draw(){
 
 	SDL_Rect rect = { 0, 0, 35, 35 };
 
-	for (int i = 0; i < TAILLE_JEU; i++){
+	for (int k = 0; k < TAILLE_JEU; k++){
 		for (int j = 0; j < TAILLE_JEU; j++){
-			rect.x = i * 35;
+			rect.x = k * 35;
 			rect.y = j * 35;
 
-			switch (jeu[i][j]){
+			switch (jeu[k][j]){
 			case MUR:
 				SDL_RenderCopy(renderer, mur, NULL, &rect);
 				break;
+
 			case CAISSE:
 				SDL_RenderCopy(renderer, caisse, NULL, &rect);
 				break;
+
 			case BOMBE: case JOUEUR_BOMBE:
 				Bombe* bombes = prncp->getBombes_tab();
-				for (i = 0; i < NB_BOMBES_MAX; i++) {
+				for (int i = 0; i < NB_BOMBES_MAX; i++) {
 					if (&bombes[i] != NULL) {
+						bombes[i].event(jeu);
 						if (rect.x == (bombes[i].getColone() * 35) && rect.y == (bombes[i].getLine() * 35)) {
-							if (!bombes[i].getExplosee()) {
+							if (bombes[i].getExplosee() == 0) {
 								SDL_RenderCopy(renderer, bombes[i].texture[0], NULL, &rect);
+							}
+							if (bombes[i].getExplosee() == 1) {
+								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
 							}
 						}
 						else {
 							//supprimer cette bombe
+							// nb bombe carefully ! poue le tableau
 						}
 					}
 				}

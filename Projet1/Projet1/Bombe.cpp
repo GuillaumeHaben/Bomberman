@@ -36,13 +36,14 @@ int Bombe::event(Case_plateau* * jeu){
 	if (retardement.getTime() >= 3000) {
 		explosee = 2;
 		retardement.stop();
-		return explosee;
+		return 2;
 	}
-	if (retardement.getTime >= 2000) {
+
+	if (retardement.getTime() >= 2000) {
 		explosee = 1;
-		return explosee;
+		return 1;
 	}
-	return explosee;
+	return 0;
 }
 
 /* Getters */

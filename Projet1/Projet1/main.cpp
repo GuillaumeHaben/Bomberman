@@ -68,6 +68,8 @@ int main( int argc, char* args[] )
 						break;
 					}
 
+
+
 					// Update Frame
 					SDL_RenderClear(renderer);
 					if (IsMenu){
