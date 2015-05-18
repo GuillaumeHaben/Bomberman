@@ -22,6 +22,8 @@ public:
 	int getPuissance();
 	Time getRetardement();
 	int getExplosee();
+	void setExplosee(int i);
+	void setLine();
 
 	int event(Case_plateau* * jeu);
 	void init(int x, int y, int power);

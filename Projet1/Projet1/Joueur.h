@@ -16,6 +16,7 @@ public:
 	~Joueur();
 
 	Bombe* getBombes_tab();
+	void dim_Nb_Bombes();
 
 	void init_var();
 	void init_load();

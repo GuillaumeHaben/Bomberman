@@ -161,10 +161,16 @@ void Level::draw(){
 							if (bombes[i].getExplosee() == 1) {
 								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
 							}
-						}
-						else {
-							//supprimer cette bombe
-							// nb bombe carefully ! poue le tableau
+							if (bombes[i].getExplosee() == 2) {
+								bombes[0] = bombes[1];
+								bombes[1].setExplosee(0);
+								bombes[1].setLine();
+								prncp->dim_Nb_Bombes();
+
+								if (jeu[k][j] == JOUEUR_BOMBE) {
+									jeu[k][j] = JOUEUR;
+								}else jeu[k][j] = VIDE;
+							}
 						}
 					}
 				}
