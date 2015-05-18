@@ -2,6 +2,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_rect.h>
+
 #include "Game.h"
 #include "Menu.h"
 
@@ -76,7 +77,6 @@ int main( int argc, char* args[] )
 					menu.draw();
 				}else{
 					plateau.draw();
-					prncp->draw();
 				}
 				SDL_RenderPresent(renderer);
 				

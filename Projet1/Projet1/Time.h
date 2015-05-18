@@ -24,8 +24,6 @@ private :
 	int startDate;
 	int stopDate;
 	bool on;
-
 };
-
 
 #endif

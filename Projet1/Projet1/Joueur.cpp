@@ -16,7 +16,7 @@ Joueur::Joueur(int pos_x, int pos_y) : Personnage(pos_x, pos_y) {
 
 /* Destructeur */
 Joueur::~Joueur(){
-
+	SDL_DestroyTexture(texture);
 }
 
 Bombe* Joueur::getBombes_tab() {
@@ -49,11 +49,13 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 				 else{
 					 if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
 						 jeu[p_colone][p_line] = BOMBE;
-					 }else jeu[p_colone][p_line] = VIDE;
+					 }
+					 else jeu[p_colone][p_line] = VIDE;
 
 					 if (jeu[p_colone][p_line - 1] == BOMBE){
 						 jeu[p_colone][p_line - 1] = JOUEUR_BOMBE;
-					 } else jeu[p_colone][p_line - 1] = JOUEUR;
+					 }
+					 else jeu[p_colone][p_line - 1] = JOUEUR;
 					 --p_line;
 					 return 0;
 				 }
@@ -66,11 +68,13 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 			else{
 				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
 					jeu[p_colone][p_line] = BOMBE;
-				}else jeu[p_colone][p_line] = VIDE;
+				}
+				else jeu[p_colone][p_line] = VIDE;
 
 				if (jeu[p_colone][p_line + 1] == BOMBE){
 					jeu[p_colone][p_line + 1] = JOUEUR_BOMBE;
-				}else jeu[p_colone][p_line + 1] = JOUEUR;
+				}
+				else jeu[p_colone][p_line + 1] = JOUEUR;
 				++p_line;
 				return 0;
 			}
@@ -83,11 +87,13 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 			else{
 				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
 					jeu[p_colone][p_line] = BOMBE;
-				}else jeu[p_colone][p_line] = VIDE;
-				
+				}
+				else jeu[p_colone][p_line] = VIDE;
+
 				if (jeu[p_colone + 1][p_line] == BOMBE){
 					jeu[p_colone + 1][p_line] = JOUEUR_BOMBE;
-				} else jeu[p_colone + 1][p_line] = JOUEUR;
+				}
+				else jeu[p_colone + 1][p_line] = JOUEUR;
 				++p_colone;
 				return 0;
 			}
@@ -96,11 +102,12 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 	case LEFT:
 		if (p_colone - 1 < 0) break;
 		else{
-			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone -1 ][p_line] == CAISSE) break;
+			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone - 1][p_line] == CAISSE) break;
 			else{
 				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
 					jeu[p_colone][p_line] = BOMBE;
-				}else jeu[p_colone][p_line] = VIDE;
+				}
+				else jeu[p_colone][p_line] = VIDE;
 
 				if (jeu[p_colone - 1][p_line] == BOMBE){
 					jeu[p_colone - 1][p_line] = JOUEUR_BOMBE;
@@ -123,7 +130,7 @@ void Joueur::event(Case_plateau* * jeu){
 		{
 		case SDLK_UP:
 			if (this->deplacement(UP, jeu) != -1){
-				dest.x = p_colone*35;
+				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 			}
 			break;

@@ -149,6 +149,10 @@ void Level::draw(){
 				SDL_RenderCopy(renderer, caisse, NULL, &rect);
 				break;
 
+			case JOUEUR: 
+				prncp->draw();
+				break;
+
 			case BOMBE: case JOUEUR_BOMBE:
 				Bombe* bombes = prncp->getBombes_tab();
 				for (int i = 0; i < NB_BOMBES_MAX; i++) {
@@ -172,6 +176,9 @@ void Level::draw(){
 								}else jeu[k][j] = VIDE;
 							}
 						}
+					}
+					if (jeu[k][j] == JOUEUR_BOMBE){
+						prncp->draw();
 					}
 				}
 				

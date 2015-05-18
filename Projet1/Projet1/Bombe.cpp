@@ -12,22 +12,25 @@ Bombe::Bombe(int pos_x, int pos_y, int power){
 	SDL_Surface* background2 = IMG_Load("Sprite/bombe_2.png");
 	texture[0] = SDL_CreateTextureFromSurface(renderer, background);
 	texture[1] = SDL_CreateTextureFromSurface(renderer, background2);
-	dest = { pos_x*35, pos_y*35, 35, 35 };
 	SDL_FreeSurface(background);
+	SDL_FreeSurface(background2);
 }
 
 /* Destructeur */
 Bombe::~Bombe(){
 	explosee = 0;
+	//SDL_DestroyTexture(texture[0]);
+	//SDL_DestroyTexture(texture[1]);
 }
 
 /* Intialise la bombe */
 void Bombe::init(int x, int y, int power){
 	b_colone = x;
 	b_line = y;
+	dest = { x * 35, y * 35, 35, 35 };
+	explosee = 0;
 	puissance = power;
 	retardement.start();
-	explosee = 0;
 }
 
 /* Gère les evenements bombes */

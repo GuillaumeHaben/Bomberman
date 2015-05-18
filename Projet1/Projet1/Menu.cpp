@@ -10,7 +10,7 @@ Menu::Menu(){
 
 
 Menu::~Menu(){
-
+	SDL_DestroyTexture(texture);
 }
 
 void Menu::clic(int x, int y){
