@@ -38,14 +38,11 @@ int main( int argc, char* args[] )
 			Joueur* prncp = plateau.getPrincipal();
 			Menu menu;
 
-			/* MENU AFFICHER A LA PLACE */
 			menu.draw();
-
 			SDL_RenderPresent(renderer);
 
 			//While user hasn't quit
-			while (quit == false)
-			{
+			while (quit == false){
 				while (SDL_PollEvent(&evn)){
 					switch (evn.type){
 					case SDL_QUIT: //Quit Window with X
@@ -60,7 +57,8 @@ int main( int argc, char* args[] )
 							plateau.setPause();
 							break;
 						default:
-							prncp->event(plateau.jeu);
+							if (! plateau.getPause())
+								prncp->event(plateau.jeu);
 							break;
 						}
 						break;
@@ -78,11 +76,8 @@ int main( int argc, char* args[] )
 				SDL_RenderClear(renderer);
 				if (IsMenu){
 					menu.draw();
-				}else{
-					plateau.draw();
-				}
+				}else plateau.draw();
 				SDL_RenderPresent(renderer);
-				
 			}
 
 			SDL_DestroyWindow(window);

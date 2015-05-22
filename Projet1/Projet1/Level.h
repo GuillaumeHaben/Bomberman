@@ -22,7 +22,7 @@ public:
 	void lvl1();
 	void lvl2();
 	void generate(int nombreCaisses);
-	void draw();
+	void draw(bool b);
 
 private:
 	int niveau;
@@ -33,6 +33,7 @@ private:
 	SDL_Texture* niveaux;
 	SDL_Texture* mur;
 	SDL_Texture* caisse;
+	SDL_Texture* pause_text;
 
 	SDL_Rect fond;
 

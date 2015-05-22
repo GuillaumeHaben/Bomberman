@@ -26,7 +26,7 @@ Game::~Game(){
 }
 
 void Game::setPause(){
-	pause = p;
+	pause = !pause;
 }
 
 bool Game::getPause(){
@@ -42,7 +42,7 @@ Level Game::getLevel(){
 }
 
 void Game::draw(){
-	l.draw();
+	l.draw(pause);
 }
 
 void Game::init(int i) {

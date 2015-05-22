@@ -11,6 +11,10 @@ Level::Level(Case_plateau* * plat, Joueur* J) {
 
 	fond = { 0, 0, 675, 525 };
 
+	SDL_Surface* background = IMG_Load("Sprite/pause.png");
+	pause_text = SDL_CreateTextureFromSurface(renderer, background);
+	SDL_FreeSurface(background);
+
 	img[0] = SDL_LoadBMP("Sprite/caisse.bmp");
 	img[1] = SDL_LoadBMP("Sprite/mur.bmp");
 
@@ -130,9 +134,8 @@ void Level::lvl1() {
 }
 
 /* Draw the level */
-void Level::draw(){
+void Level::draw(bool pause){
 	SDL_RenderCopy(renderer, niveaux, NULL, &fond);
-
 	SDL_Rect rect = { 0, 0, 35, 35 };
 
 	for (int k = 0; k < TAILLE_JEU; k++){
@@ -157,7 +160,16 @@ void Level::draw(){
 				Bombe* bombes = prncp->getBombes_tab();
 				for (int i = 0; i < NB_BOMBES_MAX; i++) {
 					if (&bombes[i] != NULL) {
-						bombes[i].event(jeu);
+
+						// Check if the bombe should be active or not
+						if (pause){
+							// TO DO : Mettre bombe en pause bombes[i].put_off
+						}else{
+							// TO DO : Verifier que la bombe est en marche sinon la remettre bombes[i].isOn();
+							bombes[i].event(jeu);
+						}
+
+						// Print the Bombe
 						if (rect.x == (bombes[i].getColone() * 35) && rect.y == (bombes[i].getLine() * 35)) {
 							if (bombes[i].getExplosee() == 0) {
 								SDL_RenderCopy(renderer, bombes[i].texture[0], NULL, &rect);
@@ -181,10 +193,12 @@ void Level::draw(){
 						prncp->draw();
 					}
 				}
-				
 				break;
 			
 			}
 		}
 	}
+
+	// Pause screen
+	if (pause) SDL_RenderCopy(renderer, pause_text, NULL, &fond);
 }
