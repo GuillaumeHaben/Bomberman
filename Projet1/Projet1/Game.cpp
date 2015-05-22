@@ -25,7 +25,7 @@ Game::~Game(){
 
 }
 
-void Game::setPause(bool p){
+void Game::setPause(){
 	pause = p;
 }
 

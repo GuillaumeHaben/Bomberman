@@ -167,8 +167,8 @@ void Level::draw(){
 							}
 							if (bombes[i].getExplosee() == 2) {
 								bombes[0] = bombes[1];
+								bombes[1] =* new Bombe(-1,-1,1);
 								bombes[1].setExplosee(0);
-								bombes[1].setLine();
 								prncp->dim_Nb_Bombes();
 
 								if (jeu[k][j] == JOUEUR_BOMBE) {

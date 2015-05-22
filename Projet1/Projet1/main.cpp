@@ -56,6 +56,9 @@ int main( int argc, char* args[] )
 						case SDLK_ESCAPE: //Quit Window with escape
 							quit = true;
 							break;
+						case SDLK_p:
+							plateau.setPause();
+							break;
 						default:
 							prncp->event(plateau.jeu);
 							break;

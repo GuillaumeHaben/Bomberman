@@ -14,7 +14,7 @@ public:
 	~Game();
 
 	bool getPause();
-	void setPause(bool p);
+	void setPause();
 	void draw();
 	Joueur* getPrincipal();
 	Level getLevel();

@@ -72,7 +72,3 @@ int Bombe::getExplosee(){
 void Bombe::setExplosee(int i) {
 	this->explosee = i;
 }
-
-void Bombe::setLine(){
-	b_line = b_line + 1;
-}
