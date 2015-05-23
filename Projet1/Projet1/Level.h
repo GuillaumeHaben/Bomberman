@@ -34,6 +34,7 @@ private:
 	SDL_Texture* mur;
 	SDL_Texture* caisse;
 	SDL_Texture* pause_text;
+	SDL_Texture* over_text;
 
 	SDL_Rect fond;
 

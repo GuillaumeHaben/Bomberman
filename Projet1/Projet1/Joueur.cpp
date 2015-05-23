@@ -170,19 +170,26 @@ void Joueur::event(Case_plateau* * jeu){
 			Bombe nouvelle_bombe(p_colone, p_line, 1);
 
 			if (nb_bombes < NB_BOMBES_MAX){
-				bombes_tab[nb_bombes] = nouvelle_bombe;
-			}
+				if (nb_bombes == 1){
+					if (bombes_tab[0].getLine() != p_line && bombes_tab[0].getColone() != p_colone)
+						bombes_tab[nb_bombes] = nouvelle_bombe;
+				}
+				else bombes_tab[nb_bombes] = nouvelle_bombe;
+				nb_bombes++;
 
-			if (bombes_tab[0].getBoom()){
-				//free(&bombes_tab[0]);
-				bombes_tab[0] = nouvelle_bombe;
-			}else{
-				if (bombes_tab[1].getBoom()){
-					//free(&bombes_tab[1]);
-					bombes_tab[1] = nouvelle_bombe;
+			} else {
+				if (bombes_tab[0].getBoom()){
+					if (bombes_tab[1].getLine() != p_line && bombes_tab[1].getColone() != p_colone)
+						bombes_tab[0] = nouvelle_bombe;
+				}
+				else{
+					if (bombes_tab[1].getBoom()){
+						if (bombes_tab[0].getLine() != p_line && bombes_tab[0].getColone() != p_colone)
+							bombes_tab[1] = nouvelle_bombe;
+					}
 				}
 			}
-			nb_bombes++;
+
 			break;
 		}
 	}

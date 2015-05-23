@@ -17,6 +17,7 @@ public:
 	// Getter
 	int getColone();
 	int getLine();
+	void setLine(int i);
 	int getExplosee();
 	int getPuissance();
 	Time getRetardement();

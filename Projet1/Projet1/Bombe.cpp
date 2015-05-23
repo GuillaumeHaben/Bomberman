@@ -37,7 +37,7 @@ void Bombe::init(int x, int y, int power){
 /* Gère les evenements bombes */
 //0 = pas explosée | 1 = prête à exploser | 2 = explosée
 int Bombe::event(Case_plateau* * jeu){
-	if (explosee == 1 && retardement.getTime() >= 3500) {
+	if (retardement.getTime() >= 3500) {
 		explosee = 2;
 		retardement.stop();
 		boom = true;
@@ -68,6 +68,10 @@ int Bombe::getColone(){
 
 int Bombe::getLine(){
 	return b_line;
+}
+
+void Bombe::setLine(int i){
+	b_line = i;
 }
 
 int Bombe::getPuissance(){
