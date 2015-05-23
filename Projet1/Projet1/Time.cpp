@@ -13,7 +13,7 @@ Time::~Time(){}
 /* To start the object Time. */
 void Time::start() {
 	if (!isOn()) {
-		startDate = SDL_GetTicks() - stopDate;
+		startDate = SDL_GetTicks();
 		stopDate = 0;
 		on = true;
 	}
@@ -22,14 +22,22 @@ void Time::start() {
 /* To stop the object Time. */
 void Time::stop(){
 	if (isOn()) {
-		stopDate = SDL_GetTicks() - startDate;
+		stopDate = stopDate + (SDL_GetTicks() - startDate);
 		on = false;
+	}
+}
+
+/* To restart the object Time. */
+void Time::restart(){
+	if (!isOn()) {
+		startDate = SDL_GetTicks();
+		on = true;
 	}
 }
 
 /* To return the time. */
 int Time::getTime() {
-	if (isOn()) return SDL_GetTicks() - startDate;
+	if (isOn()) return SDL_GetTicks() - startDate + stopDate;
 	else return stopDate;
 }
 

@@ -48,6 +48,17 @@ int Bombe::event(Case_plateau* * jeu){
 	return 0;
 }
 
+void Bombe::put_off(){
+	if (retardement.isOn())
+		retardement.stop();
+}
+
+void Bombe::put_on(){
+	if (!retardement.isOn())
+		retardement.restart();
+}
+
+
 /* Getters */
 int Bombe::getColone(){
 	return b_colone;

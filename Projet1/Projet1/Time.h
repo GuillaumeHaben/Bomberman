@@ -13,6 +13,7 @@ public :
 	// Setters.
 	void start();
 	void stop();
+	void restart();
 
 	// Getters.
 	int getTime();
@@ -21,8 +22,7 @@ public :
 	int getStopDate();
 
 private :
-	int startDate;
-	int stopDate;
+	int startDate, stopDate;
 	bool on;
 };
 

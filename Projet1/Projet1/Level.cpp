@@ -163,9 +163,9 @@ void Level::draw(bool pause){
 
 						// Check if the bombe should be active or not
 						if (pause){
-							// TO DO : Mettre bombe en pause bombes[i].put_off
+							bombes[i].put_off();
 						}else{
-							// TO DO : Verifier que la bombe est en marche sinon la remettre bombes[i].isOn();
+							bombes[i].put_on();
 							bombes[i].event(jeu);
 						}
 

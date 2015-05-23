@@ -24,6 +24,8 @@ public:
 
 	int event(Case_plateau* * jeu);
 	void init(int x, int y, int power);
+	void put_off();
+	void put_on();
 
 	SDL_Texture* texture[2];
 	SDL_Rect dest;
