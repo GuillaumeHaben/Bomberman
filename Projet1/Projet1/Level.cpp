@@ -178,14 +178,10 @@ void Level::draw(bool pause){
 								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
 							}
 							if (bombes[i].getExplosee() == 2) {
-								bombes[0] = bombes[1];
-								bombes[1] =* new Bombe(-1,-1,1);
-								bombes[1].setExplosee(0);
-								prncp->dim_Nb_Bombes();
-
 								if (jeu[k][j] == JOUEUR_BOMBE) {
 									jeu[k][j] = JOUEUR;
 								}else jeu[k][j] = VIDE;
+
 							}
 						}
 					}

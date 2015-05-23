@@ -29,6 +29,7 @@ void Bombe::init(int x, int y, int power){
 	b_line = y;
 	dest = { x * 35, y * 35, 35, 35 };
 	explosee = 0;
+	boom = false;
 	puissance = power;
 	retardement.start();
 }
@@ -39,6 +40,7 @@ int Bombe::event(Case_plateau* * jeu){
 	if (explosee == 1 && retardement.getTime() >= 3500) {
 		explosee = 2;
 		retardement.stop();
+		boom = true;
 		return explosee;
 	}
 	if (retardement.getTime() >= 2000) {
@@ -74,6 +76,10 @@ int Bombe::getPuissance(){
 
 Time Bombe::getRetardement(){
 	return retardement;
+}
+
+bool Bombe::getBoom(){
+	return boom;
 }
 
 int Bombe::getExplosee(){

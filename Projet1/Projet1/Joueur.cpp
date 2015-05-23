@@ -136,8 +136,7 @@ void Joueur::event(Case_plateau* * jeu){
 
 	if (evn.type == SDL_KEYDOWN){
 
-		switch (evn.key.keysym.sym)
-		{
+		switch (evn.key.keysym.sym) {
 		case SDLK_UP:
 			if (this->deplacement(UP, jeu) != -1){
 				dest.x = p_colone * 35;
@@ -167,15 +166,23 @@ void Joueur::event(Case_plateau* * jeu){
 			break;
 
 		case SDLK_SPACE:
-			if (nb_bombes < nb_bombes_max) {
-				jeu[p_colone][p_line] = JOUEUR_BOMBE;
-				Bombe nouvelle_bombe(p_colone, p_line, 1);
-				bombes_tab[nb_bombes] = nouvelle_bombe;
-				nb_bombes++;
-			}
-			break;
+			jeu[p_colone][p_line] = JOUEUR_BOMBE;
+			Bombe nouvelle_bombe(p_colone, p_line, 1);
 
-		default:
+			if (nb_bombes < NB_BOMBES_MAX){
+				bombes_tab[nb_bombes] = nouvelle_bombe;
+			}
+
+			if (bombes_tab[0].getBoom()){
+				//free(&bombes_tab[0]);
+				bombes_tab[0] = nouvelle_bombe;
+			}else{
+				if (bombes_tab[1].getBoom()){
+					//free(&bombes_tab[1]);
+					bombes_tab[1] = nouvelle_bombe;
+				}
+			}
+			nb_bombes++;
 			break;
 		}
 	}

@@ -20,6 +20,7 @@ public:
 	int getExplosee();
 	int getPuissance();
 	Time getRetardement();
+	bool getBoom();
 	void setExplosee(int i);
 
 	int event(Case_plateau* * jeu);
@@ -34,6 +35,7 @@ private:
 	int b_colone, b_line;
 	int explosee; //0 = pas explosee | 1 = prête à exploser | 2 = explosée
 	int puissance;
+	bool boom;
 	Time retardement;
 
 };
