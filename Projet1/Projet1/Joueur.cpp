@@ -167,25 +167,27 @@ void Joueur::event(Case_plateau* * jeu){
 
 		case SDLK_SPACE:
 			jeu[p_colone][p_line] = JOUEUR_BOMBE;
-			Bombe nouvelle_bombe(p_colone, p_line, 1);
-
 			if (nb_bombes < NB_BOMBES_MAX){
+				Bombe nouvelle_bombe(p_colone, p_line, 1);
 				if (nb_bombes == 1){
-					if (bombes_tab[0].getLine() != p_line && bombes_tab[0].getColone() != p_colone)
-						bombes_tab[nb_bombes] = nouvelle_bombe;
+					if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)){
+ 						bombes_tab[nb_bombes] = nouvelle_bombe;
+						nb_bombes++;
+					}
+				}else{
+					bombes_tab[nb_bombes] = nouvelle_bombe;
+					nb_bombes++;
 				}
-				else bombes_tab[nb_bombes] = nouvelle_bombe;
-				nb_bombes++;
 
 			} else {
 				if (bombes_tab[0].getBoom()){
-					if (bombes_tab[1].getLine() != p_line && bombes_tab[1].getColone() != p_colone)
-						bombes_tab[0] = nouvelle_bombe;
+					if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+						bombes_tab[0].init(p_colone, p_line, 1);
 				}
 				else{
 					if (bombes_tab[1].getBoom()){
-						if (bombes_tab[0].getLine() != p_line && bombes_tab[0].getColone() != p_colone)
-							bombes_tab[1] = nouvelle_bombe;
+						if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+							bombes_tab[1].init(p_colone, p_line, 1);
 					}
 				}
 			}
