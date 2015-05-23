@@ -57,14 +57,18 @@ int main( int argc, char* args[] )
 							plateau.setPause();
 							break;
 						default:
-							if (! plateau.getPause())
+							if (!plateau.getPause())
 								prncp->event(plateau.jeu);
 							break;
 						}
 						break;
 					case SDL_MOUSEBUTTONUP:
-						// plateau.clic(event.button.x, event.button.y);
-						IsMenu = false;
+						if (plateau.getPause())
+							plateau.setPause();
+						if (IsMenu){
+							IsMenu = false;
+							// plateau.clic(event.button.x, event.button.y);
+						}
 						break;
 					default:
 						break;

@@ -27,15 +27,25 @@ void Joueur::dim_Nb_Bombes() {
 	nb_bombes--;
 }
 
+int Joueur::getLife() {
+	return nb_life;
+}
+
+void Joueur::die() {
+	nb_life--;
+}
+
 void Joueur::init_var(){
 	nb_bombes = 0;
 	nb_bombes_max = NB_BOMBES_MAX;
+	nb_life = 3;
 }
 
 void Joueur::init_load(){
 	SDL_Surface* background = IMG_Load("Sprite/test.png");
 	texture = SDL_CreateTextureFromSurface(renderer, background);
 	dest = { 35, 35, 35, 35 };
+	dest_life = { 35, 35, 550, 450 };
 	SDL_FreeSurface(background);
 }
 
@@ -173,4 +183,10 @@ void Joueur::event(Case_plateau* * jeu){
 
 void Joueur::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
+
+	dest_life = { 545, 450, 35, 35};
+	for (int vie = 0; vie < getLife(); vie++){
+		SDL_RenderCopy(renderer, texture, NULL, &dest_life);
+		dest_life.x = dest_life.x + 40;
+	}
 }

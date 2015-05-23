@@ -22,11 +22,13 @@ public:
 	void init_load();
 	void event(Case_plateau* * jeu);
 	void draw();
+	int getLife();
+	void die();
 
 private:
-	int nb_bombes, nb_bombes_max;
+	int nb_bombes, nb_bombes_max, nb_life;
 	SDL_Texture* texture;
-	SDL_Rect dest;
+	SDL_Rect dest, dest_life;
 	Bombe bombes_tab[2];
 };
 
