@@ -247,4 +247,6 @@ void Explosion::end(Case_plateau* * jeu){
 			}
 		}
 	}
+
+	jeu[x][y] = VIDE;
 }
