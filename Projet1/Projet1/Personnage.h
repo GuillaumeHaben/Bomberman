@@ -10,11 +10,8 @@ public:
 	Personnage(int pos_x, int pos_y);
 	~Personnage();
 
-	// Getter
 	int getColone();
 	int getLine();
-
-	//Setter
 	void setColone(int pos_x);
 	void setLine(int pos_y);
 

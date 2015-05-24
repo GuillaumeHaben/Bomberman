@@ -1,20 +1,16 @@
 #include "Joueur.h"
 #include "SDL/SDL_image.h"
 
-
-/* Constructeur */
 Joueur::Joueur() : Personnage(){
 	init_var();
 	init_load();
 }
 
-/* Appel au super en C++ */
 Joueur::Joueur(int pos_x, int pos_y) : Personnage(pos_x, pos_y) {
 	init_var();
 	init_load();
 }
 
-/* Destructeur */
 Joueur::~Joueur(){
 	SDL_DestroyTexture(texture);
 }
@@ -41,14 +37,16 @@ void Joueur::init_var(){
 	nb_life = 3;
 }
 
+/* Init sprite */
 void Joueur::init_load(){
-	SDL_Surface* background = IMG_Load("Sprite/test.png");
+	SDL_Surface* background = IMG_Load("Sprite/perso.png");
 	texture = SDL_CreateTextureFromSurface(renderer, background);
 	dest = { 35, 35, 35, 35 };
 	dest_life = { 35, 35, 550, 450 };
 	SDL_FreeSurface(background);
 }
 
+/* Change the game */
 int Joueur::deplacement(int direction, Case_plateau* * jeu){
 
 	switch (direction){
@@ -62,12 +60,18 @@ int Joueur::deplacement(int direction, Case_plateau* * jeu){
 					 if (jeu[p_colone][p_line] == JOUEUR_EXPLOSION){
 						 jeu[p_colone][p_line] = EXPLOSION;
 					 }
-					 else jeu[p_colone][p_line] = VIDE;
+					 else{
+						 if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
+							 jeu[p_colone][p_line] = BOMBE;
+						 }
+						 else jeu[p_colone][p_line] = VIDE;
+					 }
 
 					 if (jeu[p_colone][p_line - 1] == EXPLOSION){
 						 jeu[p_colone][p_line - 1] = JOUEUR_EXPLOSION;
 						 this->die();
-					 }else jeu[p_colone][p_line - 1] = JOUEUR;
+					 }
+					 else jeu[p_colone][p_line - 1] = JOUEUR;
 
 					 --p_line;
 					 return 0;
@@ -84,7 +88,12 @@ int Joueur::deplacement(int direction, Case_plateau* * jeu){
 				if (jeu[p_colone][p_line] == JOUEUR_EXPLOSION){
 					jeu[p_colone][p_line] = EXPLOSION;
 				}
-				else jeu[p_colone][p_line] = VIDE;
+				else{
+					if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
+						jeu[p_colone][p_line] = BOMBE;
+					}
+					else jeu[p_colone][p_line] = VIDE;
+				}
 
 				if (jeu[p_colone][p_line + 1] == EXPLOSION){
 					jeu[p_colone][p_line + 1] = JOUEUR_EXPLOSION;
@@ -106,7 +115,12 @@ int Joueur::deplacement(int direction, Case_plateau* * jeu){
 				if (jeu[p_colone][p_line] == JOUEUR_EXPLOSION){
 					jeu[p_colone][p_line] = EXPLOSION;
 				}
-				else jeu[p_colone][p_line] = VIDE;
+				else{
+					if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
+						jeu[p_colone][p_line] = BOMBE;
+					}
+					else jeu[p_colone][p_line] = VIDE;
+				}
 
 				if (jeu[p_colone + 1][p_line] == EXPLOSION){
 					jeu[p_colone + 1][p_line] = JOUEUR_EXPLOSION;
@@ -128,7 +142,12 @@ int Joueur::deplacement(int direction, Case_plateau* * jeu){
 				if (jeu[p_colone][p_line] == JOUEUR_EXPLOSION){
 					jeu[p_colone][p_line] = EXPLOSION;
 				}
-				else jeu[p_colone][p_line] = VIDE;
+				else{
+					if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
+						jeu[p_colone][p_line] = BOMBE;
+					}
+					else jeu[p_colone][p_line] = VIDE;
+				}
 
 				if (jeu[p_colone - 1][p_line] == EXPLOSION){
 					jeu[p_colone - 1][p_line] = JOUEUR_EXPLOSION;
@@ -142,7 +161,7 @@ int Joueur::deplacement(int direction, Case_plateau* * jeu){
 	}
 	return -1;
 }
-
+/* move the character in the game */
 void Joueur::event(Case_plateau* * jeu){
 
 	if (evn.type == SDL_KEYDOWN){
@@ -182,36 +201,34 @@ void Joueur::event(Case_plateau* * jeu){
 				Bombe nouvelle_bombe(p_colone, p_line);
 				if (nb_bombes == 1){
 					if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)){
- 						bombes_tab[nb_bombes] = nouvelle_bombe;
+						bombes_tab[nb_bombes] = nouvelle_bombe;
 						nb_bombes++;
 					}
 				}else{
 					bombes_tab[nb_bombes] = nouvelle_bombe;
 					nb_bombes++;
 				}
-
-			} else {
+			}else{
 				if (bombes_tab[0].getBoom()){
 					if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
 						bombes_tab[0].init(p_colone, p_line);
-				}
-				else{
+				}else{
 					if (bombes_tab[1].getBoom()){
 						if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
 							bombes_tab[1].init(p_colone, p_line);
 					}
 				}
 			}
-
 			break;
 		}
 	}
 }
 
+/* Draw the player and the life on the screen */
 void Joueur::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
 
-	dest_life = { 545, 450, 35, 35};
+	dest_life = { 545, 450, 35, 35 };
 	for (int vie = 0; vie < getLife(); vie++){
 		SDL_RenderCopy(renderer, texture, NULL, &dest_life);
 		dest_life.x = dest_life.x + 40;

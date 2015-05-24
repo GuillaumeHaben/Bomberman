@@ -4,12 +4,12 @@ Game::Game(){
 	pause = false;
 	end = false;
 
-	principal = * new Joueur(1, 1);
+	principal = *new Joueur(1, 1);
 	jeu = new Case_plateau *[TAILLE_JEU];
 
 	int dim_allouee;
 	for (dim_allouee = 0; dim_allouee < TAILLE_JEU; ++dim_allouee) {
-		jeu[dim_allouee] = new Case_plateau [TAILLE_JEU];
+		jeu[dim_allouee] = new Case_plateau[TAILLE_JEU];
 	}
 
 	for (int i = 0; i < TAILLE_JEU; i++)
@@ -17,12 +17,17 @@ Game::Game(){
 			jeu[i][j] = INIT;
 
 	l = Level(this->jeu, this->getPrincipal());
-
 	this->init(1);
 }
 
 Game::~Game(){
 
+}
+
+void Game::reinit(){
+	principal.setColone(1);
+	principal.setLine(1);
+	this->init(1);
 }
 
 void Game::setPause(){

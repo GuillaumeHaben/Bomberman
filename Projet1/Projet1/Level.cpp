@@ -34,7 +34,9 @@ Level::Level(Case_plateau* * plat, Joueur* J) {
 }
 
 Level::~Level(){
-
+	SDL_DestroyTexture(pause_text);
+	SDL_DestroyTexture(over_text);
+	SDL_DestroyTexture(flamme);
 }
 
 /* To setup the game */
@@ -186,12 +188,11 @@ void Level::draw(bool pause){
 							if (bombes[i].getExplosee() == 1) {
 								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
 							}
+							if (bombes[i].getExplosee() == 2) {
+								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
+							}
 							if (bombes[i].getExplosee() == 3) {
 								bombes[i].setLine(-1);
-								if (jeu[k][j] == JOUEUR_BOMBE) {
-									jeu[k][j] = JOUEUR;
-								}else jeu[k][j] = VIDE;
-
 							}
 						}
 					}
@@ -201,8 +202,18 @@ void Level::draw(bool pause){
 				}
 				break;
 			
-			case JOUEUR_EXPLOSION:
-				prncp->die();
+			case JOUEUR_EXPLOSION:	
+				SDL_RenderCopy(renderer, flamme, NULL, &rect);
+				prncp->draw();
+				break;
+
+			case CAISSE_EXPLOSION:
+				SDL_RenderCopy(renderer, caisse, NULL, &rect);
+				SDL_RenderCopy(renderer, flamme, NULL, &rect);
+				break;
+
+			case EXPLOSION: 
+				SDL_RenderCopy(renderer, flamme, NULL, &rect);
 				break;
 			}
 		}
@@ -211,6 +222,7 @@ void Level::draw(bool pause){
 	// Pause screen
 	if (prncp->getLife() <= 0){
 		SDL_RenderCopy(renderer, over_text, NULL, &rect);
+		IsDead = true;
 	}else{
 		if (pause) SDL_RenderCopy(renderer, pause_text, NULL, &fond);
 	}

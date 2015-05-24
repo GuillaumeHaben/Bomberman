@@ -1,6 +1,6 @@
 #include "Bombe.h"
 
-/* Constructeur */
+/* Constructor */
 Bombe::Bombe(){
 	this->init(0, 0);
 }
@@ -16,14 +16,14 @@ Bombe::Bombe(int pos_x, int pos_y){
 	SDL_FreeSurface(background2);
 }
 
-/* Destructeur */
+/* Destructor */
 Bombe::~Bombe(){
 	explosee = 0;
 	//SDL_DestroyTexture(texture[0]);
 	//SDL_DestroyTexture(texture[1]);
 }
 
-/* Intialise la bombe */
+/* Init Bombe */
 void Bombe::init(int x, int y){
 	b_colone = x;
 	b_line = y;
@@ -31,13 +31,13 @@ void Bombe::init(int x, int y){
 	explosee = 0;
 	boom = false;
 	explosion = *new Explosion(this->getColone(), this->getLine(), this->getPuissance());
-	//Génération aléatoire de la puissance
+	// Random generation for the power
 	puissance = (rand() % 3) + 1;
 	retardement.start();
 }
 
-/* Gère les evenements bombes */
-//0 = pas explosée | 1 = prête à exploser | 2 = explosée | 3 = fin de l'explosion
+/* Handle Bombe event */
+//0 = pas explosée | 1 = prête à exploser | 2 = explosée
 int Bombe::event(Case_plateau* * jeu){
 	if (retardement.getTime() >= 4500) {
 		explosee = 3;
@@ -60,11 +60,13 @@ int Bombe::event(Case_plateau* * jeu){
 	return 0;
 }
 
+/* Stop the Bombe */
 void Bombe::put_off(){
 	if (retardement.isOn())
 		retardement.stop();
 }
 
+/* Restart the Bombe */
 void Bombe::put_on(){
 	if (!retardement.isOn())
 		retardement.restart();
@@ -97,7 +99,7 @@ bool Bombe::getBoom(){
 }
 
 int Bombe::getExplosee(){
-	return explosee; //0 = pas explosée | 1 = prête à exploser | 2 = explosée
+	return explosee;
 }
 
 void Bombe::setExplosee(int i) {
