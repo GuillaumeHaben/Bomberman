@@ -2,6 +2,7 @@
 #define ADVERSAIRE_H
 
 #include "Case.h"
+#include <Time.h>
 #include "Personnage.h"
 #include "Bombe.h"
 
