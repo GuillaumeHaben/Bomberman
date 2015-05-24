@@ -2,7 +2,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_rect.h>
-#include <SDL/SDL_mixer.h>
+//#include <SDL/SDL_mixer.h>
 
 #include "Game.h"
 #include "Menu.h"
