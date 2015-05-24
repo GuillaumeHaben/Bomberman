@@ -16,11 +16,12 @@ SDL_Window* window = NULL;
 SDL_Event evn;
 SDL_Renderer* renderer = NULL;
 
+bool IsDead = false;
+
 int main( int argc, char* args[] )
 {
 	bool quit = false;
 	bool IsMenu = true;
-	bool IsDead = false;
 
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0){
@@ -69,10 +70,9 @@ int main( int argc, char* args[] )
 						if (IsMenu)
 							IsMenu = false;
 						if (IsDead){
-
+							IsMenu = true;
+							plateau.reinit();
 						}
-
-
 						break;
 					default:
 						break;

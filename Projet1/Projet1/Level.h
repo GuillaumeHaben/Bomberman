@@ -9,6 +9,7 @@
 #include "Joueur.h"
 
 extern SDL_Renderer * renderer;
+extern bool IsDead;
 
 class Level {
 
@@ -27,19 +28,16 @@ public:
 private:
 	int niveau;
 	Case_plateau* * jeu;
+	Joueur* prncp;
 
 	SDL_Surface* img[3];
-
+	SDL_Rect fond;
 	SDL_Texture* niveaux;
 	SDL_Texture* mur;
 	SDL_Texture* flamme;
 	SDL_Texture* caisse;
 	SDL_Texture* pause_text;
 	SDL_Texture* over_text;
-
-	SDL_Rect fond;
-
-	Joueur* prncp;
 };
 
 #endif;

@@ -16,9 +16,10 @@ public:
 	bool getPause();
 	void setPause();
 	void draw();
+	void init(int i);
+	void reinit();
 	Joueur* getPrincipal();
 	Level getLevel();
-	void init(int i);
 
 	Case_plateau* * jeu = 0;
 
