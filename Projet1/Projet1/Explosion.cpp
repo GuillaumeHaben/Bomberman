@@ -159,8 +159,7 @@ void Explosion::end(Case_plateau* * jeu){
 
 	for (int i = 1; i <= puissance; i++) {
 
-		if (x + i >= TAILLE_JEU || east);
-		else {
+		if (!(x + i >= TAILLE_JEU || east)) {
 			switch (jeu[x + i][y]) {
 			case CAISSE_EXPLOSION: case EXPLOSION:
 				jeu[x + i][y] = VIDE;
@@ -182,8 +181,7 @@ void Explosion::end(Case_plateau* * jeu){
 			}
 		}
 
-		if (y + i >= TAILLE_JEU || south);
-		else {
+		if (!(y + i >= TAILLE_JEU || south)) {
 			switch (jeu[x][y + i]) {
 			case CAISSE_EXPLOSION: case EXPLOSION:
 				jeu[x][y + i] = VIDE;
@@ -205,8 +203,7 @@ void Explosion::end(Case_plateau* * jeu){
 			}
 		}
 
-		if (x - i < 0 || west);
-		else {
+		if (!(x - i < 0 || west)) {
 			switch (jeu[x + i][y]) {
 			case CAISSE_EXPLOSION: case EXPLOSION:
 				jeu[x + i][y] = VIDE;
@@ -228,8 +225,7 @@ void Explosion::end(Case_plateau* * jeu){
 			}
 		}
 
-		if (y - i < 0 || north);
-		else {
+		if (!(y - i < 0 || north)) {
 			switch (jeu[x + i][y]) {
 			case CAISSE_EXPLOSION: case EXPLOSION:
 				jeu[x + i][y] = VIDE;

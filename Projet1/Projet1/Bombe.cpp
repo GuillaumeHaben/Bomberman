@@ -41,30 +41,28 @@ void Bombe::init(int x, int y){
 /* Handle Bombe event */
 //0 = pas explosée | 1 = prête à exploser | 2 = explosée
 int Bombe::event(Case_plateau* * jeu){
-	if (retardement.getTime() >= 4500) {
+	if (retardement.getTime() >= 4500 && !isEnd) {
 		explosee = 3;
 		retardement.stop();
-		boom = true; //Peut être pas utile
-		if (!isEnd) {
-			explosion.end(jeu); //Fin de l'explostion
-			isEnd = true;
-		}
+		boom = true; 
+		explosion.end(jeu);
+		isEnd = true;
 		return explosee;
 	}
-	if (retardement.getTime() >= 3500) {
+
+	if (retardement.getTime() >= 3500 && !isInit) {
 		explosee = 2;
 		boom = true;
-		//On initialise l'explosion
-		if (!isInit) {
-			explosion.init(jeu);
-			isInit = true;
-		}
+		explosion.init(jeu);
+		isInit = true;
 		return explosee;
 	}
+
 	if (retardement.getTime() >= 2000) {
 		explosee = 1;
 		return 1;
 	}
+
 	return 0;
 }
 
