@@ -13,10 +13,11 @@ public:
 
 	//Méthodes 
 	void Explosion::init(Case_plateau* * jeu);
-	void Explosion::end();
+	void Explosion::end(Case_plateau* * jeu);
 
 private:
-	int x, y, puissance;
+	int e_colone, e_line, puissance;
+	void explose_direction(int direction, int puissance_i);
 };
 
 #endif;

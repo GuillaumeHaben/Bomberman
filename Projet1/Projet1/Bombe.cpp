@@ -32,25 +32,28 @@ void Bombe::init(int x, int y){
 	boom = false;
 	// Random generation for the power
 	puissance = (rand() % 3) + 1;
-	explosion = *new Explosion(x, y, this->getPuissance());
+	explosion = *new Explosion(b_colone, b_line, puissance);
 	retardement.start();
 }
 
 /* Handle Bombe event */
 //0 = pas explosée | 1 = prête à exploser | 2 = explosée
 int Bombe::event(Case_plateau* * jeu){
+	bool isInit = false;
 	if (retardement.getTime() >= 4500) {
 		explosee = 3;
 		retardement.stop();
 		boom = true; //Peut être pas utile
-		explosion.end(); //Fin de l'explostion
+		explosion.end(jeu); //Fin de l'explostion
 		return explosee;
 	}
 	if (retardement.getTime() >= 3500) {
 		explosee = 2;
 		boom = true;
 		//On initialise l'explosion
-		explosion.init(jeu);
+		if (!isInit) {
+			explosion.init(jeu);
+		}
 		return explosee;
 	}
 	if (retardement.getTime() >= 2000) {
