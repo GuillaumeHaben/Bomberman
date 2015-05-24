@@ -191,7 +191,7 @@ void Adversaire::event(Case_plateau* * jeu){
 }
 
 int Adversaire::direction(){
-	srand(time(NULL));
+	
 	int i = 0;
 		i = rand() % 5;
 	return i;
