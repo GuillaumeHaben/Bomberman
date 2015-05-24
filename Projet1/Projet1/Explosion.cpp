@@ -38,7 +38,7 @@ void Explosion::init(Case_plateau* * jeu){
 	for (int i = 1; i <= puissance; i++) {
 		if (!(x + i >= TAILLE_JEU || east)){
 			switch (jeu[x + i][y]) {
-			case CAISSE:
+			case CAISSE: case CAISSE_EXPLOSION:
 				jeu[x + i][y] = CAISSE_EXPLOSION;
 				break;
 			case VIDE:
@@ -47,13 +47,13 @@ void Explosion::init(Case_plateau* * jeu){
 			case MUR:
 				east = true;
 				break;
-			case BOMBE:
+			case BOMBE: case BOMBE_EXPLOSION:
 				jeu[x + i][y] = BOMBE_EXPLOSION;
 				break;
-			case JOUEUR:
+			case JOUEUR: case JOUEUR_EXPLOSION:
 				jeu[x + i][y] = JOUEUR_EXPLOSION;
 				break;
-			case EXPLOSION:
+			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x + i][y] = EXPLOSION_EXPLOSION;
 				break;
 			default:

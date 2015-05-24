@@ -217,8 +217,8 @@ void Level::draw(bool pause){
 				break;
 
 			case CAISSE_EXPLOSION:
-				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				SDL_RenderCopy(renderer, caisse, NULL, &rect);
+				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				break;
 
 			case EXPLOSION: case EXPLOSION_EXPLOSION:
