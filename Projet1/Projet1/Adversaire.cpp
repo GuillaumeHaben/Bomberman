@@ -132,75 +132,73 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 
 void Adversaire::event(Case_plateau* * jeu){
 
-	if (evn.type == direction()){
+	switch (direction()) {
+	case UP:
+		if (this->deplacement(UP, jeu) != -1){
+			dest.x = p_colone * 35;
+			dest.y = p_line * 35;
+		}
+		break;
 
-		switch (direction()) {
-		case UP:
-			if (this->deplacement(UP, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
+	case DOWN:
+		if (this->deplacement(DOWN, jeu) != -1){
+			dest.x = p_colone * 35;
+			dest.y = p_line * 35;
+		}
+		break;
 
-		case DOWN:
-			if (this->deplacement(DOWN, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
+	case LEFT:
+		if (this->deplacement(LEFT, jeu) != -1){
+			dest.x = p_colone * 35;
+			dest.y = p_line * 35;
+		}
+		break;
 
-		case LEFT:
-			if (this->deplacement(LEFT, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
+	case RIGHT:
+		if (this->deplacement(RIGHT, jeu) != -1){
+			dest.x = p_colone * 35;
+			dest.y = p_line * 35;
+		}
+		break;
 
-		case RIGHT:
-			if (this->deplacement(RIGHT, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
-
-		case //fonction bombe:
-			jeu[p_colone][p_line] = JOUEUR_BOMBE;
-			if (nb_bombes < NB_BOMBES_MAX){
-				Bombe nouvelle_bombe(p_colone, p_line);
-				if (nb_bombes == 1){
-					if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)){
-						bombes_tab[nb_bombes] = nouvelle_bombe;
-						nb_bombes++;
-					}
-				}
-				else{
+	case 4:
+		jeu[p_colone][p_line] = JOUEUR_BOMBE;
+		if (nb_bombes < NB_BOMBES_MAX){
+			Bombe nouvelle_bombe(p_colone, p_line);
+			if (nb_bombes == 1){
+				if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)){
 					bombes_tab[nb_bombes] = nouvelle_bombe;
 					nb_bombes++;
 				}
 			}
 			else{
-				if (bombes_tab[0].getBoom()){
-					if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
-						bombes_tab[0].init(p_colone, p_line);
-				}
-				else{
-					if (bombes_tab[1].getBoom()){
-						if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
-							bombes_tab[1].init(p_colone, p_line);
-					}
+				bombes_tab[nb_bombes] = nouvelle_bombe;
+				nb_bombes++;
+			}
+		}
+		else{
+			if (bombes_tab[0].getBoom()){
+				if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+					bombes_tab[0].init(p_colone, p_line);
+			}
+			else{
+				if (bombes_tab[1].getBoom()){
+					if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+						bombes_tab[1].init(p_colone, p_line);
 				}
 			}
-			break;
 		}
+		break;
 	}
 }
 
 int Adversaire::direction(){
 	srand(time(NULL));
 	int i = 0;
-		i = rand() % 4;
+		i = rand() % 5;
 	return i;
 }
+
 
 
 void Adversaire::draw(){
