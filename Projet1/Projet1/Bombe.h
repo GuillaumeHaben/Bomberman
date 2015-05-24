@@ -3,11 +3,11 @@
 
 #include "Case.h"
 #include "Time.h"
+#include "Explosion.h"
 #include "SDL/SDL_image.h"
 
 //Utile pour la génération aléatoire
 #include <cstdlib>
-#include <time.h>
 
 extern SDL_Renderer* renderer;
 
@@ -38,11 +38,11 @@ public:
 
 private:
 	int b_colone, b_line;
-	int explosee; //0 = pas explosee | 1 = prête à exploser | 2 = explosée
+	int explosee; //0 = pas explosee | 1 = prête à exploser | 2 = explosée | 3 = fin de l'explosion
 	int puissance;
 	bool boom;
 	Time retardement;
-
+	Explosion explosion;
 };
 
 #endif;
