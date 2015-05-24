@@ -18,8 +18,6 @@ public:
 	void setColone(int pos_x);
 	void setLine(int pos_y);
 
-	int deplacement(int direction, Case_plateau* * jeu);
-
 protected:
 	int p_colone, p_line;
 

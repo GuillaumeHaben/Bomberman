@@ -21,9 +21,11 @@ public:
 	void init_var();
 	void init_load();
 	void event(Case_plateau* * jeu);
+	int deplacement(int direction, Case_plateau* * jeu);
 	void draw();
 	int getLife();
 	void die();
+
 
 private:
 	int nb_bombes, nb_bombes_max, nb_life;

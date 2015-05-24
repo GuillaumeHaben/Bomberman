@@ -49,7 +49,7 @@ void Joueur::init_load(){
 	SDL_FreeSurface(background);
 }
 
-int Personnage::deplacement(int direction, Case_plateau* * jeu){
+int Joueur::deplacement(int direction, Case_plateau* * jeu){
 
 	switch (direction){
 
@@ -59,15 +59,16 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 					 jeu[p_colone][p_line - 1] == CAISSE_EXPLOSION || jeu[p_colone][p_line - 1] == BOMBE
 					 || jeu[p_colone][p_line - 1] == BOMBE_EXPLOSION) break;
 				 else{
-					 if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
-						 jeu[p_colone][p_line] = BOMBE;
+					 if (jeu[p_colone][p_line] == JOUEUR_EXPLOSION){
+						 jeu[p_colone][p_line] = EXPLOSION;
 					 }
 					 else jeu[p_colone][p_line] = VIDE;
 
-					 if (jeu[p_colone][p_line - 1] == BOMBE){
-						 jeu[p_colone][p_line - 1] = JOUEUR_BOMBE;
-					 }
-					 else jeu[p_colone][p_line - 1] = JOUEUR;
+					 if (jeu[p_colone][p_line - 1] == EXPLOSION){
+						 jeu[p_colone][p_line - 1] = JOUEUR_EXPLOSION;
+						 this->die();
+					 }else jeu[p_colone][p_line - 1] = JOUEUR;
+
 					 --p_line;
 					 return 0;
 				 }
@@ -76,15 +77,18 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 	case DOWN:
 		if (p_line + 1 >= TAILLE_JEU) break;
 		else{
-			if (jeu[p_colone][p_line + 1] == MUR || jeu[p_colone][p_line + 1] == CAISSE) break;
+			if (jeu[p_colone][p_line + 1] == MUR || jeu[p_colone][p_line + 1] == CAISSE ||
+				jeu[p_colone][p_line + 1] == CAISSE_EXPLOSION || jeu[p_colone][p_line + 1] == BOMBE
+				|| jeu[p_colone][p_line + 1] == BOMBE_EXPLOSION) break;
 			else{
-				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
-					jeu[p_colone][p_line] = BOMBE;
+				if (jeu[p_colone][p_line] == JOUEUR_EXPLOSION){
+					jeu[p_colone][p_line] = EXPLOSION;
 				}
 				else jeu[p_colone][p_line] = VIDE;
 
-				if (jeu[p_colone][p_line + 1] == BOMBE){
-					jeu[p_colone][p_line + 1] = JOUEUR_BOMBE;
+				if (jeu[p_colone][p_line + 1] == EXPLOSION){
+					jeu[p_colone][p_line + 1] = JOUEUR_EXPLOSION;
+					this->die();
 				}
 				else jeu[p_colone][p_line + 1] = JOUEUR;
 				++p_line;
@@ -95,15 +99,18 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 	case RIGHT:
 		if (p_colone + 1 >= TAILLE_JEU) break;
 		else{
-			if (jeu[p_colone + 1][p_line] == MUR || jeu[p_colone + 1][p_line] == CAISSE) break;
+			if (jeu[p_colone + 1][p_line] == MUR || jeu[p_colone + 1][p_line] == CAISSE ||
+				jeu[p_colone + 1][p_line] == CAISSE_EXPLOSION || jeu[p_colone + 1][p_line] == BOMBE
+				|| jeu[p_colone + 1][p_line] == BOMBE_EXPLOSION) break;
 			else{
-				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
-					jeu[p_colone][p_line] = BOMBE;
+				if (jeu[p_colone][p_line] == JOUEUR_EXPLOSION){
+					jeu[p_colone][p_line] = EXPLOSION;
 				}
 				else jeu[p_colone][p_line] = VIDE;
 
-				if (jeu[p_colone + 1][p_line] == BOMBE){
-					jeu[p_colone + 1][p_line] = JOUEUR_BOMBE;
+				if (jeu[p_colone + 1][p_line] == EXPLOSION){
+					jeu[p_colone + 1][p_line] = JOUEUR_EXPLOSION;
+					this->die();
 				}
 				else jeu[p_colone + 1][p_line] = JOUEUR;
 				++p_colone;
@@ -114,15 +121,18 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 	case LEFT:
 		if (p_colone - 1 < 0) break;
 		else{
-			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone - 1][p_line] == CAISSE) break;
+			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone - 1][p_line] == CAISSE ||
+				jeu[p_colone - 1][p_line] == CAISSE_EXPLOSION || jeu[p_colone - 1][p_line] == BOMBE
+				|| jeu[p_colone - 1][p_line] == BOMBE_EXPLOSION) break;
 			else{
-				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
-					jeu[p_colone][p_line] = BOMBE;
+				if (jeu[p_colone][p_line] == JOUEUR_EXPLOSION){
+					jeu[p_colone][p_line] = EXPLOSION;
 				}
 				else jeu[p_colone][p_line] = VIDE;
 
-				if (jeu[p_colone - 1][p_line] == BOMBE){
-					jeu[p_colone - 1][p_line] = JOUEUR_BOMBE;
+				if (jeu[p_colone - 1][p_line] == EXPLOSION){
+					jeu[p_colone - 1][p_line] = JOUEUR_EXPLOSION;
+					this->die();
 				}
 				else jeu[p_colone - 1][p_line] = JOUEUR;
 				--p_colone;
