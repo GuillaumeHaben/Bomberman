@@ -48,6 +48,7 @@ int Bombe::event(Case_plateau* * jeu){
 		boom = true; //Peut être pas utile
 		if (!isEnd) {
 			explosion.end(jeu); //Fin de l'explostion
+			isEnd = true;
 		}
 		return explosee;
 	}
@@ -57,6 +58,7 @@ int Bombe::event(Case_plateau* * jeu){
 		//On initialise l'explosion
 		if (!isInit) {
 			explosion.init(jeu);
+			isInit = true;
 		}
 		return explosee;
 	}
