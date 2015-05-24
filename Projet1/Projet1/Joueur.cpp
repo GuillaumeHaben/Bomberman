@@ -139,7 +139,6 @@ int Joueur::deplacement(int direction, Case_plateau* * jeu){
 				return 0;
 			}
 		}
-
 	}
 	return -1;
 }

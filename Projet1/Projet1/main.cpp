@@ -20,6 +20,7 @@ int main( int argc, char* args[] )
 {
 	bool quit = false;
 	bool IsMenu = true;
+	bool IsDead = false;
 
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0){
@@ -65,10 +66,13 @@ int main( int argc, char* args[] )
 					case SDL_MOUSEBUTTONUP:
 						if (plateau.getPause())
 							plateau.setPause();
-						if (IsMenu){
+						if (IsMenu)
 							IsMenu = false;
-							// plateau.clic(event.button.x, event.button.y);
+						if (IsDead){
+
 						}
+
+
 						break;
 					default:
 						break;
