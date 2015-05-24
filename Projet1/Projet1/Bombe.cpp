@@ -30,9 +30,9 @@ void Bombe::init(int x, int y){
 	dest = { x * 35, y * 35, 35, 35 };
 	explosee = 0;
 	boom = false;
-	explosion = *new Explosion(this->getColone(), this->getLine(), this->getPuissance());
 	// Random generation for the power
 	puissance = (rand() % 3) + 1;
+	explosion = *new Explosion(x, y, this->getPuissance());
 	retardement.start();
 }
 
