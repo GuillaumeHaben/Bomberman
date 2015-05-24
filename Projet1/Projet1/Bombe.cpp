@@ -8,7 +8,8 @@ Bombe::Bombe(){
 
 Bombe::Bombe(int pos_x, int pos_y){
 	this->init(pos_x, pos_y);
-
+	isEnd = false;
+	isInit = false;
 	SDL_Surface* background = IMG_Load("Sprite/bombe_1.png");
 	SDL_Surface* background2 = IMG_Load("Sprite/bombe_2.png");
 	texture[0] = SDL_CreateTextureFromSurface(renderer, background);
@@ -40,8 +41,6 @@ void Bombe::init(int x, int y){
 /* Handle Bombe event */
 //0 = pas explosée | 1 = prête à exploser | 2 = explosée
 int Bombe::event(Case_plateau* * jeu){
-	bool isInit = false;
-	bool isEnd = false;
 	if (retardement.getTime() >= 4500) {
 		explosee = 3;
 		retardement.stop();

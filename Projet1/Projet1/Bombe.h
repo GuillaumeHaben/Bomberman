@@ -41,7 +41,7 @@ private:
 	// explosee : 0 = posée | 1 = prête à exploser | 2 = explosée | 3 = explosion finie
 	int explosee;
 	int puissance;
-	bool boom;
+	bool boom, isInit, isEnd;
 	Time retardement;
 	Explosion explosion;
 };
