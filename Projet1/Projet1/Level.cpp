@@ -170,7 +170,7 @@ void Level::draw(bool pause){
 				prncp->draw();
 				break;
 
-			case BOMBE: case JOUEUR_BOMBE:
+			case BOMBE: case JOUEUR_BOMBE: case BOMBE_EXPLOSION:
 				Bombe* bombes;
 				bombes = prncp->getBombes_tab();
 				for (int i = 0; i < NB_BOMBES_MAX; i++) {
@@ -198,6 +198,10 @@ void Level::draw(bool pause){
 									Mix_PlayChannel(2, explosion, 0);
 									musique = true;
 								}
+								if (bombes[i].getPerdreVie()){
+									prncp->die();
+									bombes[i].setPerdreVie();
+								}
 							}
 							if (bombes[i].getExplosee() == 3) {
 								bombes[i].setLine(-1);
@@ -207,6 +211,9 @@ void Level::draw(bool pause){
 					}
 					if (jeu[k][j] == JOUEUR_BOMBE){
 						prncp->draw();
+					}
+					if (jeu[k][j] == BOMBE_EXPLOSION){
+						SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 					}
 				}
 				break;

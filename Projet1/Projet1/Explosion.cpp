@@ -1,7 +1,7 @@
 #include "Explosion.h"
 
 
-/* Constructeur */
+/* Constructors */
 Explosion::Explosion()
 {
 
@@ -15,7 +15,7 @@ Explosion::Explosion(int colone, int line, int puissance)
 }
 
 
-/* Destructeur */
+/* Destructor */
 Explosion::~Explosion()
 {
 	this->e_line = 0;
@@ -24,7 +24,7 @@ Explosion::~Explosion()
 }
 
 
-/* Intialise l'explosion */
+/* Init Explosion */
 int Explosion::init(Case_plateau* * jeu){
 
 	bool east = false;
@@ -51,11 +51,7 @@ int Explosion::init(Case_plateau* * jeu){
 			case BOMBE: case BOMBE_EXPLOSION:
 				jeu[x + i][y] = BOMBE_EXPLOSION;
 				break;
-			case JOUEUR: 
-				jeu[x + i][y] = JOUEUR_EXPLOSION;
-				die = true;
-				break;
-			case JOUEUR_EXPLOSION:
+			case JOUEUR: case JOUEUR_EXPLOSION:
 				jeu[x + i][y] = JOUEUR_EXPLOSION;
 				die = true;
 				break;
@@ -87,6 +83,7 @@ int Explosion::init(Case_plateau* * jeu){
 				break;
 			case JOUEUR: case JOUEUR_EXPLOSION:
 				jeu[x][y + i] = JOUEUR_EXPLOSION;
+				die = true;
 				break;
 			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x][y + i] = EXPLOSION_EXPLOSION;
@@ -116,6 +113,7 @@ int Explosion::init(Case_plateau* * jeu){
 				break;
 			case JOUEUR: case JOUEUR_EXPLOSION:
 				jeu[x - i][y] = JOUEUR_EXPLOSION;
+				die = true;
 				break;
 			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x - i][y] = EXPLOSION_EXPLOSION;
@@ -145,6 +143,7 @@ int Explosion::init(Case_plateau* * jeu){
 				break;
 			case JOUEUR: case JOUEUR_EXPLOSION:
 				jeu[x][y - i] = JOUEUR_EXPLOSION;
+				die = true;
 				break;
 			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x][y - i] = EXPLOSION_EXPLOSION;
@@ -161,7 +160,7 @@ int Explosion::init(Case_plateau* * jeu){
 }
 
 
-/* Fin de l'explosion */
+/* End of Explosion */
 void Explosion::end(Case_plateau* * jeu){
 	bool east = false;
 	bool west = false;

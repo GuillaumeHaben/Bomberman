@@ -27,6 +27,8 @@ public:
 	bool getBoom();
 	int getExplosee();
 	void setExplosee(int i);
+	bool getPerdreVie();
+	void setPerdreVie();
 
 	int event(Case_plateau* * jeu);
 	void init(int x, int y);
@@ -41,7 +43,7 @@ private:
 	// explosee : 0 = posée | 1 = prête à exploser | 2 = explosée | 3 = explosion finie
 	int explosee;
 	int puissance;
-	bool boom, isInit, isEnd;
+	bool boom, isInit, isEnd, perdreVie;
 	Time retardement;
 	Explosion explosion;
 };

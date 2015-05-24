@@ -33,6 +33,7 @@ void Bombe::init(int x, int y){
 	boom = false;
 	isEnd = false;
 	isInit = false;
+	perdreVie = false;
 
 	// Random generation for the power
 	puissance = (rand() % 3) + 1;
@@ -56,7 +57,10 @@ int Bombe::event(Case_plateau* * jeu){
 		if (retardement.getTime() >= 3500 && !isInit) {
 			explosee = 2;
 			boom = true;
-			explosion.init(jeu);
+			int i = explosion.init(jeu);
+			if (i == 1){
+				perdreVie = true;
+			}
 			isInit = true;
 			return explosee;
 		}
@@ -67,6 +71,14 @@ int Bombe::event(Case_plateau* * jeu){
 		}
 	}
 	return 0;
+}
+
+bool Bombe::getPerdreVie(){
+	return perdreVie;
+}
+
+void Bombe::setPerdreVie(){
+	perdreVie = !perdreVie;
 }
 
 /* Stop the Bombe */
