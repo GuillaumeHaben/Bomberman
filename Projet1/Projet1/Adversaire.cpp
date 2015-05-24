@@ -40,10 +40,8 @@ void Adversaire::init_var(){
 }
 
 void Adversaire::init_load(){
-	SDL_Surface* background = IMG_Load("Sprite/bombe_2.png");
-	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 0, 0, 255));
+	SDL_Surface* background = IMG_Load("Sprite/perso.png");
 	texture = SDL_CreateTextureFromSurface(renderer, background);
-	dest = { 35, 35, 35, 35 };
 	SDL_FreeSurface(background);
 }
 

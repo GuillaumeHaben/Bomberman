@@ -20,7 +20,7 @@ public:
 
 	void init_var();
 	void init_load();
-	int deplacement(Case_plateau* * jeu);
+	int deplacement(int direction, Case_plateau* * jeu);
 	void event(Case_plateau* * jeu);
 	void draw();
 	int direction();
