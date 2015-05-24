@@ -12,7 +12,7 @@ public:
 	~Explosion();
 
 	//Méthodes 
-	void Explosion::init(Case_plateau* * jeu);
+	int Explosion::init(Case_plateau* * jeu);
 	void Explosion::end(Case_plateau* * jeu);
 
 private:

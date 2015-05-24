@@ -25,12 +25,13 @@ Explosion::~Explosion()
 
 
 /* Intialise l'explosion */
-void Explosion::init(Case_plateau* * jeu){
+int Explosion::init(Case_plateau* * jeu){
 
 	bool east = false;
 	bool west = false;
 	bool north = false;
 	bool south = false;
+	bool die = false;
 
 	int x = e_colone;
 	int y = e_line;
@@ -50,8 +51,13 @@ void Explosion::init(Case_plateau* * jeu){
 			case BOMBE: case BOMBE_EXPLOSION:
 				jeu[x + i][y] = BOMBE_EXPLOSION;
 				break;
-			case JOUEUR: case JOUEUR_EXPLOSION:
+			case JOUEUR: 
 				jeu[x + i][y] = JOUEUR_EXPLOSION;
+				die = true;
+				break;
+			case JOUEUR_EXPLOSION:
+				jeu[x + i][y] = JOUEUR_EXPLOSION;
+				die = true;
 				break;
 			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x + i][y] = EXPLOSION_EXPLOSION;
@@ -139,7 +145,7 @@ void Explosion::init(Case_plateau* * jeu){
 				break;
 			}
 		}
-	}
+	}return die;
 }
 
 
