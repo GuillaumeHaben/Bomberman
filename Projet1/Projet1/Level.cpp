@@ -208,7 +208,7 @@ void Level::draw(bool pause){
 				break;
 			
 			case JOUEUR_EXPLOSION:	
-				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
+				//SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				prncp->draw();
 				break;
 
@@ -218,7 +218,7 @@ void Level::draw(bool pause){
 				break;
 
 			case EXPLOSION: 
-				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
+				//SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				break;
 			}
 		}
