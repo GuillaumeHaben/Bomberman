@@ -41,11 +41,14 @@ void Bombe::init(int x, int y){
 //0 = pas explosée | 1 = prête à exploser | 2 = explosée
 int Bombe::event(Case_plateau* * jeu){
 	bool isInit = false;
+	bool isEnd = false;
 	if (retardement.getTime() >= 4500) {
 		explosee = 3;
 		retardement.stop();
 		boom = true; //Peut être pas utile
-		explosion.end(jeu); //Fin de l'explostion
+		if (!isEnd) {
+			explosion.end(jeu); //Fin de l'explostion
+		}
 		return explosee;
 	}
 	if (retardement.getTime() >= 3500) {

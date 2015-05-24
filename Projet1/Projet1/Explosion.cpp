@@ -42,7 +42,7 @@ void Explosion::init(Case_plateau* * jeu){
 			case CAISSE:
 				jeu[x + i][y] = CAISSE_EXPLOSION;
 				break;
-			case VIDE: case EXPLOSION:
+			case VIDE:
 				jeu[x + i][y] = EXPLOSION;
 				break;
 			case MUR:
@@ -53,6 +53,9 @@ void Explosion::init(Case_plateau* * jeu){
 				break;
 			case JOUEUR:
 				jeu[x + i][y] = JOUEUR_EXPLOSION;
+				break;
+			case EXPLOSION:
+				jeu[x][y - i] = EXPLOSION_EXPLOSION;
 				break;
 			default:
 				jeu[x + i][y] = VIDE;
@@ -66,7 +69,7 @@ void Explosion::init(Case_plateau* * jeu){
 			case CAISSE:
 				jeu[x][y + i] = CAISSE_EXPLOSION;
 				break;
-			case VIDE: case EXPLOSION:
+			case VIDE:
 				jeu[x][y + i] = EXPLOSION;
 				break;
 			case MUR:
@@ -77,6 +80,9 @@ void Explosion::init(Case_plateau* * jeu){
 				break;
 			case JOUEUR:
 				jeu[x][y + i] = JOUEUR_EXPLOSION;
+				break;
+			case EXPLOSION:
+				jeu[x][y - i] = EXPLOSION_EXPLOSION;
 				break;
 			default:
 				jeu[x][y + i] = VIDE;
@@ -90,7 +96,7 @@ void Explosion::init(Case_plateau* * jeu){
 			case CAISSE:
 				jeu[x - i][y] = CAISSE_EXPLOSION;
 				break;
-			case VIDE: case EXPLOSION:
+			case VIDE:
 				jeu[x - i][y] = EXPLOSION;
 				break;
 			case MUR:
@@ -101,6 +107,9 @@ void Explosion::init(Case_plateau* * jeu){
 				break;
 			case JOUEUR:
 				jeu[x - i][y] = JOUEUR_EXPLOSION;
+				break;
+			case EXPLOSION:
+				jeu[x][y - i] = EXPLOSION_EXPLOSION;
 				break;
 			default:
 				jeu[x - i][y] = VIDE;
@@ -114,7 +123,7 @@ void Explosion::init(Case_plateau* * jeu){
 			case CAISSE:
 				jeu[x][y - i] = CAISSE_EXPLOSION;
 				break;
-			case VIDE: case EXPLOSION:
+			case VIDE:
 				jeu[x][y - i] = EXPLOSION;
 				break;
 			case MUR:
@@ -125,6 +134,9 @@ void Explosion::init(Case_plateau* * jeu){
 				break;
 			case JOUEUR:
 				jeu[x][y - i] = JOUEUR_EXPLOSION;
+				break;
+			case EXPLOSION:
+				jeu[x][y - i] = EXPLOSION_EXPLOSION;
 				break;
 			default:
 				jeu[x][y - i] = VIDE;
@@ -148,8 +160,17 @@ void Explosion::end(Case_plateau* * jeu){
 		if (x + i >= TAILLE_JEU || east);
 		else {
 			switch (jeu[x + i][y]) {
-			case CAISSE_EXPLOSION: case BOMBE_EXPLOSION: case JOUEUR_EXPLOSION: case EXPLOSION:
+			case CAISSE_EXPLOSION: case EXPLOSION:
 				jeu[x + i][y] = VIDE;
+				break;
+			case BOMBE_EXPLOSION:
+				jeu[x + i][y] = BOMBE;
+				break;
+			case JOUEUR_EXPLOSION:
+				jeu[x + i][y] = JOUEUR;
+				break;
+			case EXPLOSION_EXPLOSION:
+				jeu[x + i][y] = EXPLOSION;
 				break;
 			case MUR:
 				east = true;
@@ -162,8 +183,17 @@ void Explosion::end(Case_plateau* * jeu){
 		if (y + i >= TAILLE_JEU || south);
 		else {
 			switch (jeu[x][y + i]) {
-			case CAISSE_EXPLOSION: case BOMBE_EXPLOSION: case JOUEUR_EXPLOSION: case EXPLOSION:
+			case CAISSE_EXPLOSION: case EXPLOSION:
 				jeu[x][y + i] = VIDE;
+				break;
+			case BOMBE_EXPLOSION:
+				jeu[x][y + i] = BOMBE;
+				break;
+			case JOUEUR_EXPLOSION:
+				jeu[x][y + i] = JOUEUR;
+				break;
+			case EXPLOSION_EXPLOSION:
+				jeu[x][y + i] = EXPLOSION;
 				break;
 			case MUR:
 				south = true;
@@ -175,29 +205,47 @@ void Explosion::end(Case_plateau* * jeu){
 
 		if (x - i < 0 || west);
 		else {
-			switch (jeu[x - i][y]) {
-			case CAISSE_EXPLOSION: case BOMBE_EXPLOSION: case JOUEUR_EXPLOSION: case EXPLOSION:
-				jeu[x - i][y] = VIDE;
+			switch (jeu[x + i][y]) {
+			case CAISSE_EXPLOSION: case EXPLOSION:
+				jeu[x + i][y] = VIDE;
+				break;
+			case BOMBE_EXPLOSION:
+				jeu[x + i][y] = BOMBE;
+				break;
+			case JOUEUR_EXPLOSION:
+				jeu[x + i][y] = JOUEUR;
+				break;
+			case EXPLOSION_EXPLOSION:
+				jeu[x + i][y] = EXPLOSION;
 				break;
 			case MUR:
 				west = true;
 				break;
 			default:
-				jeu[x - i][y] = VIDE;
+				jeu[x + i][y] = VIDE;
 			}
 		}
 
 		if (y - i < 0 || north);
 		else {
-			switch (jeu[x][y - i]) {
-			case CAISSE_EXPLOSION: case BOMBE_EXPLOSION: case JOUEUR_EXPLOSION: case EXPLOSION:
-				jeu[x][y - i] = VIDE;
+			switch (jeu[x + i][y]) {
+			case CAISSE_EXPLOSION: case EXPLOSION:
+				jeu[x + i][y] = VIDE;
+				break;
+			case BOMBE_EXPLOSION:
+				jeu[x + i][y] = BOMBE;
+				break;
+			case JOUEUR_EXPLOSION:
+				jeu[x + i][y] = JOUEUR;
+				break;
+			case EXPLOSION_EXPLOSION:
+				jeu[x + i][y] = EXPLOSION;
 				break;
 			case MUR:
 				north = true;
 				break;
 			default:
-				jeu[x][y - i] = VIDE;
+				jeu[x + i][y] = VIDE;
 			}
 		}
 	}
