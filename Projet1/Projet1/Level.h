@@ -14,7 +14,6 @@ extern bool IsDead;
 class Level {
 
 public:
-
 	Level();
 	Level(Case_plateau** jeu, Joueur* J);
 	~Level();

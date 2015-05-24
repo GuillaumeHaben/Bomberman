@@ -6,16 +6,13 @@
 class Time{
 
 public :
-	// Constructor.
 	Time();
 	~Time();
 
-	// Setters.
 	void start();
 	void stop();
 	void restart();
 
-	// Getters.
 	int getTime();
 	bool isOn();
 	int getStartDate();

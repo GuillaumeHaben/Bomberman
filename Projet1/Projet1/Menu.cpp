@@ -14,7 +14,7 @@ Menu::~Menu(){
 }
 
 void Menu::clic(int x, int y){
-	
+	// TO-DO
 }
 
 void Menu::draw(){
