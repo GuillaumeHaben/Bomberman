@@ -39,7 +39,9 @@ int main( int argc, char* args[] )
 			Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024);
 			Mix_Chunk *fin = Mix_LoadWAV("Sprite/creature.wav");
 			Mix_Chunk *musique = Mix_LoadWAV("Sprite/fond.wav");
-			Mix_Volume(1, MIX_MAX_VOLUME / 2);
+			Mix_Chunk *menumusique = Mix_LoadWAV("Sprite/tictac.wav");
+			Mix_Volume(1, MIX_MAX_VOLUME / 3);
+			Mix_PlayChannel(1, menumusique, -1);
 
 			Game plateau;
 			Joueur* prncp = plateau.getPrincipal();
@@ -73,13 +75,16 @@ int main( int argc, char* args[] )
 						if (plateau.getPause())
 							plateau.setPause();
 						if (IsMenu){
-							Mix_PlayChannel(1, musique, -1);
+							Mix_HaltChannel(1);
+							//Mix_PlayChannel(1, musique, -1);
 							IsMenu = false;
 						}
 						if (IsDead){
 							Mix_HaltChannel(1);
-							Mix_PlayChannel(1, fin, 0);
+							Mix_PlayChannel(1, menumusique, -1);
+							Mix_PlayChannel(2, fin, 0);
 							IsMenu = true;
+							IsDead = false;
 							plateau.reinit();
 						}
 						break;
@@ -93,7 +98,8 @@ int main( int argc, char* args[] )
 				SDL_RenderClear(renderer);
 				if (IsMenu){
 					menu.draw();
-				}else plateau.draw();
+				}
+				else plateau.draw();
 				SDL_RenderPresent(renderer);
 			}
 

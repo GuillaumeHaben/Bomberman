@@ -27,6 +27,17 @@ Game::~Game(){
 void Game::reinit(){
 	principal.setColone(1);
 	principal.setLine(1);
+	principal.init_var();
+
+	int dim_allouee;
+	for (dim_allouee = 0; dim_allouee < TAILLE_JEU; ++dim_allouee) {
+		jeu[dim_allouee] = new Case_plateau[TAILLE_JEU];
+	}
+
+	for (int i = 0; i < TAILLE_JEU; i++)
+		for (int j = 0; j < TAILLE_JEU; j++)
+			jeu[i][j] = INIT;
+
 	this->init(1);
 }
 
