@@ -20,6 +20,7 @@ public:
 	void init(int i);
 	void reinit();
 	Joueur* getPrincipal();
+	Adversaire* getSecondaire();
 	Level getLevel();
 
 	Case_plateau* * jeu = 0;

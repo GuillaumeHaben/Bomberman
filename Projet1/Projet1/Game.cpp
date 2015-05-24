@@ -54,6 +54,10 @@ Joueur* Game::getPrincipal(){
 	return &principal;
 }
 
+Adversaire* Game::getSecondaire(){
+	return &secondaire;
+}
+
 Level Game::getLevel(){
 	return l;
 }
