@@ -4,11 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Time.h>
+#include <SDL/SDL_mixer.h>
 
 #include "Case.h"
 #include "Joueur.h"
 
 extern SDL_Renderer * renderer;
+extern bool IsDead;
 
 class Level {
 
@@ -27,6 +29,7 @@ public:
 private:
 	int niveau;
 	Case_plateau* * jeu;
+	Joueur* prncp;
 
 	SDL_Surface* img[3];
 
@@ -39,7 +42,8 @@ private:
 
 	SDL_Rect fond;
 
-	Joueur* prncp;
+	Mix_Chunk *explosion;
+
 };
 
 #endif;

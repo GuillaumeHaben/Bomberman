@@ -31,6 +31,8 @@ Level::Level(Case_plateau* * plat, Joueur* J) {
 
 	SDL_FreeSurface(img[0]);
 	SDL_FreeSurface(img[1]);
+
+	explosion = Mix_LoadWAV("Sprite/canon.wav");
 }
 
 Level::~Level(){
@@ -42,10 +44,11 @@ Level::~Level(){
 /* To setup the game */
 void Level::setUpGame(int niveau) {
 	this->niveau = niveau;
+	
 
 	switch (niveau) {
 	case 1:
-		lvl1();
+		lvl1();		
 		break;
 	case 2:
 		break;
@@ -193,6 +196,7 @@ void Level::draw(bool pause){
 							}
 							if (bombes[i].getExplosee() == 3) {
 								bombes[i].setLine(-1);
+								Mix_PlayChannel(2, explosion, 0);
 							}
 						}
 					}

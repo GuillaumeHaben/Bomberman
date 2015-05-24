@@ -1,4 +1,5 @@
 #include "Bombe.h"
+#include <SDL/SDL_mixer.h>
 
 /* Constructor */
 Bombe::Bombe(){

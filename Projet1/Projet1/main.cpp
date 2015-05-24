@@ -36,6 +36,10 @@ int main( int argc, char* args[] )
 		} else {
 
 			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+			Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024);
+			Mix_Chunk *fin = Mix_LoadWAV("Sprite/creature.wav");
+			Mix_Chunk *musique = Mix_LoadWAV("Sprite/fond.wav");
+			Mix_Volume(1, MIX_MAX_VOLUME / 2);
 
 			Game plateau;
 			Joueur* prncp = plateau.getPrincipal();
@@ -68,9 +72,13 @@ int main( int argc, char* args[] )
 					case SDL_MOUSEBUTTONUP:
 						if (plateau.getPause())
 							plateau.setPause();
-						if (IsMenu)
+						if (IsMenu){
+							Mix_PlayChannel(1, musique, -1);
 							IsMenu = false;
+						}
 						if (IsDead){
+							Mix_HaltChannel(1);
+							Mix_PlayChannel(1, fin, 0);
 							IsMenu = true;
 							plateau.reinit();
 						}
@@ -89,6 +97,7 @@ int main( int argc, char* args[] )
 				SDL_RenderPresent(renderer);
 			}
 
+			Mix_CloseAudio();
 			SDL_DestroyWindow(window);
 			SDL_Quit();
 		}
