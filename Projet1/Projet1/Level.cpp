@@ -31,21 +31,22 @@ Level::Level(Case_plateau* * plat, Joueur* J) {
 
 	SDL_FreeSurface(img[0]);
 	SDL_FreeSurface(img[1]);
+
+	explosion = Mix_LoadWAV("Sprite/canon.wav");
 }
 
 Level::~Level(){
-	SDL_DestroyTexture(pause_text);
-	SDL_DestroyTexture(over_text);
-	SDL_DestroyTexture(flamme);
+
 }
 
 /* To setup the game */
 void Level::setUpGame(int niveau) {
 	this->niveau = niveau;
+	
 
 	switch (niveau) {
 	case 1:
-		lvl1();
+		lvl1();		
 		break;
 	case 2:
 		break;
@@ -147,11 +148,14 @@ void Level::lvl1() {
 void Level::draw(bool pause){
 	SDL_RenderCopy(renderer, niveaux, NULL, &fond);
 	SDL_Rect rect = { 0, 0, 35, 35 };
+	SDL_Rect rect2 = { 0, 0, 25, 25 };
 
 	for (int k = 0; k < TAILLE_JEU; k++){
 		for (int j = 0; j < TAILLE_JEU; j++){
 			rect.x = k * 35;
 			rect.y = j * 35;
+			rect2.x = k * 35+5;
+			rect2.y = j * 35+5;
 
 			switch (jeu[k][j]){
 			case MUR:
@@ -187,6 +191,7 @@ void Level::draw(bool pause){
 							}
 							if (bombes[i].getExplosee() == 1) {
 								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
+								Mix_PlayChannel(2, explosion, 0);
 							}
 							if (bombes[i].getExplosee() == 2) {
 								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
@@ -203,17 +208,17 @@ void Level::draw(bool pause){
 				break;
 			
 			case JOUEUR_EXPLOSION:	
-				SDL_RenderCopy(renderer, flamme, NULL, &rect);
+				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				prncp->draw();
 				break;
 
 			case CAISSE_EXPLOSION:
+				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				SDL_RenderCopy(renderer, caisse, NULL, &rect);
-				SDL_RenderCopy(renderer, flamme, NULL, &rect);
 				break;
 
 			case EXPLOSION: 
-				SDL_RenderCopy(renderer, flamme, NULL, &rect);
+				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				break;
 			}
 		}
@@ -221,9 +226,11 @@ void Level::draw(bool pause){
 
 	// Pause screen
 	if (prncp->getLife() <= 0){
-		SDL_RenderCopy(renderer, over_text, NULL, &rect);
+		SDL_RenderCopy(renderer, over_text, NULL, &fond);
 		IsDead = true;
-	}else{
-		if (pause) SDL_RenderCopy(renderer, pause_text, NULL, &fond);
 	}
+	if (pause){
+		SDL_RenderCopy(renderer, pause_text, NULL, &fond);
+	}
+	
 }

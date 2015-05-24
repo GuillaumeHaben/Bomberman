@@ -35,14 +35,14 @@ void Joueur::init_var(){
 	nb_bombes = 0;
 	nb_bombes_max = NB_BOMBES_MAX;
 	nb_life = 3;
+	dest = { 35, 35, 35, 35 };
+	dest_life = { 35, 35, 550, 450 };
 }
 
 /* Init sprite */
 void Joueur::init_load(){
 	SDL_Surface* background = IMG_Load("Sprite/perso.png");
 	texture = SDL_CreateTextureFromSurface(renderer, background);
-	dest = { 35, 35, 35, 35 };
-	dest_life = { 35, 35, 550, 450 };
 	SDL_FreeSurface(background);
 }
 
