@@ -156,7 +156,7 @@ void Adversaire::event(Case_plateau* * jeu){
 		case SDLK_SPACE:
 			if (nb_bombes < nb_bombes_max) {
 				jeu[p_colone][p_line] = JOUEUR_BOMBE;
-				Bombe nouvelle_bombe(p_colone, p_line, 1);
+				Bombe nouvelle_bombe(p_colone, p_line);
 				bombes_tab[nb_bombes] = nouvelle_bombe;
 				nb_bombes++;
 			}
