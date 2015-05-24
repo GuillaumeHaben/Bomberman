@@ -36,9 +36,9 @@ void Adversaire::init_load(){
 	SDL_FreeSurface(background);
 }
 
-int Adversaire::deplacement(int direction, Case_plateau* * jeu){
+int Adversaire::deplacement(Case_plateau* * jeu){
 
-	switch (direction){
+	switch (direction()){
 
 	case UP: if (p_line - 1 < 0) break;
 			 else{
@@ -117,6 +117,13 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 
 	}
 	return -1;
+}
+
+int Adversaire::direction(){
+	srand(time(NULL));
+	int i = 0;
+		i = rand() % 4;
+	return i;
 }
 
 void Adversaire::event(Case_plateau* * jeu){

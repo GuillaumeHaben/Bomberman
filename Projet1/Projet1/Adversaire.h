@@ -22,6 +22,7 @@ public:
 	int deplacement(int direction, Case_plateau* * jeu);
 	void event(Case_plateau* * jeu);
 	void draw();
+	int direction();
 
 private:
 	int nb_bombes, nb_bombes_max;
