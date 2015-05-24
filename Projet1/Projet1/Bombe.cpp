@@ -8,8 +8,6 @@ Bombe::Bombe(){
 
 Bombe::Bombe(int pos_x, int pos_y){
 	this->init(pos_x, pos_y);
-	isEnd = false;
-	isInit = false;
 	SDL_Surface* background = IMG_Load("Sprite/bombe_1.png");
 	SDL_Surface* background2 = IMG_Load("Sprite/bombe_2.png");
 	texture[0] = SDL_CreateTextureFromSurface(renderer, background);
@@ -31,7 +29,11 @@ void Bombe::init(int x, int y){
 	b_line = y;
 	dest = { x * 35, y * 35, 35, 35 };
 	explosee = 0;
+
 	boom = false;
+	isEnd = false;
+	isInit = false;
+
 	// Random generation for the power
 	puissance = (rand() % 3) + 1;
 	explosion = *new Explosion(b_colone, b_line, puissance);
@@ -41,28 +43,29 @@ void Bombe::init(int x, int y){
 /* Handle Bombe event */
 //0 = pas explosée | 1 = prête à exploser | 2 = explosée
 int Bombe::event(Case_plateau* * jeu){
-	if (retardement.getTime() >= 4500 && !isEnd) {
-		explosee = 3;
-		retardement.stop();
-		boom = true; 
-		explosion.end(jeu);
-		isEnd = true;
-		return explosee;
-	}
+	if (b_colone != 0 && b_line != 0){
+		if (retardement.getTime() >= 4500 && !isEnd) {
+			explosee = 3;
+			retardement.stop();
+			boom = true;
+			explosion.end(jeu);
+			isEnd = true;
+			return explosee;
+		}
 
-	if (retardement.getTime() >= 3500 && !isInit) {
-		explosee = 2;
-		boom = true;
-		explosion.init(jeu);
-		isInit = true;
-		return explosee;
-	}
+		if (retardement.getTime() >= 3500 && !isInit) {
+			explosee = 2;
+			boom = true;
+			explosion.init(jeu);
+			isInit = true;
+			return explosee;
+		}
 
-	if (retardement.getTime() >= 2000) {
-		explosee = 1;
-		return 1;
+		if (retardement.getTime() >= 2000) {
+			explosee = 1;
+			return 1;
+		}
 	}
-
 	return 0;
 }
 

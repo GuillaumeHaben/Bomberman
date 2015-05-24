@@ -41,7 +41,7 @@ private:
 	SDL_Texture* over_text;
 
 	SDL_Rect fond;
-
+	bool musique = false;
 	Mix_Chunk *explosion;
 
 };

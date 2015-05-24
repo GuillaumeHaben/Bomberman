@@ -191,13 +191,17 @@ void Level::draw(bool pause){
 							}
 							if (bombes[i].getExplosee() == 1) {
 								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
-								Mix_PlayChannel(2, explosion, 0);
 							}
 							if (bombes[i].getExplosee() == 2) {
 								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
+								if (!musique){
+									Mix_PlayChannel(2, explosion, 0);
+									musique = true;
+								}
 							}
 							if (bombes[i].getExplosee() == 3) {
 								bombes[i].setLine(-1);
+								musique = false;
 							}
 						}
 					}
@@ -217,7 +221,7 @@ void Level::draw(bool pause){
 				SDL_RenderCopy(renderer, caisse, NULL, &rect);
 				break;
 
-			case EXPLOSION: 
+			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				break;
 			}
