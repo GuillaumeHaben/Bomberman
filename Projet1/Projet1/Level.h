@@ -32,6 +32,7 @@ private:
 
 	SDL_Texture* niveaux;
 	SDL_Texture* mur;
+	SDL_Texture* flamme;
 	SDL_Texture* caisse;
 	SDL_Texture* pause_text;
 	SDL_Texture* over_text;

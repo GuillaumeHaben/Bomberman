@@ -19,6 +19,10 @@ Level::Level(Case_plateau* * plat, Joueur* J) {
 	over_text = SDL_CreateTextureFromSurface(renderer, background2);
 	SDL_FreeSurface(background2);
 
+	SDL_Surface* background3 = IMG_Load("Sprite/flamme.png");
+	flamme = SDL_CreateTextureFromSurface(renderer, background3);
+	SDL_FreeSurface(background3);
+
 	img[0] = SDL_LoadBMP("Sprite/caisse.bmp");
 	img[1] = SDL_LoadBMP("Sprite/mur.bmp");
 
@@ -182,7 +186,7 @@ void Level::draw(bool pause){
 							if (bombes[i].getExplosee() == 1) {
 								SDL_RenderCopy(renderer, bombes[i].texture[1], NULL, &rect);
 							}
-							if (bombes[i].getExplosee() == 2) {
+							if (bombes[i].getExplosee() == 3) {
 								bombes[i].setLine(-1);
 								if (jeu[k][j] == JOUEUR_BOMBE) {
 									jeu[k][j] = JOUEUR;

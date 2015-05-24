@@ -55,7 +55,9 @@ int Personnage::deplacement(int direction, Case_plateau* * jeu){
 
 	case UP: if (p_line - 1 < 0) break;
 			 else{
-				 if (jeu[p_colone][p_line - 1] == MUR || jeu[p_colone][p_line - 1] == CAISSE) break;
+				 if (jeu[p_colone][p_line - 1] == MUR || jeu[p_colone][p_line - 1] == CAISSE ||
+					 jeu[p_colone][p_line - 1] == CAISSE_EXPLOSION || jeu[p_colone][p_line - 1] == BOMBE
+					 || jeu[p_colone][p_line - 1] == BOMBE_EXPLOSION) break;
 				 else{
 					 if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
 						 jeu[p_colone][p_line] = BOMBE;
