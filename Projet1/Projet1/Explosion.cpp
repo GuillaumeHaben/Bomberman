@@ -202,7 +202,7 @@ void Explosion::end(Case_plateau* * jeu){
 		}
 
 		if (!(x - i < 0 || west)) {
-			switch (jeu[x + i][y]) {
+			switch (jeu[x - i][y]) {
 			case CAISSE_EXPLOSION: case EXPLOSION:
 				jeu[x - i][y] = VIDE;
 				break;
