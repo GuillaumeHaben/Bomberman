@@ -145,6 +145,8 @@ void Explosion::init(Case_plateau* * jeu){
 		}
 	}
 }
+
+
 /* Fin de l'explosion */
 void Explosion::end(Case_plateau* * jeu){
 	bool east = false;
