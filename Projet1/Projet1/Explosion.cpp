@@ -56,6 +56,9 @@ void Explosion::init(Case_plateau* * jeu){
 			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x + i][y] = EXPLOSION_EXPLOSION;
 				break;
+			case INIT:
+				jeu[x + i][y] = EXPLOSION;
+				break;
 			default:
 				jeu[x + i][y] = VIDE;
 				break;
@@ -64,7 +67,7 @@ void Explosion::init(Case_plateau* * jeu){
 
 		if (!(y + i >= TAILLE_JEU || south)) {
 			switch (jeu[x][y + i]) {
-			case CAISSE:
+			case CAISSE: case CAISSE_EXPLOSION:
 				jeu[x][y + i] = CAISSE_EXPLOSION;
 				break;
 			case VIDE:
@@ -73,14 +76,17 @@ void Explosion::init(Case_plateau* * jeu){
 			case MUR:
 				south = true;
 				break;
-			case BOMBE:
+			case BOMBE: case BOMBE_EXPLOSION:
 				jeu[x][y + i] = BOMBE_EXPLOSION;
 				break;
-			case JOUEUR:
+			case JOUEUR: case JOUEUR_EXPLOSION:
 				jeu[x][y + i] = JOUEUR_EXPLOSION;
 				break;
-			case EXPLOSION:
+			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x][y + i] = EXPLOSION_EXPLOSION;
+				break;
+			case INIT:
+				jeu[x + i][y] = EXPLOSION;
 				break;
 			default:
 				jeu[x][y + i] = VIDE;
@@ -90,7 +96,7 @@ void Explosion::init(Case_plateau* * jeu){
 
 		if (!(x - i < 0 || west)) {
 			switch (jeu[x - i][y]) {
-			case CAISSE:
+			case CAISSE: case CAISSE_EXPLOSION:
 				jeu[x - i][y] = CAISSE_EXPLOSION;
 				break;
 			case VIDE:
@@ -99,14 +105,17 @@ void Explosion::init(Case_plateau* * jeu){
 			case MUR:
 				west = true;
 				break;
-			case BOMBE:
+			case BOMBE: case BOMBE_EXPLOSION:
 				jeu[x - i][y] = BOMBE_EXPLOSION;
 				break;
-			case JOUEUR:
+			case JOUEUR: case JOUEUR_EXPLOSION:
 				jeu[x - i][y] = JOUEUR_EXPLOSION;
 				break;
-			case EXPLOSION:
+			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x - i][y] = EXPLOSION_EXPLOSION;
+				break;
+			case INIT:
+				jeu[x + i][y] = EXPLOSION;
 				break;
 			default:
 				jeu[x - i][y] = VIDE;
@@ -116,7 +125,7 @@ void Explosion::init(Case_plateau* * jeu){
 
 		if (!(y - i < 0 || north)){
 			switch (jeu[x][y - i]) {
-			case CAISSE:
+			case CAISSE: case CAISSE_EXPLOSION:
 				jeu[x][y - i] = CAISSE_EXPLOSION;
 				break;
 			case VIDE:
@@ -125,14 +134,17 @@ void Explosion::init(Case_plateau* * jeu){
 			case MUR:
 				north = true;
 				break;
-			case BOMBE:
+			case BOMBE: case BOMBE_EXPLOSION:
 				jeu[x][y - i] = BOMBE_EXPLOSION;
 				break;
-			case JOUEUR:
+			case JOUEUR: case JOUEUR_EXPLOSION:
 				jeu[x][y - i] = JOUEUR_EXPLOSION;
 				break;
-			case EXPLOSION:
+			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x][y - i] = EXPLOSION_EXPLOSION;
+				break;
+			case INIT:
+				jeu[x + i][y] = EXPLOSION;
 				break;
 			default:
 				jeu[x][y - i] = VIDE;
@@ -157,7 +169,7 @@ void Explosion::end(Case_plateau* * jeu){
 
 		if (!(x + i >= TAILLE_JEU || east)) {
 			switch (jeu[x + i][y]) {
-			case CAISSE_EXPLOSION: case EXPLOSION:
+			case EXPLOSION: case CAISSE_EXPLOSION:
 				jeu[x + i][y] = VIDE;
 				break;
 			case BOMBE_EXPLOSION:
