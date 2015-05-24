@@ -2,11 +2,11 @@
 
 /* Constructeur */
 Bombe::Bombe(){
-	this->init(0, 0, 2);
+	this->init(0, 0);
 }
 
-Bombe::Bombe(int pos_x, int pos_y, int power){
-	this->init(pos_x, pos_y, power);
+Bombe::Bombe(int pos_x, int pos_y){
+	this->init(pos_x, pos_y);
 
 	SDL_Surface* background = IMG_Load("Sprite/bombe_1.png");
 	SDL_Surface* background2 = IMG_Load("Sprite/bombe_2.png");
@@ -24,13 +24,16 @@ Bombe::~Bombe(){
 }
 
 /* Intialise la bombe */
-void Bombe::init(int x, int y, int power){
+void Bombe::init(int x, int y){
 	b_colone = x;
 	b_line = y;
 	dest = { x * 35, y * 35, 35, 35 };
 	explosee = 0;
 	boom = false;
-	puissance = power;
+
+	//Génération aléatoire de la puissance
+	srand(time(NULL));
+	puissance = (rand() % 3) + 1;
 	retardement.start();
 }
 

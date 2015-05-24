@@ -5,13 +5,17 @@
 #include "Time.h"
 #include "SDL/SDL_image.h"
 
+//Utile pour la génération aléatoire
+#include <cstdlib>
+#include <time.h>
+
 extern SDL_Renderer* renderer;
 
 class Bombe {
 
 public:
 	Bombe();
-	Bombe(int pos_x, int pos_y, int power);
+	Bombe(int pos_x, int pos_y);
 	~Bombe();
 
 	// Getter
@@ -25,7 +29,7 @@ public:
 	void setExplosee(int i);
 
 	int event(Case_plateau* * jeu);
-	void init(int x, int y, int power);
+	void init(int x, int y);
 	void put_off();
 	void put_on();
 
