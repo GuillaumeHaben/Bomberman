@@ -248,5 +248,14 @@ void Explosion::end(Case_plateau* * jeu){
 		}
 	}
 
-	jeu[x][y] = VIDE;
+	switch (jeu[x][y]) {
+	case JOUEUR_BOMBE:
+		jeu[x][y] = JOUEUR;
+		break;
+	case BOMBE_EXPLOSION:
+		jeu[x][y] = EXPLOSION;
+		break;
+	default:
+		jeu[x][y] = VIDE;
+	}
 }
