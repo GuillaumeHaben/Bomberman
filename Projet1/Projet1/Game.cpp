@@ -5,6 +5,7 @@ Game::Game(){
 	end = false;
 
 	principal = *new Joueur(1, 1);
+	secondaire = *new Adversaire(13, 13);
 	jeu = new Case_plateau *[TAILLE_JEU];
 
 	int dim_allouee;

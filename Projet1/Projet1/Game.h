@@ -4,6 +4,7 @@
 #include "Case.h"
 #include "Joueur.h"
 #include "Level.h"
+#include "Adversaire.h"
 
 extern SDL_Renderer * renderer;
 
@@ -26,6 +27,7 @@ public:
 private:
 	bool end, pause;
 	Joueur principal;
+	Adversaire secondaire;
 	Level l;
 };
 

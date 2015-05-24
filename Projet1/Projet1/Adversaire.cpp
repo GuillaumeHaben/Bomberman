@@ -16,16 +16,27 @@ Adversaire::Adversaire(int pos_x, int pos_y) : Personnage(pos_x, pos_y) {
 
 /* Destructeur */
 Adversaire::~Adversaire(){
-
+	SDL_DestroyTexture(texture);
 }
 
 Bombe* Adversaire::getBombes_tab() {
 	return bombes_tab;
 }
 
+int Adversaire::getLife() {
+	return nb_life;
+}
+
+void Adversaire::die() {
+	nb_life--;
+}
+
 void Adversaire::init_var(){
 	nb_bombes = 0;
 	nb_bombes_max = NB_BOMBES_MAX;
+	nb_life = 3;
+	dest = { 35, 35, 35, 35 };
+	dest_life = { 35, 35, 550, 450 };
 }
 
 void Adversaire::init_load(){
@@ -36,9 +47,9 @@ void Adversaire::init_load(){
 	SDL_FreeSurface(background);
 }
 
-int Adversaire::deplacement(Case_plateau* * jeu){
+int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 
-	switch (direction()){
+	switch (direction){
 
 	case UP: if (p_line - 1 < 0) break;
 			 else{
@@ -119,6 +130,71 @@ int Adversaire::deplacement(Case_plateau* * jeu){
 	return -1;
 }
 
+void Adversaire::event(Case_plateau* * jeu){
+
+	if (evn.type == direction()){
+
+		switch (direction()) {
+		case UP:
+			if (this->deplacement(UP, jeu) != -1){
+				dest.x = p_colone * 35;
+				dest.y = p_line * 35;
+			}
+			break;
+
+		case DOWN:
+			if (this->deplacement(DOWN, jeu) != -1){
+				dest.x = p_colone * 35;
+				dest.y = p_line * 35;
+			}
+			break;
+
+		case LEFT:
+			if (this->deplacement(LEFT, jeu) != -1){
+				dest.x = p_colone * 35;
+				dest.y = p_line * 35;
+			}
+			break;
+
+		case RIGHT:
+			if (this->deplacement(RIGHT, jeu) != -1){
+				dest.x = p_colone * 35;
+				dest.y = p_line * 35;
+			}
+			break;
+
+		case //fonction bombe:
+			jeu[p_colone][p_line] = JOUEUR_BOMBE;
+			if (nb_bombes < NB_BOMBES_MAX){
+				Bombe nouvelle_bombe(p_colone, p_line);
+				if (nb_bombes == 1){
+					if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)){
+						bombes_tab[nb_bombes] = nouvelle_bombe;
+						nb_bombes++;
+					}
+				}
+				else{
+					bombes_tab[nb_bombes] = nouvelle_bombe;
+					nb_bombes++;
+				}
+			}
+			else{
+				if (bombes_tab[0].getBoom()){
+					if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+						bombes_tab[0].init(p_colone, p_line);
+				}
+				else{
+					if (bombes_tab[1].getBoom()){
+						if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+							bombes_tab[1].init(p_colone, p_line);
+					}
+				}
+			}
+			break;
+		}
+	}
+}
+
 int Adversaire::direction(){
 	srand(time(NULL));
 	int i = 0;
@@ -126,54 +202,6 @@ int Adversaire::direction(){
 	return i;
 }
 
-void Adversaire::event(Case_plateau* * jeu){
-
-	if (evn.type == SDL_KEYDOWN){
-
-		switch (evn.key.keysym.sym)
-		{
-		case SDLK_UP:
-			if (this->deplacement(UP, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
-
-		case SDLK_DOWN:
-			if (this->deplacement(DOWN, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
-
-		case SDLK_LEFT:
-			if (this->deplacement(LEFT, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
-
-		case SDLK_RIGHT:
-			if (this->deplacement(RIGHT, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
-
-		case SDLK_SPACE:
-			if (nb_bombes < nb_bombes_max) {
-				jeu[p_colone][p_line] = JOUEUR_BOMBE;
-				Bombe nouvelle_bombe(p_colone, p_line);
-				bombes_tab[nb_bombes] = nouvelle_bombe;
-				nb_bombes++;
-			}
-			break;
-
-		default:
-			break;
-		}
-	}
-}
 
 void Adversaire::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
