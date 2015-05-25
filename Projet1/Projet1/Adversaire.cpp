@@ -27,6 +27,8 @@ void Adversaire::init_var(){
 	nb_bombes_max = NB_BOMBES_MAX;
 	dest = { 35*13, 35*13, 35, 35 };
 	chemin = (int *)malloc(sizeof(int));
+	p_colone = 13;
+	p_line = 13;
 }
 
 void Adversaire::init_load(){

@@ -29,6 +29,7 @@ void Time::stop(){
 void Time::restart(){
 	if (!isOn()) {
 		startDate = SDL_GetTicks();
+		stopDate = 0;
 		on = true;
 	}
 }
