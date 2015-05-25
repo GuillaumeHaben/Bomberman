@@ -52,7 +52,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 	switch (direction){
 
 	case UP:
-		if (p_line - 1 < 0) {
+		if (p_line - 1 < 0 || jeu[p_colone][p_line - 1] == BOMBE || jeu[p_colone][p_line - 1] == BOMBE_EXPLOSION) {
 			break;
 		}
 		else{
@@ -71,17 +71,20 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 							nb_bombes++;
 						}
 						deplacement(last_deplacement, jeu, player);
+						jeu[p_colone][p_line] = ADVERSAIRE;
 					}else{
 						if (bombes_tab[0].getBoom()){
 							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone)) {
 								bombes_tab[0].init(p_colone, p_line);
 								deplacement(last_deplacement, jeu, player);
+								jeu[p_colone][p_line] = ADVERSAIRE;
 							}
 						}else{
 							if (bombes_tab[1].getBoom()){
 								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)) {
 									bombes_tab[1].init(p_colone, p_line);
 									deplacement(last_deplacement, jeu, player);
+									jeu[p_colone][p_line] = ADVERSAIRE;
 								}	
 							}
 						}
@@ -89,20 +92,18 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 				}
 			}
 			else{
-				jeu[p_colone][p_line - 1] = ADVERSAIRE;
-				--p_line;
+				p_line--;
+				//jeu[p_colone][p_line+1] = ADVERSAIRE;
 				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 				last_deplacement = DOWN;
-				//recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player);
-				//done = false;
 				return 0;
 			}
 		}
 	break;
 
 	case DOWN:
-		if (p_line + 1 >= TAILLE_JEU) {
+		if (p_line + 1 >= TAILLE_JEU || jeu[p_colone][p_line + 1] == BOMBE || jeu[p_colone][p_line + 1] == BOMBE_EXPLOSION) {
 			break;
 		}
 		else{
@@ -122,12 +123,14 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 							nb_bombes++;
 						}
 						deplacement(last_deplacement, jeu, player);
+						jeu[p_colone][p_line] = ADVERSAIRE;
 					}
 					else{
 						if (bombes_tab[0].getBoom()){
 							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone)) {
 								bombes_tab[0].init(p_colone, p_line);
 								deplacement(last_deplacement, jeu, player);
+								jeu[p_colone][p_line] = ADVERSAIRE;
 							}
 						}
 						else{
@@ -135,6 +138,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)) {
 									bombes_tab[1].init(p_colone, p_line);
 									deplacement(last_deplacement, jeu, player);
+									jeu[p_colone][p_line] = ADVERSAIRE;
 								}
 							}
 						}
@@ -142,20 +146,18 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 				}
 			}
 			else{
-				jeu[p_colone][p_line + 1] = ADVERSAIRE;
-				++p_line;
+				p_line++;
+				//jeu[p_colone][p_line] = ADVERSAIRE;
 				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 				last_deplacement = UP;
-				//recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player);
-				//done = false;
 				return 0;
 			}
 		}
 		break;
 
 	case RIGHT:
-		if (p_colone + 1 >= TAILLE_JEU) {
+		if (p_colone + 1 >= TAILLE_JEU || jeu[p_colone + 1][p_line] == BOMBE || jeu[p_colone + 1][p_line] == BOMBE_EXPLOSION) {
 			break;
 		}
 		else{
@@ -175,12 +177,14 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 							nb_bombes++;
 						}
 						deplacement(last_deplacement, jeu, player);
+						jeu[p_colone][p_line] = ADVERSAIRE;
 					}
 					else{
 						if (bombes_tab[0].getBoom()){
 							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone)) {
 								bombes_tab[0].init(p_colone, p_line);
 								deplacement(last_deplacement, jeu, player);
+								jeu[p_colone][p_line] = ADVERSAIRE;
 							}
 						}
 						else{
@@ -188,6 +192,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)) {
 									bombes_tab[1].init(p_colone, p_line);
 									deplacement(last_deplacement, jeu, player);
+									jeu[p_colone][p_line] = ADVERSAIRE;
 								}
 							}
 						}
@@ -195,20 +200,18 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 				}
 			}
 			else{
-				jeu[p_colone + 1][p_line] = ADVERSAIRE;
-				++p_colone;
+				p_colone++;
+				//jeu[p_colone][p_line] = ADVERSAIRE;
 				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 				last_deplacement = LEFT;
-				//recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player);
-				//done = false;
 				return 0;
 			}
 		}
 		break;
 
 	case LEFT:
-		if (p_colone - 1 < 0) {
+		if (p_colone - 1 < 0 || jeu[p_colone - 1][p_line] == BOMBE || jeu[p_colone - 1][p_line] == BOMBE_EXPLOSION) {
 			break;
 		}
 		else{
@@ -228,6 +231,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 							nb_bombes++;
 						}
 						deplacement(last_deplacement, jeu, player);
+						jeu[p_colone][p_line] = ADVERSAIRE;
 
 					}
 					else{
@@ -235,6 +239,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone)) {
 								bombes_tab[0].init(p_colone, p_line);
 								deplacement(last_deplacement, jeu, player);
+								jeu[p_colone][p_line] = ADVERSAIRE;
 							}
 						}
 						else{
@@ -242,6 +247,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)) {
 									bombes_tab[1].init(p_colone, p_line);
 									deplacement(last_deplacement, jeu, player);
+									jeu[p_colone][p_line] = ADVERSAIRE;
 								}
 							}
 						}
@@ -249,13 +255,11 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 				}
 			}
 			else{
-				jeu[p_colone - 1][p_line] = ADVERSAIRE;
-				--p_colone;
+				p_colone--;
+				//jeu[p_colone][p_line] = ADVERSAIRE;
 				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 				last_deplacement = RIGHT;
-				//recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player);
-				//done = false;
 				return 0;
 			}
 		}

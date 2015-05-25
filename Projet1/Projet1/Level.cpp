@@ -408,10 +408,9 @@ void Level::draw(bool pause){
 				break;
 
 			case ADVERSAIRE_EXPLOSION:
-				if (j != 12 && k != 13){
-					ennemi->draw();
+				ennemi->draw();
 				ennemi->setDie();
-				}
+				
 				break;
 			}
 		}
