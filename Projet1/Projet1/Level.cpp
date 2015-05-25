@@ -317,10 +317,8 @@ void Level::draw(bool pause){
 				bombes = prncp->getBombes_tab();
 				Bombe* bombes_adv;
 				bombes_adv = ennemi->getBombes_tab();
-				bombes[2] = bombes_adv[0];
-				bombes[3] = bombes_adv[1];
-
-				for (int i = 0; i < 4; i++) {
+			
+				for (int i = 0; i < 2; i++) {
 					if (&bombes[i] != NULL) {
 
 						if (pause)
@@ -353,6 +351,43 @@ void Level::draw(bool pause){
 							}
 							if (bombes[i].getExplosee() == 3) {
 								bombes[i].setLine(-1);
+								musique = false;
+							}
+							break;
+						}
+					}
+					if (&bombes_adv[i] != NULL) {
+
+						if (pause)
+							bombes_adv[i].put_off();
+						else{
+							bombes_adv[i].put_on();
+							bombes_adv[i].event(jeu);
+						}
+
+						// Print the Bombe
+						if (rect.x == (bombes_adv[i].getColone() * 35) && rect.y == (bombes_adv[i].getLine() * 35)) {
+							if (bombes_adv[i].getExplosee() == 0) {
+								SDL_RenderCopy(renderer, bombes_adv[i].texture[0], NULL, &rect);
+							}
+							if (bombes_adv[i].getExplosee() == 1) {
+								SDL_RenderCopy(renderer, bombes_adv[i].texture[1], NULL, &rect);
+							}
+							if (bombes_adv[i].getExplosee() == 2) {
+								SDL_RenderCopy(renderer, bombes_adv[i].texture[1], NULL, &rect);
+								if (!musique){
+									Mix_PlayChannel(2, explosion, 0);
+									musique = true;
+								}
+								if (bombes_adv[i].getPerdreVie()){
+									if (i == 0 || i == 1){
+										prncp->die();
+										bombes_adv[i].setPerdreVie();
+									}
+								}
+							}
+							if (bombes_adv[i].getExplosee() == 3) {
+								bombes_adv[i].setLine(-1);
 								musique = false;
 							}
 							break;
