@@ -50,8 +50,10 @@ void Level::setUpGame(int niveau) {
 		lvl1();		
 		break;
 	case 2:
+		lvl2();
 		break;
 	case 3:
+		lvl3();
 		break;
 	default:
 		lvl1();
