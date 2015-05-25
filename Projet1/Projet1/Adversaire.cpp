@@ -124,16 +124,30 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 							bombes_tab[nb_bombes] = nouvelle_bombe;
 							nb_bombes++;
 						}
+						if (recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player)){
+							deplacement(chemin[0], jeu, player);
+							deplacement(chemin[1], jeu, player);
+						}
 					}
 					else{
 						if (bombes_tab[0].getBoom()){
-							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone)) {
 								bombes_tab[0].init(p_colone, p_line);
+								if (recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player)){
+									deplacement(chemin[0], jeu, player);
+									deplacement(chemin[1], jeu, player);
+								}
+							}
 						}
 						else{
 							if (bombes_tab[1].getBoom()){
-								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)) {
 									bombes_tab[1].init(p_colone, p_line);
+									if (recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player)){
+										deplacement(chemin[0], jeu, player);
+										deplacement(chemin[1], jeu, player);
+									}
+								}
 							}
 						}
 					}
@@ -168,16 +182,30 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 							bombes_tab[nb_bombes] = nouvelle_bombe;
 							nb_bombes++;
 						}
+						if (recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player)){
+							deplacement(chemin[0], jeu, player);
+							deplacement(chemin[1], jeu, player);
+						}
 					}
 					else{
 						if (bombes_tab[0].getBoom()){
-							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone)) {
 								bombes_tab[0].init(p_colone, p_line);
+								if (recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player)){
+									deplacement(chemin[0], jeu, player);
+									deplacement(chemin[1], jeu, player);
+								}
+							}
 						}
 						else{
 							if (bombes_tab[1].getBoom()){
-								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)) {
 									bombes_tab[1].init(p_colone, p_line);
+									if (recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player)){
+										deplacement(chemin[0], jeu, player);
+										deplacement(chemin[1], jeu, player);
+									}
+								}
 							}
 						}
 					}
@@ -212,16 +240,30 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 							bombes_tab[nb_bombes] = nouvelle_bombe;
 							nb_bombes++;
 						}
+						if (recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player)){
+							deplacement(chemin[0], jeu, player);
+							deplacement(chemin[1], jeu, player);
+						}
 					}
 					else{
 						if (bombes_tab[0].getBoom()){
-							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone)) {
 								bombes_tab[0].init(p_colone, p_line);
+								if (recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player)){
+									deplacement(chemin[0], jeu, player);
+									deplacement(chemin[1], jeu, player);
+								}
+							}
 						}
 						else{
 							if (bombes_tab[1].getBoom()){
-								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)) {
 									bombes_tab[1].init(p_colone, p_line);
+									if (recherche_chemin_recursive(jeu, chemin, 0, p_colone, p_line, player)){
+										deplacement(chemin[0], jeu, player);
+										deplacement(chemin[1], jeu, player);
+									}
+								}
 							}
 						}
 					}
