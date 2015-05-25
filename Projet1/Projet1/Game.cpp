@@ -31,6 +31,10 @@ void Game::reinit(){
 	principal.setLine(1);
 	principal.init_var();
 
+	secondaire.setColone(1);
+	secondaire.setLine(1);
+	secondaire.init_var();
+
 	int dim_allouee;
 	for (dim_allouee = 0; dim_allouee < TAILLE_JEU; ++dim_allouee) {
 		jeu[dim_allouee] = new Case_plateau[TAILLE_JEU];

@@ -47,7 +47,7 @@ void Level::setUpGame(int niveau) {
 
 	switch (niveau) {
 	case 1:
-		lvl1();		
+		lvl3();		
 		break;
 	case 2:
 		lvl2();
@@ -277,7 +277,6 @@ void Level::lvl3() {
 	niveaux = SDL_CreateTextureFromSurface(renderer, background);
 	SDL_FreeSurface(background);
 }
-
 
 /* Draw the level */
 void Level::draw(bool pause){
