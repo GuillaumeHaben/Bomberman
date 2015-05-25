@@ -23,7 +23,6 @@ public:
 	void init_var();
 	void init_load();
 	int deplacement(int direction, Case_plateau* * jeu);
-	void event(Case_plateau* * jeu);
 	void draw();
 	void recherche_chemin(Case_plateau* * jeu, Joueur *player);
 	bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int pos_x, int pos_y, Joueur *player);

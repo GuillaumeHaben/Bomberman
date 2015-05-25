@@ -142,10 +142,6 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 	return -1;
 }
 
-void Adversaire::event(Case_plateau* * jeu){
-
-}
-
 void Adversaire::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
 }
