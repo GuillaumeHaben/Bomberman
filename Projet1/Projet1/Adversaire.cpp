@@ -306,8 +306,10 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 	if (taille_chemin > 50)	return false;
 	if (i - 1 < 0 || j - 1 < 0) return false;
 	if (i + 1 >= TAILLE_JEU || j + 1 >= TAILLE_JEU) return false;
+	int x = player->getColone();
+	int y = player->getLine();
 
-	if (jeu[i][j] == JOUEUR) {
+	if (jeu[i][j] == jeu[x][y]) {
 		return true;
 	}
 	else{
