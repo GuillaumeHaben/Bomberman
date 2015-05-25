@@ -47,7 +47,33 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 			break;
 		}
 			 else{
-				 if (jeu[p_colone][p_line - 1] == MUR || jeu[p_colone][p_line - 1] == CAISSE) break;
+				 if (jeu[p_colone][p_line - 1] == MUR || jeu[p_colone][p_line - 1] == CAISSE) {
+					 if (jeu[p_colone][p_line - 1] == CAISSE) {
+						 jeu[p_colone][p_line] = JOUEUR_BOMBE;
+						 if (nb_bombes < NB_BOMBES_MAX){
+							 Bombe nouvelle_bombe(p_colone, p_line);
+							 if (nb_bombes == 1){
+								 if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)){
+									 bombes_tab[nb_bombes] = nouvelle_bombe;
+									 nb_bombes++;
+								 }
+							 }else{
+								 bombes_tab[nb_bombes] = nouvelle_bombe;
+								 nb_bombes++;
+							 }
+						 }else{
+							 if (bombes_tab[0].getBoom()){
+								 if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+									 bombes_tab[0].init(p_colone, p_line);
+							 }else{
+								 if (bombes_tab[1].getBoom()){
+									 if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+										 bombes_tab[1].init(p_colone, p_line);
+								 }
+							 }
+						 }
+					 }
+				 }
 				 else{
 					 /*if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
 						 jeu[p_colone][p_line] = BOMBE;
@@ -72,7 +98,36 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 			break;
 		}
 		else{
-			if (jeu[p_colone][p_line + 1] == MUR || jeu[p_colone][p_line + 1] == CAISSE) break;
+			if (jeu[p_colone][p_line + 1] == MUR || jeu[p_colone][p_line + 1] == CAISSE) {
+				if (jeu[p_colone][p_line - 1] == CAISSE) {
+					jeu[p_colone][p_line] = JOUEUR_BOMBE;
+					if (nb_bombes < NB_BOMBES_MAX){
+						Bombe nouvelle_bombe(p_colone, p_line);
+						if (nb_bombes == 1){
+							if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)){
+								bombes_tab[nb_bombes] = nouvelle_bombe;
+								nb_bombes++;
+							}
+						}
+						else{
+							bombes_tab[nb_bombes] = nouvelle_bombe;
+							nb_bombes++;
+						}
+					}
+					else{
+						if (bombes_tab[0].getBoom()){
+							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+								bombes_tab[0].init(p_colone, p_line);
+						}
+						else{
+							if (bombes_tab[1].getBoom()){
+								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+									bombes_tab[1].init(p_colone, p_line);
+							}
+						}
+					}
+				}
+			}
 			else{
 				/*if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
 					jeu[p_colone][p_line] = BOMBE;
@@ -97,7 +152,36 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 			break;
 		}
 		else{
-			if (jeu[p_colone + 1][p_line] == MUR || jeu[p_colone + 1][p_line] == CAISSE) break;
+			if (jeu[p_colone + 1][p_line] == MUR || jeu[p_colone + 1][p_line] == CAISSE) {
+				if (jeu[p_colone][p_line - 1] == CAISSE) {
+					jeu[p_colone][p_line] = JOUEUR_BOMBE;
+					if (nb_bombes < NB_BOMBES_MAX){
+						Bombe nouvelle_bombe(p_colone, p_line);
+						if (nb_bombes == 1){
+							if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)){
+								bombes_tab[nb_bombes] = nouvelle_bombe;
+								nb_bombes++;
+							}
+						}
+						else{
+							bombes_tab[nb_bombes] = nouvelle_bombe;
+							nb_bombes++;
+						}
+					}
+					else{
+						if (bombes_tab[0].getBoom()){
+							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+								bombes_tab[0].init(p_colone, p_line);
+						}
+						else{
+							if (bombes_tab[1].getBoom()){
+								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+									bombes_tab[1].init(p_colone, p_line);
+							}
+						}
+					}
+				}
+			}
 			else{
 				/*if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
 					jeu[p_colone][p_line] = BOMBE;
@@ -122,7 +206,36 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 			break;
 		}
 		else{
-			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone - 1][p_line] == CAISSE) break;
+			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone - 1][p_line] == CAISSE) {
+				if (jeu[p_colone][p_line - 1] == CAISSE) {
+					jeu[p_colone][p_line] = JOUEUR_BOMBE;
+					if (nb_bombes < NB_BOMBES_MAX){
+						Bombe nouvelle_bombe(p_colone, p_line);
+						if (nb_bombes == 1){
+							if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone)){
+								bombes_tab[nb_bombes] = nouvelle_bombe;
+								nb_bombes++;
+							}
+						}
+						else{
+							bombes_tab[nb_bombes] = nouvelle_bombe;
+							nb_bombes++;
+						}
+					}
+					else{
+						if (bombes_tab[0].getBoom()){
+							if (!(bombes_tab[1].getLine() == p_line && bombes_tab[1].getColone() == p_colone))
+								bombes_tab[0].init(p_colone, p_line);
+						}
+						else{
+							if (bombes_tab[1].getBoom()){
+								if (!(bombes_tab[0].getLine() == p_line && bombes_tab[0].getColone() == p_colone))
+									bombes_tab[1].init(p_colone, p_line);
+							}
+						}
+					}
+				}
+			}
 			else{
 				/*if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
 					jeu[p_colone][p_line] = BOMBE;
