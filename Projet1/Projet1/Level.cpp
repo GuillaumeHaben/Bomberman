@@ -436,9 +436,9 @@ void Level::draw(bool pause){
 		SDL_RenderCopy(renderer, vict_text, NULL, &fond);
 		NextLevel = true;
 	}
-
-	if (pause){
-		SDL_RenderCopy(renderer, pause_text, NULL, &fond);
+	else{
+		if (pause){
+			SDL_RenderCopy(renderer, pause_text, NULL, &fond);
+		}
 	}
-	
 }

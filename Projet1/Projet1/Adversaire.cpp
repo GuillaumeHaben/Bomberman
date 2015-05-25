@@ -266,6 +266,7 @@ void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player, int l) {
 	if (recherche_chemin_recursive(jeu, chemin, 0, i, j, player)){
 		deplacement(chemin[l], jeu, player);
 	}
+	else deplacement(last_deplacement, jeu, player);
 }
 
 bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int i, int j, Joueur *player) {
@@ -274,6 +275,8 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 		return false;
 	}
 	
+	if (i < 0 || j < 0) return false;
+	if (i >= TAILLE_JEU || j >= TAILLE_JEU) return false;
 	if (jeu[i][j] == JOUEUR) {
 		return true;
 	}
@@ -337,36 +340,36 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 					if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i, j + 1, player)) {
 					chemin[taille_chemin] = DOWN;
 					return true;
-				}
-				else {
-					if (player->getColone() > j) {
-							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
-							chemin[taille_chemin] = RIGHT;
-							return true;
+					}
+					else {
+						if (player->getColone() > j) {
+								if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
+								chemin[taille_chemin] = RIGHT;
+								return true;
+							}
+							else {
+									if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
+									chemin[taille_chemin] = LEFT;
+									return true;
+								}
+							}
 						}
 						else {
 								if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
 								chemin[taille_chemin] = LEFT;
 								return true;
 							}
-						}
-					}
-					else {
-							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
-							chemin[taille_chemin] = LEFT;
-							return true;
-						}
-						else {
-								if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
-								chemin[taille_chemin] = RIGHT;
-								return true;
+							else {
+									if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
+									chemin[taille_chemin] = RIGHT;
+									return true;
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-	}
 	}
 	return false;
 }

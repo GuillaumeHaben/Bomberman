@@ -31,8 +31,8 @@ void Game::reinit(){
 	principal.setLine(1);
 	principal.init_var();
 
-	secondaire.setColone(1);
-	secondaire.setLine(1);
+	secondaire.setColone(13);
+	secondaire.setLine(13);
 	secondaire.init_var();
 
 	int dim_allouee;
@@ -43,8 +43,6 @@ void Game::reinit(){
 	for (int i = 0; i < TAILLE_JEU; i++)
 		for (int j = 0; j < TAILLE_JEU; j++)
 			jeu[i][j] = INIT;
-
-	this->init(1);
 }
 
 void Game::setPause(){
@@ -72,6 +70,7 @@ void Game::draw(){
 }
 
 void Game::init(int i) {
+	reinit();
 	l.setUpGame(i);
 	draw();
 }
