@@ -37,10 +37,14 @@ void Adversaire::init_load(){
 }
 
 int Adversaire::deplacement(int direction, Case_plateau* * jeu){
+	int i = 0;
+	switch (chemin[i]){
 
-	switch (direction){
-
-	case UP: if (p_line - 1 < 0) break;
+	case UP:
+		if (p_line - 1 < 0) {
+			i++;
+			break;
+		}
 			 else{
 				 if (jeu[p_colone][p_line - 1] == MUR || jeu[p_colone][p_line - 1] == CAISSE) break;
 				 else{
@@ -56,10 +60,14 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 					 --p_line;
 					 return 0;
 				 }
+			i++;
 			 }
 
 	case DOWN:
-		if (p_line + 1 >= TAILLE_JEU) break;
+		if (p_line + 1 >= TAILLE_JEU) {
+			i++;
+			break;
+		}
 		else{
 			if (jeu[p_colone][p_line + 1] == MUR || jeu[p_colone][p_line + 1] == CAISSE) break;
 			else{
@@ -75,10 +83,14 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 				++p_line;
 				return 0;
 			}
+			i++;
 		}
 
 	case RIGHT:
-		if (p_colone + 1 >= TAILLE_JEU) break;
+		if (p_colone + 1 >= TAILLE_JEU) {
+			i++;
+			break;
+		}
 		else{
 			if (jeu[p_colone + 1][p_line] == MUR || jeu[p_colone + 1][p_line] == CAISSE) break;
 			else{
@@ -94,10 +106,14 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 				++p_colone;
 				return 0;
 			}
+			i++;
 		}
 
 	case LEFT:
-		if (p_colone - 1 < 0) break;
+		if (p_colone - 1 < 0) {
+			i++;
+			break;
+		}
 		else{
 			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone - 1][p_line] == CAISSE) break;
 			else{
@@ -113,6 +129,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 				--p_colone;
 				return 0;
 			}
+			i++;
 		}
 	}
 	return -1;
@@ -132,7 +149,7 @@ void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player) {
 	int j = p_line;
 	if (recherche_chemin_recursive(jeu, chemin, 0, i, j, player)){
 		deplacement(chemin[0], jeu);
-	}
+}
 }
 
 bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int i, int j, Joueur *player) {
@@ -197,38 +214,38 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 				}
 				else{
 					if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i, j + 1, player)) {
-						chemin[taille_chemin] = DOWN;
-						return true;
-					}
-					else {
-						if (player->getColone() > j) {
+					chemin[taille_chemin] = DOWN;
+					return true;
+				}
+				else {
+					if (player->getColone() > j) {
 							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
-								chemin[taille_chemin] = RIGHT;
-								return true;
-							}
-							else {
-								if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
-									chemin[taille_chemin] = LEFT;
-									return true;
-								}
-							}
+							chemin[taille_chemin] = RIGHT;
+							return true;
 						}
 						else {
-							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
+								if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
 								chemin[taille_chemin] = LEFT;
 								return true;
 							}
-							else {
+						}
+					}
+					else {
+							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
+							chemin[taille_chemin] = LEFT;
+							return true;
+						}
+						else {
 								if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
-									chemin[taille_chemin] = RIGHT;
-									return true;
-								}
+								chemin[taille_chemin] = RIGHT;
+								return true;
 							}
 						}
 					}
 				}
 			}
 		}
+	}
 	}
 	return false;
 }
