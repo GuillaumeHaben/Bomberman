@@ -24,6 +24,7 @@ Explosion::~Explosion()
 }
 
 
+
 /* Init Explosion */
 int Explosion::init(Case_plateau* * jeu){
 
@@ -38,123 +39,19 @@ int Explosion::init(Case_plateau* * jeu){
 
 	for (int i = 1; i <= puissance; i++) {
 		if (!(x + i >= TAILLE_JEU || east)){
-			switch (jeu[x + i][y]) {
-			case CAISSE: case CAISSE_EXPLOSION:
-				jeu[x + i][y] = CAISSE_EXPLOSION;
-				break;
-			case VIDE: case INIT:
-				jeu[x + i][y] = EXPLOSION;
-				break;
-			case MUR:
-				east = true;
-				break;
-			case BOMBE: case BOMBE_EXPLOSION:
-				jeu[x + i][y] = BOMBE_EXPLOSION;
-				break;
-			case JOUEUR_BOMBE:
-				jeu[x + i][y] = JOUEUR_BOMBE;
-				break;
-			case JOUEUR: case JOUEUR_EXPLOSION:
-				jeu[x + i][y] = JOUEUR_EXPLOSION;
-				die = true;
-				break;
-			case EXPLOSION: case EXPLOSION_EXPLOSION:
-				jeu[x + i][y] = EXPLOSION_EXPLOSION;
-				break;
-			case ADVERSAIRE: case ADVERSAIRE_EXPLOSION:
-				jeu[x + 1][y] = ADVERSAIRE_EXPLOSION;
-				break;
-			}
+			affichage_init(x + i, y, jeu, east, die);
 		}
 
 		if (!(y + i >= TAILLE_JEU || south)) {
-			switch (jeu[x][y + i]) {
-			case CAISSE: case CAISSE_EXPLOSION:
-				jeu[x][y + i] = CAISSE_EXPLOSION;
-				break;
-			case VIDE: case INIT:
-				jeu[x][y + i] = EXPLOSION;
-				break;
-			case MUR:
-				south = true;
-				break;
-			case BOMBE: case BOMBE_EXPLOSION:
-				jeu[x][y + i] = BOMBE_EXPLOSION;
-				break;
-			case JOUEUR_BOMBE:
-				jeu[x][y + i] = JOUEUR_BOMBE;
-				break;
-			case JOUEUR: case JOUEUR_EXPLOSION:
-				jeu[x][y + i] = JOUEUR_EXPLOSION;
-				die = true;
-				break;
-			case EXPLOSION: case EXPLOSION_EXPLOSION:
-				jeu[x][y + i] = EXPLOSION_EXPLOSION;
-				break;
-			case ADVERSAIRE: case ADVERSAIRE_EXPLOSION:
-				jeu[x][y + i] = ADVERSAIRE_EXPLOSION;
-				break;
-			}
+			affichage_init(x, y + i, jeu, south, die);
 		}
 
 		if (!(x - i < 0 || west)) {
-			switch (jeu[x - i][y]) {
-			case CAISSE: case CAISSE_EXPLOSION:
-				jeu[x - i][y] = CAISSE_EXPLOSION;
-				break;
-			case VIDE: case INIT:
-				jeu[x - i][y] = EXPLOSION;
-				break;
-			case MUR:
-				west = true;
-				break;
-			case BOMBE: case BOMBE_EXPLOSION:
-				jeu[x - i][y] = BOMBE_EXPLOSION;
-				break;
-			case JOUEUR_BOMBE:
-				jeu[x - i][y] = JOUEUR_BOMBE;
-				break;
-			case JOUEUR: case JOUEUR_EXPLOSION:
-				jeu[x - i][y] = JOUEUR_EXPLOSION;
-				die = true;
-				break;
-			case EXPLOSION: case EXPLOSION_EXPLOSION:
-				jeu[x - i][y] = EXPLOSION_EXPLOSION;
-				break;
-			case ADVERSAIRE: case ADVERSAIRE_EXPLOSION:
-				jeu[x - i][y] = ADVERSAIRE_EXPLOSION;
-				break;
-			}
+			affichage_init(x - i, y, jeu, west, die);
 		}
 
 		if (!(y - i < 0 || north)){
-			switch (jeu[x][y - i]) {
-			case CAISSE: case CAISSE_EXPLOSION:
-				jeu[x][y - i] = CAISSE_EXPLOSION;
-				break;
-			case VIDE: case INIT:
-				jeu[x][y - i] = EXPLOSION;
-				break;
-			case MUR:
-				north = true;
-				break;
-			case BOMBE: case BOMBE_EXPLOSION:
-				jeu[x][y - i] = BOMBE_EXPLOSION;
-				break;
-			case JOUEUR_BOMBE:
-				jeu[x][y - i] = JOUEUR_BOMBE;
-				break;
-			case JOUEUR: case JOUEUR_EXPLOSION:
-				jeu[x][y - i] = JOUEUR_EXPLOSION;
-				die = true;
-				break;
-			case EXPLOSION: case EXPLOSION_EXPLOSION:
-				jeu[x][y - i] = EXPLOSION_EXPLOSION;
-				break;
-			case ADVERSAIRE: case ADVERSAIRE_EXPLOSION:
-				jeu[x][y - i] = ADVERSAIRE_EXPLOSION;
-				break;
-			}
+			affichage_init(x, y - i, jeu, north, die);
 		}
 	}return die;
 }
@@ -172,130 +69,91 @@ void Explosion::end(Case_plateau* * jeu){
 
 	for (int i = 1; i <= puissance; i++) {
 		if (!(x + i >= TAILLE_JEU || east)) {
-			switch (jeu[x + i][y]) {
-			case EXPLOSION: case CAISSE_EXPLOSION:
-				jeu[x + i][y] = VIDE;
-				break;
-			case BOMBE_EXPLOSION:
-				jeu[x + i][y] = BOMBE;
-				break;
-			case JOUEUR_EXPLOSION:
-				jeu[x + i][y] = JOUEUR;
-				break;
-			case EXPLOSION_EXPLOSION:
-				jeu[x + i][y] = EXPLOSION;
-				break;
-			case MUR:
-				east = true;
-				break;
-			case JOUEUR_BOMBE:
-				jeu[x + i][y] = JOUEUR_BOMBE;
-				break;
-			case ADVERSAIRE_EXPLOSION: 
-				jeu[x + i][y] = ADVERSAIRE;
-				break;
-			default:
-				jeu[x + i][y] = VIDE;
-				break;
-			}
+			affichage_end(x + i, y, jeu, east);
 		}
 
 		if (!(y + i >= TAILLE_JEU || south)) {
-			switch (jeu[x][y + i]) {
-			case EXPLOSION: case CAISSE_EXPLOSION:
-				jeu[x][y + i] = VIDE;
-				break;
-			case BOMBE_EXPLOSION:
-				jeu[x][y + i] = BOMBE;
-				break;
-			case JOUEUR_EXPLOSION:
-				jeu[x][y + i] = JOUEUR;
-				break;
-			case EXPLOSION_EXPLOSION:
-				jeu[x][y + i] = EXPLOSION;
-				break;
-			case MUR:
-				south = true;
-				break;
-			case JOUEUR_BOMBE:
-				jeu[x][y + i] = JOUEUR_BOMBE;
-				break;
-			case ADVERSAIRE_EXPLOSION:
-				jeu[x][y + i] = ADVERSAIRE;
-				break;
-			default:
-				jeu[x][y + i] = VIDE;
-				break;
-			}
+			affichage_end(x, y + i, jeu, south);
 		}
 
 		if (!(x - i < 0 || west)) {
-			switch (jeu[x - i][y]) {
-			case EXPLOSION: case CAISSE_EXPLOSION:
-				jeu[x - i][y] = VIDE;
-				break;
-			case BOMBE_EXPLOSION:
-				jeu[x - i][y] = BOMBE;
-				break;
-			case JOUEUR_EXPLOSION:
-				jeu[x - i][y] = JOUEUR;
-				break;
-			case EXPLOSION_EXPLOSION:
-				jeu[x - i][y] = EXPLOSION;
-				break;
-			case MUR:
-				west = true;
-				break;
-			case JOUEUR_BOMBE:
-				jeu[x - i][y] = JOUEUR_BOMBE;
-				break;
-			case ADVERSAIRE_EXPLOSION:
-				jeu[x - i][y] = ADVERSAIRE;
-				break;
-			default:
-				jeu[x - i][y] = VIDE;
-				break;
-			}
+			affichage_end(x - i, y, jeu, west);
 		}
 
 		if (!(y - i < 0 || north)){
-			switch (jeu[x][y - i]) {
-			case EXPLOSION: case CAISSE_EXPLOSION:
-				jeu[x][y - i] = VIDE;
-				break;
-			case BOMBE_EXPLOSION:
-				jeu[x][y - i] = BOMBE;
-				break;
-			case JOUEUR_EXPLOSION:
-				jeu[x][y - i] = JOUEUR;
-				break;
-			case EXPLOSION_EXPLOSION:
-				jeu[x][y - i] = EXPLOSION;
-				break;
-			case MUR:
-				north = true;
-				break;
-			case JOUEUR_BOMBE:
-				jeu[x][y - i] = JOUEUR_BOMBE;
-				break;
-			case ADVERSAIRE_EXPLOSION:
-				jeu[x][y - i] = ADVERSAIRE;
-				break;
-			default:
-				jeu[x][y - i] = VIDE;
-				break;
-			}
+			affichage_end(x, y - i, jeu, north);
 		}
 	}
 
 	switch (jeu[x][y]) {
-	case JOUEUR_BOMBE:
-		jeu[x][y] = JOUEUR;
+		case JOUEUR_BOMBE:
+			jeu[x][y] = JOUEUR;
+			break;
+		case BOMBE_EXPLOSION:
+			jeu[x][y] = EXPLOSION;
+			break;
+		default:
+			jeu[x][y] = VIDE;
+	}
+}
+
+void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool axe, bool die) {
+	switch (jeu[x][y]) {
+	case CAISSE: case CAISSE_EXPLOSION:
+		jeu[x][y] = CAISSE_EXPLOSION;
 		break;
-	case BOMBE_EXPLOSION:
+	case VIDE: case INIT:
 		jeu[x][y] = EXPLOSION;
+		break;
+	case MUR:
+		axe = true;
+		break;
+	case BOMBE: case BOMBE_EXPLOSION:
+		jeu[x][y] = BOMBE_EXPLOSION;
+		break;
+	case JOUEUR_BOMBE:
+		jeu[x][y] = JOUEUR_BOMBE;
+		break;
+	case JOUEUR: case JOUEUR_EXPLOSION:
+		jeu[x][y] = JOUEUR_EXPLOSION;
+		die = true;
+		break;
+	case EXPLOSION: case EXPLOSION_EXPLOSION:
+		jeu[x][y] = EXPLOSION_EXPLOSION;
+		break;
+	case ADVERSAIRE: case ADVERSAIRE_EXPLOSION:
+		jeu[x][y] = ADVERSAIRE_EXPLOSION;
 		break;
 	default:
 		jeu[x][y] = VIDE;
+	}
+}
+
+void Explosion::affichage_end(int x, int y, Case_plateau* * jeu, bool axe) {
+	switch (jeu[x][y]) {
+	case EXPLOSION: case CAISSE_EXPLOSION:
+		jeu[x][y] = VIDE;
+		break;
+	case BOMBE_EXPLOSION:
+		jeu[x][y] = BOMBE;
+		break;
+	case JOUEUR_EXPLOSION:
+		jeu[x][y] = JOUEUR;
+		break;
+	case EXPLOSION_EXPLOSION:
+		jeu[x][y] = EXPLOSION;
+		break;
+	case MUR:
+		axe = true;
+		break;
+	case JOUEUR_BOMBE:
+		jeu[x][y] = JOUEUR_BOMBE;
+		break;
+	case ADVERSAIRE_EXPLOSION:
+		jeu[x][y] = ADVERSAIRE;
+		break;
+	default:
+		jeu[x][y] = VIDE;
+		break;
 	}
 }
