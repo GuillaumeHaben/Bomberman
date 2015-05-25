@@ -3,6 +3,7 @@
 Game::Game(){
 	pause = false;
 	end = false;
+	int i = 1;
 
 	principal = *new Joueur(1, 1);
 	secondaire = *new Adversaire(13, 13);
@@ -18,7 +19,7 @@ Game::Game(){
 			jeu[i][j] = INIT;
 
 	l = Level(this->jeu, this->getPrincipal(), this->getSecondaire());
-	this->init(1);
+	this->init(i);
 }
 
 Game::~Game(){
