@@ -8,6 +8,7 @@
 
 #include "Case.h"
 #include "Joueur.h"
+#include "Adversaire.h"
 
 extern SDL_Renderer * renderer;
 extern bool IsDead;
@@ -17,7 +18,7 @@ class Level {
 public:
 
 	Level();
-	Level(Case_plateau** jeu, Joueur* J);
+	Level(Case_plateau** jeu, Joueur* J, Adversaire* A);
 	~Level();
 
 	void setUpGame(int niveau);
@@ -30,6 +31,7 @@ private:
 	int niveau;
 	Case_plateau* * jeu;
 	Joueur* prncp;
+	Adversaire* scnd;
 
 	SDL_Surface* img[3];
 
