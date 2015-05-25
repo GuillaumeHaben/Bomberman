@@ -274,6 +274,8 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 		return false;
 	}
 	
+	if (i < 0 || j < 0) return false;
+	if (i >= TAILLE_JEU || j >= TAILLE_JEU) return false;
 	if (jeu[i][j] == JOUEUR) {
 		return true;
 	}
