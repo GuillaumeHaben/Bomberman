@@ -201,6 +201,15 @@ void Level::lvl2() {
 	jeu[10][2] = MUR;
 	jeu[12][10] = MUR;
 
+	// Block
+	for (int i = 8; i < 10; i++){
+		jeu[i][1] = CAISSE;
+	}
+	for (int i = 5; i < 7; i++){
+		jeu[i][13] = CAISSE;
+	}
+	generate(90);
+
 	// Empty cases
 	for (int i = 1; i < 4; i++) {
 		jeu[i][1] = VIDE;
@@ -210,15 +219,6 @@ void Level::lvl2() {
 		jeu[i][13] = VIDE;
 		jeu[13][i] = VIDE;
 	}
-
-	// Block
-	for (int i = 8; i < 10; i++){
-		jeu[i][1] = CAISSE;
-	}
-	for (int i = 5; i < 7; i++){
-		jeu[i][13] = CAISSE;
-	}
-	generate(90);
 
 	// Personnages
 	jeu[1][1] = JOUEUR;
@@ -249,6 +249,15 @@ void Level::lvl3() {
 		}
 	}
 
+	// Block
+	for (int i = 8; i < 10; i++){
+		jeu[i][1] = CAISSE;
+	}
+	for (int i = 5; i < 7; i++){
+		jeu[i][13] = CAISSE;
+	}
+	generate(90);
+
 	// Empty cases
 	for (int i = 1; i < 4; i++) {
 		jeu[i][1] = VIDE;
@@ -258,15 +267,6 @@ void Level::lvl3() {
 		jeu[i][13] = VIDE;
 		jeu[13][i] = VIDE;
 	}
-
-	// Block
-	for (int i = 8; i < 10; i++){
-		jeu[i][1] = CAISSE;
-	}
-	for (int i = 5; i < 7; i++){
-		jeu[i][13] = CAISSE;
-	}
-	generate(90);
 
 	// Personnages
 	jeu[1][1] = JOUEUR;
