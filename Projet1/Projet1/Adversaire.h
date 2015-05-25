@@ -24,7 +24,7 @@ public:
 	void init_load();
 	int deplacement(int direction, Case_plateau* * jeu, Joueur *player);
 	void draw();
-	void recherche_chemin(Case_plateau* * jeu, Joueur *player);
+	void recherche_chemin(Case_plateau* * jeu, Joueur *player, int i);
 	bool recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int pos_x, int pos_y, Joueur *player);
 	bool die();
 	void setDie();

@@ -25,6 +25,7 @@ int main( int argc, char* args[] )
 	bool quit = false;
 	bool IsMenu = true;
 	bool mute = false;
+	bool nonFait = false;
 
 	Time ennemi_temps;
 
@@ -126,10 +127,17 @@ int main( int argc, char* args[] )
 				}
 				else{
 					// Move IA
-					if (ennemi_temps.getTime() > 2000){
+					if (ennemi_temps.getTime() > 4000){
 						ennemi_temps.stop();
-						adv->recherche_chemin(plateau.jeu, prncp);
+						adv->recherche_chemin(plateau.jeu, prncp, 0);
 						ennemi_temps.restart();
+						nonFait = false;
+					}
+					else{
+						if (ennemi_temps.getTime() < 4000 && ennemi_temps.getTime() > 2000 && !nonFait){
+							adv->recherche_chemin(plateau.jeu, prncp, 1);
+							nonFait = true;
+						}
 					}
 					plateau.draw();
 				}
