@@ -312,16 +312,17 @@ void Level::draw(bool pause){
 				prncp->draw();
 				break;
 
-			case BOMBE: case JOUEUR_BOMBE: case BOMBE_EXPLOSION:
+			case BOMBE: case JOUEUR_BOMBE: case BOMBE_EXPLOSION: case ADVERSAIRE_BOMBE:
 				Bombe* bombes;
 				bombes = prncp->getBombes_tab();
-				for (int i = 0; i < NB_BOMBES_MAX; i++) {
+				bombes[2] = ennemi->getBombes_tab[0];
+				bombes[3] = ennemi->getBombes_tab[1];
+
+				for (int i = 0; i < 4; i++) {
 					if (&bombes[i] != NULL) {
 
-						// Check if the bombe should be active or not
-						if (pause){
+						if (pause)
 							bombes[i].put_off();
-						}
 						else{
 							bombes[i].put_on();
 							bombes[i].event(jeu);
@@ -380,6 +381,7 @@ void Level::draw(bool pause){
 				break;
 
 			case ADVERSAIRE_EXPLOSION:
+				ennemi->draw();
 				ennemi->setDie();
 				break;
 			}

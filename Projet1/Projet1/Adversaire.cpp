@@ -243,11 +243,11 @@ void Adversaire::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
 }
 
-void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player, int i) {
+void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player, int l) {
 	int i = p_colone;
 	int j = p_line;
 	if (recherche_chemin_recursive(jeu, chemin, 0, i, j, player)){
-		deplacement(chemin[i], jeu, player);
+		deplacement(chemin[l], jeu, player);
 	}
 }
 
