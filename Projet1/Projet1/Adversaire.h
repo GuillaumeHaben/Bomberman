@@ -25,19 +25,19 @@ public:
 	int deplacement(int direction, Case_plateau* * jeu, Joueur *player);
 	void draw();
 	void recherche_chemin(Case_plateau* * jeu, Joueur *player, int i);
-	bool recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int pos_x, int pos_y, Joueur *player);
+	bool recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int pos_x, int pos_y, Joueur *player, int direction);
 	bool die();
 	void setDie();
 
 private:
 	int nb_bombes, nb_bombes_max;
-	int last_deplacement;
+	int last_deplacement, last_dep;
 	SDL_Texture* texture;
 	SDL_Rect dest;
 	Bombe bombes_tab[2];
 	int* chemin;
 	int taille_chemin;
-	bool mort;
+	bool mort, done;
 };
 
 #endif

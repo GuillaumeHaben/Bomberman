@@ -379,12 +379,6 @@ void Level::draw(bool pause){
 									Mix_PlayChannel(2, explosion, 0);
 									musique = true;
 								}
-								if (bombes_adv[i].getPerdreVie()){
-									if (i == 0 || i == 1){
-										prncp->die();
-										bombes_adv[i].setPerdreVie();
-									}
-								}
 							}
 							if (bombes_adv[i].getExplosee() == 3) {
 								bombes_adv[i].setLine(-1);
