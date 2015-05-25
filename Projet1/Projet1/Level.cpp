@@ -24,6 +24,10 @@ Level::Level(Case_plateau* * plat, Joueur* J, Adversaire* A) {
 	flamme = SDL_CreateTextureFromSurface(renderer, background3);
 	SDL_FreeSurface(background3);
 
+	SDL_Surface* background4 = IMG_Load("Sprite/victoire.png");
+	vict_text = SDL_CreateTextureFromSurface(renderer, background4);
+	SDL_FreeSurface(background4);
+
 	img[0] = SDL_LoadBMP("Sprite/caisse.bmp");
 	img[1] = SDL_LoadBMP("Sprite/mur.bmp");
 
@@ -40,14 +44,17 @@ Level::~Level(){
 
 }
 
+int Level::getLevel(){
+	return niveau;
+}
+
 /* To setup the game */
 void Level::setUpGame(int niveau) {
 	this->niveau = niveau;
-	
 
 	switch (niveau) {
 	case 1:
-		lvl3();		
+		lvl1();		
 		break;
 	case 2:
 		lvl2();
@@ -79,11 +86,10 @@ void Level::generate(int nombreCaisses) {
 	for (int l = 0; l < TAILLE_JEU; l++) {
 		for (int m = 0; m < TAILLE_JEU; m++) {
 			if (jeu[l][m] != MUR && jeu[l][m] != CAISSE && jeu[l][m] != JOUEUR) {
-				jeu[i][j] = VIDE;
+				jeu[l][m] = VIDE;
 			}
 		}
 	}
-
 }
 
 /* Build the first level */
@@ -133,19 +139,21 @@ void Level::lvl1() {
 	jeu[8][7] = MUR;
 	jeu[TAILLE_JEU - 2][10] = MUR;
 	jeu[1][4] = MUR;
+	jeu[7][2] = VIDE;
+	jeu[7][12] = VIDE;
 
 	// Empty cases
-	for (int i = 2; i < 4; i++) {
+	for (int i = 1; i < 4; i++) {
 		jeu[i][1] = VIDE;
 		jeu[1][i] = VIDE;
 	}
-	for (int i = 11; i <= 13; i++){
+	for (int i = 11; i < 14; i++){
 		jeu[i][13] = VIDE;
 		jeu[13][i] = VIDE;
 	} 
 
 	// Block
-	generate(80);
+	generate(100);
 
 	jeu[1][1] = JOUEUR;
 	jeu[13][13] = ADVERSAIRE;
@@ -202,7 +210,7 @@ void Level::lvl2() {
 	jeu[12][10] = MUR;
 
 	// Empty cases
-	for (int i = 2; i < 4; i++) {
+	for (int i = 1; i < 4; i++) {
 		jeu[i][1] = VIDE;
 		jeu[1][i] = VIDE;
 	}
@@ -218,7 +226,7 @@ void Level::lvl2() {
 	for (int i = 5; i < 7; i++){
 		jeu[i][13] = CAISSE;
 	}
-	generate(80);
+	generate(90);
 
 	// Personnages
 	jeu[1][1] = JOUEUR;
@@ -250,7 +258,7 @@ void Level::lvl3() {
 	}
 
 	// Empty cases
-	for (int i = 2; i < 4; i++) {
+	for (int i = 1; i < 4; i++) {
 		jeu[i][1] = VIDE;
 		jeu[1][i] = VIDE;
 	}
@@ -266,7 +274,7 @@ void Level::lvl3() {
 	for (int i = 5; i < 7; i++){
 		jeu[i][13] = CAISSE;
 	}
-	generate(80);
+	generate(90);
 
 	// Personnages
 	jeu[1][1] = JOUEUR;
@@ -369,6 +377,11 @@ void Level::draw(bool pause){
 
 			case ADVERSAIRE:
 				ennemi->draw();
+				break;
+
+			case ADVERSAIRE_EXPLOSION:
+				ennemi->setDie();
+				break;
 			}
 		}
 	}
@@ -378,6 +391,11 @@ void Level::draw(bool pause){
 		SDL_RenderCopy(renderer, over_text, NULL, &fond);
 		IsDead = true;
 	}
+	if (ennemi->die()){
+		SDL_RenderCopy(renderer, vict_text, NULL, &fond);
+		NextLevel = true;
+	}
+
 	if (pause){
 		SDL_RenderCopy(renderer, pause_text, NULL, &fond);
 	}
