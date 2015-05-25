@@ -16,7 +16,7 @@ Adversaire::Adversaire(int pos_x, int pos_y) : Personnage(pos_x, pos_y) {
 
 /* Destructeur */
 Adversaire::~Adversaire(){
-
+	SDL_DestroyTexture(texture);
 }
 
 Bombe* Adversaire::getBombes_tab() {
@@ -26,13 +26,12 @@ Bombe* Adversaire::getBombes_tab() {
 void Adversaire::init_var(){
 	nb_bombes = 0;
 	nb_bombes_max = NB_BOMBES_MAX;
+	dest = { 35*13, 35*13, 35, 35 };
 }
 
 void Adversaire::init_load(){
 	SDL_Surface* background = IMG_Load("Sprite/advers.png");
-	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 0, 0, 255));
 	texture = SDL_CreateTextureFromSurface(renderer, background);
-	dest = { 35, 35, 35, 35 };
 	SDL_FreeSurface(background);
 }
 
@@ -125,7 +124,7 @@ void Adversaire::event(Case_plateau* * jeu){
 
 void Adversaire::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
-}
+			}
 
 void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player) {
 	chemin = (int *) malloc(sizeof(int));

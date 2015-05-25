@@ -5,6 +5,7 @@ Game::Game(){
 	end = false;
 
 	principal = *new Joueur(1, 1);
+	secondaire = *new Adversaire(13, 13);
 	jeu = new Case_plateau *[TAILLE_JEU];
 
 	int dim_allouee;
@@ -16,7 +17,7 @@ Game::Game(){
 		for (int j = 0; j < TAILLE_JEU; j++)
 			jeu[i][j] = INIT;
 
-	l = Level(this->jeu, this->getPrincipal());
+	l = Level(this->jeu, this->getPrincipal(), this->getSecondaire());
 	this->init(1);
 }
 
@@ -51,6 +52,10 @@ bool Game::getPause(){
 
 Joueur* Game::getPrincipal(){
 	return &principal;
+}
+
+Adversaire* Game::getSecondaire(){
+	return &secondaire;
 }
 
 Level Game::getLevel(){

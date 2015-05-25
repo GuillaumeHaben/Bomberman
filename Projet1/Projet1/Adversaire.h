@@ -2,6 +2,7 @@
 #define ADVERSAIRE_H
 
 #include "Case.h"
+#include <Time.h>
 #include "Personnage.h"
 #include "Bombe.h"
 #include "Joueur.h"
@@ -17,6 +18,7 @@ public:
 	~Adversaire();
 
 	Bombe* getBombes_tab();
+	void dim_Nb_Bombes();
 
 	void init_var();
 	void init_load();
