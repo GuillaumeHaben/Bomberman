@@ -36,29 +36,37 @@ void Adversaire::init_load(){
 }
 
 int Adversaire::deplacement(int direction, Case_plateau* * jeu){
+	int i = 0;
+	switch (chemin[i]){
 
-	switch (direction){
+	case UP:
+		if (p_line - 1 < 0) {
+			i++;
+			break;
+		}
+		else{
+			if (jeu[p_colone][p_line - 1] == MUR || jeu[p_colone][p_line - 1] == CAISSE) break;
+			else{
+				if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
+					jeu[p_colone][p_line] = BOMBE;
+				}
+				else jeu[p_colone][p_line] = VIDE;
 
-	case UP: if (p_line - 1 < 0) break;
-			 else{
-				 if (jeu[p_colone][p_line - 1] == MUR || jeu[p_colone][p_line - 1] == CAISSE) break;
-				 else{
-					 if (jeu[p_colone][p_line] == JOUEUR_BOMBE){
-						 jeu[p_colone][p_line] = BOMBE;
-					 }
-					 else jeu[p_colone][p_line] = VIDE;
-
-					 if (jeu[p_colone][p_line - 1] == BOMBE){
-						 jeu[p_colone][p_line - 1] = JOUEUR_BOMBE;
-					 }
-					 else jeu[p_colone][p_line - 1] = JOUEUR;
-					 --p_line;
-					 return 0;
-				 }
-			 }
+				if (jeu[p_colone][p_line - 1] == BOMBE){
+					jeu[p_colone][p_line - 1] = JOUEUR_BOMBE;
+				}
+				else jeu[p_colone][p_line - 1] = JOUEUR;
+				--p_line;
+				return 0;
+			}
+			i++;
+		}
 
 	case DOWN:
-		if (p_line + 1 >= TAILLE_JEU) break;
+		if (p_line + 1 >= TAILLE_JEU) {
+			i++;
+			break;
+		}
 		else{
 			if (jeu[p_colone][p_line + 1] == MUR || jeu[p_colone][p_line + 1] == CAISSE) break;
 			else{
@@ -74,10 +82,14 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 				++p_line;
 				return 0;
 			}
+			i++;
 		}
 
 	case RIGHT:
-		if (p_colone + 1 >= TAILLE_JEU) break;
+		if (p_colone + 1 >= TAILLE_JEU) {
+			i++;
+			break;
+		}
 		else{
 			if (jeu[p_colone + 1][p_line] == MUR || jeu[p_colone + 1][p_line] == CAISSE) break;
 			else{
@@ -93,10 +105,14 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 				++p_colone;
 				return 0;
 			}
+			i++;
 		}
 
 	case LEFT:
-		if (p_colone - 1 < 0) break;
+		if (p_colone - 1 < 0) {
+			i++;
+			break;
+		}
 		else{
 			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone - 1][p_line] == CAISSE) break;
 			else{
@@ -112,6 +128,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 				--p_colone;
 				return 0;
 			}
+			i++;
 		}
 
 	}
