@@ -82,7 +82,7 @@ void Level::generate(int nombreCaisses) {
 			k++;
 		}
 	}
-}
+	}
 
 /* Build the first level */
 void Level::lvl1() {
@@ -410,7 +410,7 @@ void Level::draw(bool pause){
 			case ADVERSAIRE_EXPLOSION:
 				if (j != 12 && k != 13){
 					ennemi->draw();
-					ennemi->setDie();
+				ennemi->setDie();
 				}
 				break;
 			}
