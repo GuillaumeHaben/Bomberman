@@ -24,7 +24,6 @@ Explosion::~Explosion()
 }
 
 
-
 /* Init Explosion */
 int Explosion::init(Case_plateau* * jeu){
 
@@ -102,7 +101,7 @@ void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool* axe, boo
 	case CAISSE: case CAISSE_EXPLOSION:
 		jeu[x][y] = CAISSE_EXPLOSION;
 		break;
-	case VIDE: case INIT:
+	case VIDE:
 		jeu[x][y] = EXPLOSION;
 		break;
 	case MUR:
@@ -127,7 +126,6 @@ void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool* axe, boo
 	default:
 		jeu[x][y] = VIDE;
 		break;
-		
 	}
 }
 

@@ -93,7 +93,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 			}
 			else{
 				p_line--;
-				//jeu[p_colone][p_line+1] = ADVERSAIRE;
+				jeu[p_colone][p_line] = ADVERSAIRE;
 				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 				last_deplacement = DOWN;
@@ -147,7 +147,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 			}
 			else{
 				p_line++;
-				//jeu[p_colone][p_line] = ADVERSAIRE;
+				jeu[p_colone][p_line] = ADVERSAIRE;
 				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 				last_deplacement = UP;
@@ -201,7 +201,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 			}
 			else{
 				p_colone++;
-				//jeu[p_colone][p_line] = ADVERSAIRE;
+				jeu[p_colone][p_line] = ADVERSAIRE;
 				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 				last_deplacement = LEFT;
@@ -256,7 +256,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 			}
 			else{
 				p_colone--;
-				//jeu[p_colone][p_line] = ADVERSAIRE;
+				jeu[p_colone][p_line] = ADVERSAIRE;
 				dest.x = p_colone * 35;
 				dest.y = p_line * 35;
 				last_deplacement = RIGHT;
