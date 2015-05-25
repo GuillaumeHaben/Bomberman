@@ -30,7 +30,6 @@ void Adversaire::init_var(){
 	p_colone = 13;
 	p_line = 13;
 	mort = false;
-	done = false;
 	last_dep = LEFT;
 }
 
