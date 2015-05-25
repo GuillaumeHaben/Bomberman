@@ -29,7 +29,7 @@ void Adversaire::init_var(){
 }
 
 void Adversaire::init_load(){
-	SDL_Surface* background = IMG_Load("Sprite/bombe_2.png");
+	SDL_Surface* background = IMG_Load("Sprite/advers.png");
 	SDL_SetColorKey(background, SDL_TRUE, SDL_MapRGB(background->format, 0, 0, 255));
 	texture = SDL_CreateTextureFromSurface(renderer, background);
 	dest = { 35, 35, 35, 35 };
@@ -121,53 +121,92 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 
 void Adversaire::event(Case_plateau* * jeu){
 
-	if (evn.type == SDL_KEYDOWN){
-
-		switch (evn.key.keysym.sym)
-		{
-		case SDLK_UP:
-			if (this->deplacement(UP, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
-
-		case SDLK_DOWN:
-			if (this->deplacement(DOWN, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
-
-		case SDLK_LEFT:
-			if (this->deplacement(LEFT, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
-
-		case SDLK_RIGHT:
-			if (this->deplacement(RIGHT, jeu) != -1){
-				dest.x = p_colone * 35;
-				dest.y = p_line * 35;
-			}
-			break;
-
-		case SDLK_SPACE:
-			if (nb_bombes < nb_bombes_max) {
-				jeu[p_colone][p_line] = JOUEUR_BOMBE;
-				Bombe nouvelle_bombe(p_colone, p_line);
-				bombes_tab[nb_bombes] = nouvelle_bombe;
-				nb_bombes++;
-			}
-			break;
-
-		default:
-			break;
-		}
-	}
 }
 
 void Adversaire::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
+}
+
+void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player) {
+	chemin = (int *) malloc(sizeof(int));
+	taille_chemin = 0;
+	int i = p_colone;
+	int j = p_line;
+	recherche_chemin_recursive(jeu, chemin, taille_chemin, i, j, player);
+}
+
+bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int i, int j, Joueur *player) {
+	if (jeu[i][j] == JOUEUR) {
+		return true;
+	}
+	else {
+		if (jeu[i][j] == MUR || jeu[i][j] == BOMBE) return false;
+		else {
+			if (player->getLine() >= j) {
+				if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i, j - 1, player)) {
+					chemin[taille_chemin] = UP;
+					return true;
+				}
+				else {
+					if (player->getColone() <= i) {
+						if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i - 1, j, player)) {
+							chemin[taille_chemin] = LEFT;
+							return true;
+						}
+						else {
+							if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i + 1, j, player)) {
+								chemin[taille_chemin] = RIGHT;
+								return true;
+							}
+						}
+					}
+					else {
+						if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i + 1, j, player)) {
+							chemin[taille_chemin] = RIGHT;
+							return true;
+						}
+						else {
+							if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i - 1, j, player)) {
+								chemin[taille_chemin] = LEFT;
+								return true;
+							}
+						}
+					}
+				}
+			}
+			else { //x < i
+				if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i, j + 1, player)) {
+					chemin[taille_chemin] = DOWN;
+					return true;
+				}
+				else {
+					if (player->getColone() > j) {
+						if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i + 1, j, player)) {
+							chemin[taille_chemin] = RIGHT;
+							return true;
+						}
+						else {
+							if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i - 1, j, player)) {
+								chemin[taille_chemin] = LEFT;
+								return true;
+							}
+						}
+					}
+					else {
+						if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i - 1, j, player)) {
+							chemin[taille_chemin] = LEFT;
+							return true;
+						}
+						else {
+							if (recherche_chemin_recursive(jeu, chemin, taille_chemin++, i + 1, j, player)) {
+								chemin[taille_chemin] = RIGHT;
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return false;
 }
