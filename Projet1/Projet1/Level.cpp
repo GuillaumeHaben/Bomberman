@@ -214,7 +214,55 @@ void Level::lvl2() {
 	jeu[13][13] = ADVERSAIRE;
 
 	// Chargement du sprite
-	SDL_Surface * background = SDL_LoadBMP("Sprite/lvl1.bmp");
+	SDL_Surface * background = SDL_LoadBMP("Sprite/lvl2.bmp");
+	niveaux = SDL_CreateTextureFromSurface(renderer, background);
+	SDL_FreeSurface(background);
+}
+
+/* Build the third level */
+void Level::lvl3() {
+
+	// Walls
+	for (int i = 0; i < TAILLE_JEU; i++) {
+		jeu[i][0] = MUR;
+		jeu[i][TAILLE_JEU - 1] = MUR;
+	}
+	for (int j = 0; j < TAILLE_JEU; j++) {
+		jeu[0][j] = MUR;
+		jeu[TAILLE_JEU - 1][j] = MUR;
+	}
+	
+	for (int i = 2; i < 13; i += 2){
+		for (int j = 2; j < 13; j += 2){
+			jeu[i][j] = MUR;
+		}
+	}
+
+	// Empty cases
+	for (int i = 2; i < 4; i++) {
+		jeu[i][1] = VIDE;
+		jeu[1][i] = VIDE;
+	}
+	for (int i = 11; i < 14; i++){
+		jeu[i][13] = VIDE;
+		jeu[13][i] = VIDE;
+	}
+
+	// Block
+	for (int i = 8; i < 10; i++){
+		jeu[i][1] = CAISSE;
+	}
+	for (int i = 5; i < 7; i++){
+		jeu[i][13] = CAISSE;
+	}
+	generate(80);
+
+	// Personnages
+	jeu[1][1] = JOUEUR;
+	jeu[13][13] = ADVERSAIRE;
+
+	// Chargement du sprite
+	SDL_Surface * background = SDL_LoadBMP("Sprite/lvl3.bmp");
 	niveaux = SDL_CreateTextureFromSurface(renderer, background);
 	SDL_FreeSurface(background);
 }

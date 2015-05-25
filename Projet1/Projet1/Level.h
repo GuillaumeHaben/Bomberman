@@ -24,6 +24,7 @@ public:
 	void setUpGame(int niveau);
 	void lvl1();
 	void lvl2();
+	void lvl3();
 	void generate(int nombreCaisses);
 	void draw(bool b);
 
