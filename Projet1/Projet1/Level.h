@@ -12,6 +12,7 @@
 
 extern SDL_Renderer * renderer;
 extern bool IsDead;
+extern bool NextLevel;
 
 class Level {
 
@@ -27,6 +28,7 @@ public:
 	void lvl3();
 	void generate(int nombreCaisses);
 	void draw(bool b);
+	int getLevel();
 
 private:
 	int niveau;
@@ -42,6 +44,7 @@ private:
 	SDL_Texture* caisse;
 	SDL_Texture* pause_text;
 	SDL_Texture* over_text;
+	SDL_Texture* vict_text;
 
 	SDL_Rect fond;
 	bool musique = false;

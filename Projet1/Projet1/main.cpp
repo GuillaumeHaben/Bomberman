@@ -2,7 +2,6 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_rect.h>
-//#include <SDL/SDL_mixer.h>
 
 #include "Game.h"
 #include "Menu.h"
@@ -19,6 +18,7 @@ SDL_Event evn;
 SDL_Renderer* renderer = NULL;
 
 bool IsDead = false;
+bool NextLevel = false;
 
 int main( int argc, char* args[] )
 {
@@ -104,6 +104,14 @@ int main( int argc, char* args[] )
 							IsDead = false;
 							plateau.reinit();
 						}
+						if (NextLevel){
+							Mix_HaltChannel(1);
+							Mix_PlayChannel(1, musique, -1);
+							NextLevel = false;
+							if ((plateau.getLevel().getLevel() + 1) <= 3)
+								plateau.init(plateau.getLevel().getLevel() + 1);
+							else plateau.init(1);
+						}
 						break;
 					default:
 						break;
@@ -117,7 +125,8 @@ int main( int argc, char* args[] )
 					menu.draw();
 				}
 				else{
-					if (ennemi_temps.getTime() > 3000){
+					// Move IA
+					if (ennemi_temps.getTime() > 2000){
 						ennemi_temps.stop();
 						adv->recherche_chemin(plateau.jeu, prncp);
 						ennemi_temps.restart();

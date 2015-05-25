@@ -29,12 +29,21 @@ void Adversaire::init_var(){
 	chemin = (int *)malloc(sizeof(int));
 	p_colone = 13;
 	p_line = 13;
+	mort = false;
 }
 
 void Adversaire::init_load(){
 	SDL_Surface* background = IMG_Load("Sprite/advers.png");
 	texture = SDL_CreateTextureFromSurface(renderer, background);
 	SDL_FreeSurface(background);
+}
+
+bool Adversaire::die(){
+	return mort;
+}
+
+void Adversaire::setDie(){
+	mort = true;
 }
 
 int Adversaire::deplacement(int direction, Case_plateau* * jeu){
@@ -271,7 +280,7 @@ void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player) {
 
 bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int i, int j, Joueur *player) {
 	
-	if (taille_chemin > 20){
+	if (taille_chemin > 25){
 		return false;
 	}
 	

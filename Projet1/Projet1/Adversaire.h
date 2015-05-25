@@ -25,7 +25,9 @@ public:
 	int deplacement(int direction, Case_plateau* * jeu);
 	void draw();
 	void recherche_chemin(Case_plateau* * jeu, Joueur *player);
-	bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int pos_x, int pos_y, Joueur *player);
+	bool recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int pos_x, int pos_y, Joueur *player);
+	bool die();
+	void setDie();
 
 private:
 	int nb_bombes, nb_bombes_max;
@@ -34,6 +36,7 @@ private:
 	Bombe bombes_tab[2];
 	int* chemin;
 	int taille_chemin;
+	bool mort;
 };
 
 #endif
