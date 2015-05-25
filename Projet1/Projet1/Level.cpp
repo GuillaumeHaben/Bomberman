@@ -286,12 +286,12 @@ void Level::draw(bool pause){
 
 	for (int k = 0; k < TAILLE_JEU; k++){
 		for (int j = 0; j < TAILLE_JEU; j++){
-			rect.x = k * 35;
-			rect.y = j * 35;
-			rect2.x = k * 35+5;
-			rect2.y = j * 35+5;
+			rect.x = j * 35;
+			rect.y = k * 35;
+			rect2.x = j * 35+5;
+			rect2.y = k * 35+5;
 
-			switch (jeu[k][j]){
+			switch (jeu[j][k]){
 			case MUR:
 				SDL_RenderCopy(renderer, mur, NULL, &rect);
 				break;
@@ -321,7 +321,6 @@ void Level::draw(bool pause){
 
 						// Print the Bombe
 						if (rect.x == (bombes[i].getColone() * 35) && rect.y == (bombes[i].getLine() * 35)) {
-							int as = jeu[12][13];
 							bombes[i].event(jeu);
 							if (bombes[i].getExplosee() == 0) {
 								SDL_RenderCopy(renderer, bombes[i].texture[0], NULL, &rect);
@@ -360,6 +359,7 @@ void Level::draw(bool pause){
 
 						// Print the Bombe
 						if (rect.x == (bombes_adv[i].getColone() * 35) && rect.y == (bombes_adv[i].getLine() * 35)) {
+							bombes[i].event(jeu);
 							if (bombes_adv[i].getExplosee() == 0) {
 								SDL_RenderCopy(renderer, bombes_adv[i].texture[0], NULL, &rect);
 							}
@@ -381,10 +381,10 @@ void Level::draw(bool pause){
 						}
 					}
 				}
-				if (jeu[k][j] == JOUEUR_BOMBE){
+				if (jeu[j][k] == JOUEUR_BOMBE){
 					prncp->draw();
 				}
-				if (jeu[k][j] == BOMBE_EXPLOSION){
+				if (jeu[j][k] == BOMBE_EXPLOSION){
 					SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				}
 				break;

@@ -122,7 +122,7 @@ void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool* axe, boo
 		jeu[x][y] = EXPLOSION_EXPLOSION;
 		break;
 	case ADVERSAIRE: case ADVERSAIRE_EXPLOSION:
-		jeu[x][y] = ADVERSAIRE_EXPLOSION;
+		//jeu[x][y] = ADVERSAIRE_EXPLOSION;
 		break;
 	default:
 		jeu[x][y] = VIDE;
@@ -149,10 +149,10 @@ void Explosion::affichage_end(int x, int y, Case_plateau* * jeu, bool* axe) {
 		*axe = true;
 		break;
 	case JOUEUR_BOMBE:
-		jeu[x][y] = JOUEUR_BOMBE;
+		jeu[x][y] = JOUEUR;
 		break;
 	case ADVERSAIRE_EXPLOSION:
-		jeu[x][y] = ADVERSAIRE;
+		//jeu[x][y] = ADVERSAIRE;
 		break;
 	default:
 		jeu[x][y] = VIDE;
