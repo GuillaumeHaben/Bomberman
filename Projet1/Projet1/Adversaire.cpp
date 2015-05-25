@@ -23,19 +23,10 @@ Bombe* Adversaire::getBombes_tab() {
 	return bombes_tab;
 }
 
-int Adversaire::getLife() {
-	return nb_life;
-}
-
-void Adversaire::die() {
-	nb_life--;
-}
-
 void Adversaire::init_var(){
 	nb_bombes = 0;
 	nb_bombes_max = NB_BOMBES_MAX;
-	nb_life = 3;
-	dest = { 35, 35, 35, 35 };
+	dest = { 35*13, 35*13, 35, 35 };
 	dest_life = { 35, 35, 550, 450 };
 }
 
@@ -196,7 +187,6 @@ int Adversaire::direction(){
 		i = rand() % 5;
 	return i;
 }
-
 
 
 void Adversaire::draw(){

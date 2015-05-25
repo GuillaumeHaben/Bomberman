@@ -25,11 +25,9 @@ public:
 	void event(Case_plateau* * jeu);
 	void draw();
 	int direction();
-	int getLife();
-	void die();
 
 private:
-	int nb_bombes, nb_bombes_max, nb_life;
+	int nb_bombes, nb_bombes_max;
 	SDL_Texture* texture;
 	SDL_Rect dest, dest_life;
 	Bombe bombes_tab[2];

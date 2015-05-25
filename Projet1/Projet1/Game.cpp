@@ -17,7 +17,7 @@ Game::Game(){
 		for (int j = 0; j < TAILLE_JEU; j++)
 			jeu[i][j] = INIT;
 
-	l = Level(this->jeu, this->getPrincipal());
+	l = Level(this->jeu, this->getPrincipal(), this->getSecondaire());
 	this->init(1);
 }
 
