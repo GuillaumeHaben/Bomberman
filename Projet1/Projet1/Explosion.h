@@ -15,8 +15,8 @@ public:
 	int Explosion::init(Case_plateau* * jeu);
 	void Explosion::end(Case_plateau* * jeu);
 
-	void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool axe, bool die);
-	void Explosion::affichage_end(int x, int y, Case_plateau* * jeu, bool axe);
+	void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool* axe, bool* die);
+	void Explosion::affichage_end(int x, int y, Case_plateau* * jeu, bool* axe);
 
 private:
 	int e_colone, e_line, puissance;

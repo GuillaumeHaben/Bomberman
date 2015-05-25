@@ -278,27 +278,28 @@ void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player, int l) {
 		recherche_chemin_recursive(jeu, chemin, 0, i, j, player, last_dep);
 		deplacement(chemin[0], jeu, player);
 		done = true;
-	}else{
+	}
+	else{
 		deplacement(chemin[0], jeu, player);
 		done = true;
 	}
-	
-	
 }
 
+
 bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int i, int j, Joueur *player, int direction) {
-	
+
 	if (taille_chemin > 35)	return false;
-	if (i-1 < 0 || j-1 < 0) return false;
-	if (i+1 >= TAILLE_JEU || j+1 >= TAILLE_JEU) return false;
+	if (i - 1 < 0 || j - 1 < 0) return false;
+	if (i + 1 >= TAILLE_JEU || j + 1 >= TAILLE_JEU) return false;
 
 	if (jeu[i][j] == JOUEUR) {
 		return true;
 	}
-	else {
+	else{
+
 		if (jeu[i][j - 1] != MUR && jeu[i][j - 1] != BOMBE && jeu[i][j - 1] != JOUEUR_BOMBE && direction != DOWN){
 
-			// On essaie de monter
+			// On essaie gauche
 			if (recherche_chemin_recursive(jeu, chemin, taille_chemin + 1, i, j - 1, player, UP)) {
 				chemin[taille_chemin] = UP;
 				return true;
@@ -313,6 +314,7 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 				return true;
 			}
 		}
+
 
 		if (jeu[i + 1][j] != MUR && jeu[i + 1][j] != BOMBE && jeu[i + 1][j] != JOUEUR_BOMBE && direction != LEFT){
 

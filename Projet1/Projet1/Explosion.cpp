@@ -39,19 +39,19 @@ int Explosion::init(Case_plateau* * jeu){
 
 	for (int i = 1; i <= puissance; i++) {
 		if (!(x + i >= TAILLE_JEU || east)){
-			affichage_init(x + i, y, jeu, east, die);
+			affichage_init(x + i, y, jeu, &east, &die);
 		}
 
 		if (!(y + i >= TAILLE_JEU || south)) {
-			affichage_init(x, y + i, jeu, south, die);
+			affichage_init(x, y + i, jeu, &south, &die);
 		}
 
 		if (!(x - i < 0 || west)) {
-			affichage_init(x - i, y, jeu, west, die);
+			affichage_init(x - i, y, jeu, &west, &die);
 		}
 
 		if (!(y - i < 0 || north)){
-			affichage_init(x, y - i, jeu, north, die);
+			affichage_init(x, y - i, jeu, &north, &die);
 		}
 	}return die;
 }
@@ -69,19 +69,19 @@ void Explosion::end(Case_plateau* * jeu){
 
 	for (int i = 1; i <= puissance; i++) {
 		if (!(x + i >= TAILLE_JEU || east)) {
-			affichage_end(x + i, y, jeu, east);
+			affichage_end(x + i, y, jeu, &east);
 		}
 
 		if (!(y + i >= TAILLE_JEU || south)) {
-			affichage_end(x, y + i, jeu, south);
+			affichage_end(x, y + i, jeu, &south);
 		}
 
 		if (!(x - i < 0 || west)) {
-			affichage_end(x - i, y, jeu, west);
+			affichage_end(x - i, y, jeu, &west);
 		}
 
 		if (!(y - i < 0 || north)){
-			affichage_end(x, y - i, jeu, north);
+			affichage_end(x, y - i, jeu, &north);
 		}
 	}
 
@@ -97,7 +97,7 @@ void Explosion::end(Case_plateau* * jeu){
 	}
 }
 
-void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool axe, bool die) {
+void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool* axe, bool* die) {
 	switch (jeu[x][y]) {
 	case CAISSE: case CAISSE_EXPLOSION:
 		jeu[x][y] = CAISSE_EXPLOSION;
@@ -106,7 +106,7 @@ void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool axe, bool
 		jeu[x][y] = EXPLOSION;
 		break;
 	case MUR:
-		axe = true;
+		*axe = true;
 		break;
 	case BOMBE: case BOMBE_EXPLOSION:
 		jeu[x][y] = BOMBE_EXPLOSION;
@@ -116,7 +116,7 @@ void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool axe, bool
 		break;
 	case JOUEUR: case JOUEUR_EXPLOSION:
 		jeu[x][y] = JOUEUR_EXPLOSION;
-		die = true;
+		*die = true;
 		break;
 	case EXPLOSION: case EXPLOSION_EXPLOSION:
 		jeu[x][y] = EXPLOSION_EXPLOSION;
@@ -129,7 +129,7 @@ void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool axe, bool
 	}
 }
 
-void Explosion::affichage_end(int x, int y, Case_plateau* * jeu, bool axe) {
+void Explosion::affichage_end(int x, int y, Case_plateau* * jeu, bool* axe) {
 	switch (jeu[x][y]) {
 	case EXPLOSION: case CAISSE_EXPLOSION:
 		jeu[x][y] = VIDE;
@@ -144,7 +144,7 @@ void Explosion::affichage_end(int x, int y, Case_plateau* * jeu, bool axe) {
 		jeu[x][y] = EXPLOSION;
 		break;
 	case MUR:
-		axe = true;
+		*axe = true;
 		break;
 	case JOUEUR_BOMBE:
 		jeu[x][y] = JOUEUR_BOMBE;
