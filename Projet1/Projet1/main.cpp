@@ -111,6 +111,7 @@ int main( int argc, char* args[] )
 							if ((plateau.getLevel().getLevel() + 1) <= 3)
 								plateau.init(plateau.getLevel().getLevel() + 1);
 							else plateau.init(1);
+							SDL_RenderClear(renderer);
 						}
 						break;
 					default:

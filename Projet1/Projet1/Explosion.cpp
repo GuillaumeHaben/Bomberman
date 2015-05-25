@@ -126,6 +126,8 @@ void Explosion::affichage_init(int x, int y, Case_plateau* * jeu, bool* axe, boo
 		break;
 	default:
 		jeu[x][y] = VIDE;
+		break;
+		
 	}
 }
 

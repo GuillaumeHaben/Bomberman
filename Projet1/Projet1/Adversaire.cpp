@@ -297,7 +297,8 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 	}
 	else{
 
-		if (jeu[i][j - 1] != MUR && jeu[i][j - 1] != BOMBE && jeu[i][j - 1] != JOUEUR_BOMBE && direction != DOWN){
+		if (jeu[i][j - 1] != MUR && jeu[i][j - 1] != BOMBE && jeu[i][j - 1] != JOUEUR_BOMBE && jeu[i][j - 1] != EXPLOSION && jeu[i][j - 1] != EXPLOSION_EXPLOSION 
+			&& jeu[i][j - 1] != JOUEUR_EXPLOSION && jeu[i][j - 1] != BOMBE_EXPLOSION  && direction != DOWN){
 
 			// On essaie gauche
 			if (recherche_chemin_recursive(jeu, chemin, taille_chemin + 1, i, j - 1, player, UP)) {
@@ -306,7 +307,8 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 			}
 		}
 
-		if (jeu[i - 1][j] != MUR && jeu[i - 1][j] != BOMBE && jeu[i - 1][j] != JOUEUR_BOMBE && direction != RIGHT){
+		if (jeu[i - 1][j] != MUR && jeu[i - 1][j] != BOMBE && jeu[i - 1][j] != JOUEUR_BOMBE && jeu[i - 1][j] != EXPLOSION && jeu[i - 1][j] != EXPLOSION_EXPLOSION
+			&& jeu[i - 1][j] != JOUEUR_EXPLOSION && jeu[i - 1][j] != BOMBE_EXPLOSION  && direction != RIGHT){
 
 			// On essaie gauche
 			if (recherche_chemin_recursive(jeu, chemin, taille_chemin + 1, i - 1, j, player, LEFT)) {
@@ -316,7 +318,8 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 		}
 
 
-		if (jeu[i + 1][j] != MUR && jeu[i + 1][j] != BOMBE && jeu[i + 1][j] != JOUEUR_BOMBE && direction != LEFT){
+		if (jeu[i + 1][j] != MUR && jeu[i + 1][j] != BOMBE && jeu[i + 1][j] != JOUEUR_BOMBE && jeu[i + 1][j] != EXPLOSION && jeu[i + 1][j] != EXPLOSION_EXPLOSION
+			&& jeu[i + 1][j] != JOUEUR_EXPLOSION && jeu[i + 1][j] != BOMBE_EXPLOSION  && direction != LEFT){
 
 			// On essaie droite
 			if (recherche_chemin_recursive(jeu, chemin, taille_chemin + 1, i + 1, j, player, RIGHT)) {
@@ -325,7 +328,8 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 			}
 		}
 
-		if (jeu[i][j + 1] != MUR && jeu[i][j + 1] != BOMBE && jeu[i][j + 1] != JOUEUR_BOMBE && direction != UP){
+		if (jeu[i][j + 1] != MUR && jeu[i][j + 1] != BOMBE && jeu[i][j + 1] != JOUEUR_BOMBE && jeu[i][j + 1] != EXPLOSION && jeu[i][j + 1] != EXPLOSION_EXPLOSION
+			&& jeu[i][j + 1] != JOUEUR_EXPLOSION && jeu[i][j + 1] != BOMBE_EXPLOSION && direction != UP){
 
 			// On essaie de descendre
 			if (recherche_chemin_recursive(jeu, chemin, taille_chemin + 1, i, j + 1, player, DOWN)) {

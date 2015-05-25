@@ -16,7 +16,7 @@ Game::Game(){
 
 	for (int i = 0; i < TAILLE_JEU; i++)
 		for (int j = 0; j < TAILLE_JEU; j++)
-			jeu[i][j] = INIT;
+			jeu[i][j] = VIDE;
 
 	l = Level(this->jeu, this->getPrincipal(), this->getSecondaire());
 	this->init(i);
@@ -42,7 +42,7 @@ void Game::reinit(){
 
 	for (int i = 0; i < TAILLE_JEU; i++)
 		for (int j = 0; j < TAILLE_JEU; j++)
-			jeu[i][j] = INIT;
+			jeu[i][j] = VIDE;
 }
 
 void Game::setPause(){

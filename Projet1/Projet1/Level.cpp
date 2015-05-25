@@ -77,17 +77,9 @@ void Level::generate(int nombreCaisses) {
 	while (k < nombreCaisses) {
 		i = rand() % 15;
 		j = rand() % 15;
-		if (jeu[i][j] != MUR && jeu[i][j] != VIDE && jeu[i][j] != JOUEUR) {
+		if (jeu[i][j] != MUR) {
 			jeu[i][j] = CAISSE;
 			k++;
-		}
-	}
-
-	for (int l = 0; l < TAILLE_JEU; l++) {
-		for (int m = 0; m < TAILLE_JEU; m++) {
-			if (jeu[l][m] != MUR && jeu[l][m] != CAISSE && jeu[l][m] != JOUEUR) {
-				jeu[l][m] = VIDE;
-			}
 		}
 	}
 }
@@ -142,6 +134,9 @@ void Level::lvl1() {
 	jeu[7][2] = VIDE;
 	jeu[7][12] = VIDE;
 
+	// Block
+	generate(100);
+
 	// Empty cases
 	for (int i = 1; i < 4; i++) {
 		jeu[i][1] = VIDE;
@@ -151,9 +146,6 @@ void Level::lvl1() {
 		jeu[i][13] = VIDE;
 		jeu[13][i] = VIDE;
 	} 
-
-	// Block
-	generate(100);
 
 	jeu[1][1] = JOUEUR;
 	jeu[13][13] = ADVERSAIRE;
@@ -325,11 +317,12 @@ void Level::draw(bool pause){
 							bombes[i].put_off();
 						else{
 							bombes[i].put_on();
-							bombes[i].event(jeu);
 						}
 
 						// Print the Bombe
 						if (rect.x == (bombes[i].getColone() * 35) && rect.y == (bombes[i].getLine() * 35)) {
+							int as = jeu[12][13];
+							bombes[i].event(jeu);
 							if (bombes[i].getExplosee() == 0) {
 								SDL_RenderCopy(renderer, bombes[i].texture[0], NULL, &rect);
 							}
@@ -415,7 +408,10 @@ void Level::draw(bool pause){
 				break;
 
 			case ADVERSAIRE_EXPLOSION:
-				ennemi->setDie();
+				if (j != 12 && k != 13){
+					ennemi->draw();
+					ennemi->setDie();
+				}
 				break;
 			}
 		}
