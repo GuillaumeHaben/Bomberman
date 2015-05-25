@@ -315,8 +315,10 @@ void Level::draw(bool pause){
 			case BOMBE: case JOUEUR_BOMBE: case BOMBE_EXPLOSION: case ADVERSAIRE_BOMBE:
 				Bombe* bombes;
 				bombes = prncp->getBombes_tab();
-				bombes[2] = ennemi->getBombes_tab[0];
-				bombes[3] = ennemi->getBombes_tab[1];
+				Bombe* bombes_adv;
+				bombes_adv = ennemi->getBombes_tab();
+				bombes[2] = bombes_adv[0];
+				bombes[3] = bombes_adv[1];
 
 				for (int i = 0; i < 4; i++) {
 					if (&bombes[i] != NULL) {
@@ -343,22 +345,25 @@ void Level::draw(bool pause){
 									musique = true;
 								}
 								if (bombes[i].getPerdreVie()){
-									prncp->die();
-									bombes[i].setPerdreVie();
+									if (i == 0 || i == 1){
+										prncp->die();
+										bombes[i].setPerdreVie();
+									}
 								}
 							}
 							if (bombes[i].getExplosee() == 3) {
 								bombes[i].setLine(-1);
 								musique = false;
 							}
+							break;
 						}
 					}
-					if (jeu[k][j] == JOUEUR_BOMBE){
-						prncp->draw();
-					}
-					if (jeu[k][j] == BOMBE_EXPLOSION){
-						SDL_RenderCopy(renderer, flamme, NULL, &rect2);
-					}
+				}
+				if (jeu[k][j] == JOUEUR_BOMBE){
+					prncp->draw();
+				}
+				if (jeu[k][j] == BOMBE_EXPLOSION){
+					SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				}
 				break;
 
@@ -381,7 +386,6 @@ void Level::draw(bool pause){
 				break;
 
 			case ADVERSAIRE_EXPLOSION:
-				ennemi->draw();
 				ennemi->setDie();
 				break;
 			}

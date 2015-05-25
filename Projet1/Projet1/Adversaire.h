@@ -31,6 +31,7 @@ public:
 
 private:
 	int nb_bombes, nb_bombes_max;
+	int last_deplacement;
 	SDL_Texture* texture;
 	SDL_Rect dest;
 	Bombe bombes_tab[2];
