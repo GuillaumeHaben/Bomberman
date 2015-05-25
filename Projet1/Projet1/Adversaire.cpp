@@ -56,7 +56,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 		else{
 			if (jeu[p_colone][p_line - 1] == MUR || jeu[p_colone][p_line - 1] == CAISSE) {
 				if (jeu[p_colone][p_line - 1] == CAISSE) {
-					jeu[p_colone][p_line] = ADVERSAIRE_BOMBE;
+					jeu[p_colone][p_line] = BOMBE;
 					if (nb_bombes < NB_BOMBES_MAX){
 						Bombe nouvelle_bombe(p_colone, p_line);
 						if (nb_bombes == 1){
@@ -105,7 +105,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 		else{
 			if (jeu[p_colone][p_line + 1] == MUR || jeu[p_colone][p_line + 1] == CAISSE) {
 				if (jeu[p_colone][p_line + 1] == CAISSE) {
-					jeu[p_colone][p_line] = ADVERSAIRE_BOMBE;
+					jeu[p_colone][p_line] = BOMBE;
 					if (nb_bombes < NB_BOMBES_MAX){
 						Bombe nouvelle_bombe(p_colone, p_line);
 						if (nb_bombes == 1){
@@ -156,7 +156,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 		else{
 			if (jeu[p_colone + 1][p_line] == MUR || jeu[p_colone + 1][p_line] == CAISSE) {
 				if (jeu[p_colone + 1][p_line] == CAISSE) {
-					jeu[p_colone][p_line] = ADVERSAIRE_BOMBE;
+					jeu[p_colone][p_line] = BOMBE;
 					if (nb_bombes < NB_BOMBES_MAX){
 						Bombe nouvelle_bombe(p_colone, p_line);
 						if (nb_bombes == 1){
@@ -207,7 +207,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 		else{
 			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone - 1][p_line] == CAISSE) {
 				if (jeu[p_colone - 1][p_line] == CAISSE) {
-					jeu[p_colone][p_line] = ADVERSAIRE_BOMBE;
+					jeu[p_colone][p_line] = BOMBE;
 					if (nb_bombes < NB_BOMBES_MAX){
 						Bombe nouvelle_bombe(p_colone, p_line);
 						if (nb_bombes == 1){
@@ -270,7 +270,7 @@ void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player, int l) {
 
 bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int i, int j, Joueur *player) {
 	
-	if (taille_chemin > 25){
+	if (taille_chemin > 35){
 		return false;
 	}
 	
@@ -278,7 +278,12 @@ bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, in
 		return true;
 	}
 	else {
-		if (jeu[i][j] == MUR || jeu[i][j] == BOMBE || jeu[i][j] == ADVERSAIRE_BOMBE) return false;
+		if (jeu[i][j] == MUR) {
+			return false;
+		}
+		if (jeu[i][j] == BOMBE) {
+
+		}
 		else {
 			if (player->getLine() < j) {
 				if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i, j - 1, player)) {
