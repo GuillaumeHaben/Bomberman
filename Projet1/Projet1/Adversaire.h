@@ -20,12 +20,18 @@ public:
 	Bombe* getBombes_tab();
 	void dim_Nb_Bombes();
 
+	int** murs;
+	int** danger;
+	void modifTableaux(Case_plateau** jeu);
+	int x_objectif;
+	int y_objectif;
+
 	void init_var();
 	void init_load();
 	int deplacement(int direction, Case_plateau* * jeu, Joueur *player);
 	void draw();
-	void recherche_chemin(Case_plateau* * jeu, Joueur *player, int i);
-	bool recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int pos_x, int pos_y, Joueur *player);
+	void vers_chemin(Case_plateau** jeu, Joueur* player);
+	void recherche_objectif();
 	bool die();
 	void setDie();
 

@@ -6,6 +6,18 @@
 Adversaire::Adversaire() : Personnage(){
 	init_var();
 	init_load();
+	murs = new int* [TAILLE_JEU];
+	danger = new int* [TAILLE_JEU];
+	int dim_allouee;
+	for (dim_allouee = 0; dim_allouee < TAILLE_JEU; ++dim_allouee) {
+		murs[dim_allouee] = new int[TAILLE_JEU];
+		danger[dim_allouee] = new int[TAILLE_JEU];
+	}
+	for (int i = 0; i < TAILLE_JEU; i++)
+		for (int j = 0; j < TAILLE_JEU; j++) {
+			murs[i][j] = 0;
+			danger[i][j] = 0;
+		}
 }
 
 /* Appel au super en C++ */
@@ -18,6 +30,24 @@ Adversaire::Adversaire(int pos_x, int pos_y) : Personnage(pos_x, pos_y) {
 Adversaire::~Adversaire(){
 }
 
+void Adversaire::modifTableaux(Case_plateau** jeu) {
+	for (int i = 0; i < TAILLE_JEU; i++) {
+		for (int j = 0; j < TAILLE_JEU; j++) {
+			if (jeu[i][j] == MUR || jeu[i][j] == CAISSE) {
+				murs[i][j] = 1;
+			}
+			if (jeu[i][j] == ADVERSAIRE_BOMBE) {
+				danger[i][j] = 1;
+				for (int k = 1; k <= 3; k++) {
+					danger[i + k][j] = 1;
+					danger[i - k][j] = 1;
+					danger[i][j + k] = 1;
+					danger[i][j - k] = 1;
+				}
+			}
+		}
+	}
+}
 Bombe* Adversaire::getBombes_tab() {
 	return bombes_tab;
 }
@@ -260,110 +290,42 @@ void Adversaire::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
 }
 
-void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player, int l) {
-	int i = p_colone;
-	int j = p_line;
-	if (recherche_chemin_recursive(jeu, chemin, 0, i, j, player)){
-		deplacement(chemin[l], jeu, player);
-	}
+void Adversaire::vers_chemin(Case_plateau** jeu, Joueur* player) {
+	modifTableaux(jeu);
+	recherche_objectif();
+	if (this->getLine() > y_objectif)
+		deplacement(DOWN, jeu, player);
+	if (this->getLine() < y_objectif)
+		deplacement(UP, jeu, player);
+	if (this->getColone() < x_objectif)
+		deplacement(RIGHT, jeu, player);
+	if (this->getColone() > x_objectif)
+		deplacement(LEFT, jeu, player);
 }
 
-bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int i, int j, Joueur *player) {
-	
-	if (taille_chemin > 25){
-		return false;
-	}
-	
-	if (i < 0 || j < 0) return false;
-	if (i >= TAILLE_JEU || j >= TAILLE_JEU) return false;
-	if (jeu[i][j] == JOUEUR) {
-		return true;
-	}
-	else {
-		if (jeu[i][j] == MUR || jeu[i][j] == BOMBE || jeu[i][j] == ADVERSAIRE_BOMBE) return false;
-		else {
-			if (player->getLine() < j) {
-				if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i, j - 1, player)) {
-					chemin[taille_chemin] = UP;
-					return true;
-				}
-				else {
-					if (player->getColone() <= i) {
-						if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
-							chemin[taille_chemin] = LEFT;
-							return true;
-						}
-						else {
-							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
-								chemin[taille_chemin] = RIGHT;
-								return true;
-							}
-						}
-					}
-					else {
-						if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
-							chemin[taille_chemin] = RIGHT;
-							return true;
-						}
-						else {
-							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
-								chemin[taille_chemin] = LEFT;
-								return true;
-							}
-						}
-					}
-				}
+void Adversaire::recherche_objectif() {
+	x_objectif = this->getColone();
+	y_objectif = this->getLine();
+	if (danger[this->getColone()][this->getLine()] == 0) {
+		do {
+			srand(time(NULL));
+			int i = rand() % 4;
+			switch (i) {
+			case 0 :
+				x_objectif += 1;
+				break;
+			case 1 :
+				x_objectif -= 1;
+				break;
+			case 2 :
+				y_objectif += 1;
+				break;
+			case 3 :
+				y_objectif -= 1;
+				break;
 			}
-			else { //x < i
-				if (player->getLine() == j){
-					if (player->getColone() > j) {
-						if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
-							chemin[taille_chemin] = RIGHT;
-							return true;
-						}
-						else {
-							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
-								chemin[taille_chemin] = LEFT;
-								return true;
-							}
-						}
-					}
+		} while (murs[x_objectif][y_objectif] == 1);
+		srand(time(NULL));
+	}
 
-				}
-				else{
-					if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i, j + 1, player)) {
-					chemin[taille_chemin] = DOWN;
-					return true;
-				}
-				else {
-					if (player->getColone() > j) {
-							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
-							chemin[taille_chemin] = RIGHT;
-							return true;
-						}
-						else {
-								if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
-								chemin[taille_chemin] = LEFT;
-								return true;
-							}
-						}
-					}
-					else {
-							if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i - 1, j, player)) {
-							chemin[taille_chemin] = LEFT;
-							return true;
-						}
-						else {
-								if (recherche_chemin_recursive(jeu, chemin, taille_chemin+1, i + 1, j, player)) {
-								chemin[taille_chemin] = RIGHT;
-								return true;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	}
-	return false;
 }

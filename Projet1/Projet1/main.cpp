@@ -129,13 +129,13 @@ int main( int argc, char* args[] )
 					// Move IA
 					if (ennemi_temps.getTime() > 4000){
 						ennemi_temps.stop();
-						adv->recherche_chemin(plateau.jeu, prncp, 0);
+						adv->vers_chemin(plateau.jeu, prncp);
 						ennemi_temps.restart();
 						nonFait = false;
 					}
 					else{
 						if (ennemi_temps.getTime() < 4000 && ennemi_temps.getTime() > 2000 && !nonFait){
-							adv->recherche_chemin(plateau.jeu, prncp, 1);
+							adv->vers_chemin(plateau.jeu, prncp);
 							nonFait = true;
 						}
 					}
