@@ -6,6 +6,7 @@
 
 #include "Game.h"
 #include "Menu.h"
+#include "Time.h"
 
 const int SCREEN_WIDTH = 675;
 const int SCREEN_HEIGHT = 525;
@@ -24,6 +25,8 @@ int main( int argc, char* args[] )
 	bool quit = false;
 	bool IsMenu = true;
 	bool mute = false;
+
+	Time ennemi_temps;
 
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0){ 
@@ -46,10 +49,12 @@ int main( int argc, char* args[] )
 
 			Game plateau;
 			Joueur* prncp = plateau.getPrincipal();
+			Adversaire* adv = plateau.getSecondaire();
 			Menu menu;
 
 			menu.draw();
 			SDL_RenderPresent(renderer);
+			ennemi_temps.start();
 
 			//While user hasn't quit
 			while (quit == false){
@@ -106,12 +111,20 @@ int main( int argc, char* args[] )
 
 				}
 
+				
+
 				// Update Frame
 				SDL_RenderClear(renderer);
 				if (IsMenu){
 					menu.draw();
 				}
-				else plateau.draw();
+				else{
+					if (ennemi_temps.getTime() > 4000){
+						adv->recherche_chemin(plateau.jeu, prncp);
+						ennemi_temps.restart();
+					}
+					plateau.draw();
+				}
 				SDL_RenderPresent(renderer);
 			}
 
