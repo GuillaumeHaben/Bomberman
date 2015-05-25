@@ -274,10 +274,9 @@ void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player, int l) {
 	int i = p_colone;
 	int j = p_line;
 
-	if (done){
+
 		if (recherche_chemin_recursive(jeu, chemin, 0, i, j, player, last_dep)){
 			deplacement(chemin[0], jeu, player);
-			done = true;
 		}
 		else{
 			int a = last_dep;
@@ -293,11 +292,6 @@ void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player, int l) {
 				deplacement(a, jeu, player);
 			}
 		}
-	}
-	else{
-		deplacement(chemin[0], jeu, player);
-		done = true;
-	}
 }
 
 
