@@ -111,15 +111,14 @@ int main( int argc, char* args[] )
 
 				}
 
-				
-
 				// Update Frame
 				SDL_RenderClear(renderer);
 				if (IsMenu){
 					menu.draw();
 				}
 				else{
-					if (ennemi_temps.getTime() > 4000){
+					if (ennemi_temps.getTime() > 3000){
+						ennemi_temps.stop();
 						adv->recherche_chemin(plateau.jeu, prncp);
 						ennemi_temps.restart();
 					}

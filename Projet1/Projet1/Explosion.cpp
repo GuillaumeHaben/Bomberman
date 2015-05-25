@@ -42,7 +42,7 @@ int Explosion::init(Case_plateau* * jeu){
 			case CAISSE: case CAISSE_EXPLOSION:
 				jeu[x + i][y] = CAISSE_EXPLOSION;
 				break;
-			case VIDE:
+			case VIDE: case INIT:
 				jeu[x + i][y] = EXPLOSION;
 				break;
 			case MUR:
@@ -57,9 +57,6 @@ int Explosion::init(Case_plateau* * jeu){
 				break;
 			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x + i][y] = EXPLOSION_EXPLOSION;
-				break;
-			case INIT:
-				jeu[x + i][y] = EXPLOSION;
 				break;
 			default:
 				jeu[x + i][y] = VIDE;
@@ -102,7 +99,7 @@ int Explosion::init(Case_plateau* * jeu){
 			case CAISSE: case CAISSE_EXPLOSION:
 				jeu[x - i][y] = CAISSE_EXPLOSION;
 				break;
-			case VIDE:
+			case VIDE: case INIT:
 				jeu[x - i][y] = EXPLOSION;
 				break;
 			case MUR:
@@ -117,9 +114,6 @@ int Explosion::init(Case_plateau* * jeu){
 				break;
 			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				jeu[x - i][y] = EXPLOSION_EXPLOSION;
-				break;
-			case INIT:
-				jeu[x + i][y] = EXPLOSION;
 				break;
 			default:
 				jeu[x - i][y] = VIDE;

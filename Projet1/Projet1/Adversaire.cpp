@@ -16,7 +16,6 @@ Adversaire::Adversaire(int pos_x, int pos_y) : Personnage(pos_x, pos_y) {
 
 /* Destructeur */
 Adversaire::~Adversaire(){
-	SDL_DestroyTexture(texture);
 }
 
 Bombe* Adversaire::getBombes_tab() {
@@ -58,6 +57,8 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 					 }
 					 else*/ jeu[p_colone][p_line - 1] = ADVERSAIRE;
 					 --p_line;
+					 dest.x = p_colone * 35;
+					 dest.y = p_line * 35;
 					 return 0;
 				 }
 			i++;
@@ -81,6 +82,8 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 				}
 				else*/ jeu[p_colone][p_line + 1] = ADVERSAIRE;
 				++p_line;
+				dest.x = p_colone * 35;
+				dest.y = p_line * 35;
 				return 0;
 			}
 			i++;
@@ -104,6 +107,8 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 				}
 				else*/ jeu[p_colone + 1][p_line] = ADVERSAIRE;
 				++p_colone;
+				dest.x = p_colone * 35;
+				dest.y = p_line * 35;
 				return 0;
 			}
 			i++;
@@ -127,6 +132,8 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu){
 				}
 				else*/ jeu[p_colone - 1][p_line] = ADVERSAIRE;
 				--p_colone;
+				dest.x = p_colone * 35;
+				dest.y = p_line * 35;
 				return 0;
 			}
 			i++;
@@ -141,20 +148,19 @@ void Adversaire::event(Case_plateau* * jeu){
 
 void Adversaire::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, &dest);
-			}
+}
 
 void Adversaire::recherche_chemin(Case_plateau* * jeu, Joueur *player) {
-	
 	int i = p_colone;
 	int j = p_line;
 	if (recherche_chemin_recursive(jeu, chemin, 0, i, j, player)){
 		deplacement(chemin[0], jeu);
-}
+	}
 }
 
 bool Adversaire::recherche_chemin_recursive(Case_plateau* * jeu, int* chemin, int taille_chemin, int i, int j, Joueur *player) {
 	
-	if (taille_chemin > 30){
+	if (taille_chemin > 20){
 		return false;
 	}
 	

@@ -73,6 +73,15 @@ void Level::generate(int nombreCaisses) {
 			k++;
 		}
 	}
+
+	for (int l = 0; l < TAILLE_JEU; l++) {
+		for (int m = 0; m < TAILLE_JEU; m++) {
+			if (jeu[l][m] != MUR && jeu[l][m] != CAISSE && jeu[l][m] != JOUEUR) {
+				jeu[i][j] = VIDE;
+			}
+		}
+	}
+
 }
 
 /* Build the first level */
