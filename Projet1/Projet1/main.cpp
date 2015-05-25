@@ -23,9 +23,10 @@ int main( int argc, char* args[] )
 {
 	bool quit = false;
 	bool IsMenu = true;
+	bool mute = false;
 
 	//Initialize SDL
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0){
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0){ 
 		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
 	} else {
 
@@ -40,7 +41,7 @@ int main( int argc, char* args[] )
 			Mix_Chunk *fin = Mix_LoadWAV("Sprite/creature.wav");
 			Mix_Chunk *musique = Mix_LoadWAV("Sprite/fond.wav");
 			Mix_Chunk *menumusique = Mix_LoadWAV("Sprite/tictac.wav");
-			Mix_Volume(1, MIX_MAX_VOLUME / 3);
+			Mix_Volume(1, MIX_MAX_VOLUME / 10);
 			Mix_PlayChannel(1, menumusique, -1);
 
 			Game plateau;
@@ -65,6 +66,17 @@ int main( int argc, char* args[] )
 						case SDLK_p:
 							plateau.setPause();
 							break;
+						case SDLK_m:
+							if (!mute){
+								Mix_Volume(1, 0);
+								Mix_Volume(2, 0);
+								mute = true;
+							}else{
+								mute = false;
+								Mix_Volume(1, MIX_MAX_VOLUME / 10);
+								Mix_Volume(2, MIX_MAX_VOLUME / 10);
+							}
+							break;
 						default:
 							if (!plateau.getPause())
 								prncp->event(plateau.jeu);
@@ -76,7 +88,7 @@ int main( int argc, char* args[] )
 							plateau.setPause();
 						if (IsMenu){
 							Mix_HaltChannel(1);
-							//Mix_PlayChannel(1, musique, -1);
+							Mix_PlayChannel(1, musique, -1);
 							IsMenu = false;
 						}
 						if (IsDead){

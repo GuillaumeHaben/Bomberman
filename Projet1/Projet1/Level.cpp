@@ -5,9 +5,10 @@ Level::Level() {
 
 }
 
-Level::Level(Case_plateau* * plat, Joueur* J) {
+Level::Level(Case_plateau* * plat, Joueur* J, Adversaire* A) {
 	jeu = plat;
 	prncp = J;
+	ennemi = A;
 
 	fond = { 0, 0, 675, 525 };
 
@@ -122,21 +123,21 @@ void Level::lvl1() {
 	jeu[TAILLE_JEU - 2][10] = MUR;
 	jeu[1][4] = MUR;
 
-	// Player
-	jeu[1][1] = JOUEUR;
-
 	// Empty cases
 	for (int i = 2; i < 4; i++) {
 		jeu[i][1] = VIDE;
 		jeu[1][i] = VIDE;
 	}
-	for (int i = 11; i < 13; i++){
+	for (int i = 11; i <= 13; i++){
 		jeu[i][13] = VIDE;
 		jeu[13][i] = VIDE;
 	}
 
 	// Block
 	generate(80);
+
+	jeu[1][1] = JOUEUR;
+	jeu[13][13] = ADVERSAIRE;
 
 	// Chargement du sprite
 	SDL_Surface * background = SDL_LoadBMP("Sprite/lvl1.bmp");
@@ -166,7 +167,7 @@ void Level::draw(bool pause){
 				SDL_RenderCopy(renderer, caisse, NULL, &rect);
 				break;
 
-			case JOUEUR: 
+			case JOUEUR:
 				prncp->draw();
 				break;
 
@@ -179,7 +180,8 @@ void Level::draw(bool pause){
 						// Check if the bombe should be active or not
 						if (pause){
 							bombes[i].put_off();
-						}else{
+						}
+						else{
 							bombes[i].put_on();
 							bombes[i].event(jeu);
 						}
@@ -217,8 +219,8 @@ void Level::draw(bool pause){
 					}
 				}
 				break;
-			
-			case JOUEUR_EXPLOSION:	
+
+			case JOUEUR_EXPLOSION:
 				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				prncp->draw();
 				break;
@@ -231,6 +233,9 @@ void Level::draw(bool pause){
 			case EXPLOSION: case EXPLOSION_EXPLOSION:
 				SDL_RenderCopy(renderer, flamme, NULL, &rect2);
 				break;
+
+			case ADVERSAIRE:
+				ennemi->draw();
 			}
 		}
 	}
