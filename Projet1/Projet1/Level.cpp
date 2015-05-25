@@ -77,7 +77,7 @@ void Level::generate(int nombreCaisses) {
 	while (k < nombreCaisses) {
 		i = rand() % 15;
 		j = rand() % 15;
-		if (jeu[i][j] != MUR && jeu[i][j] != VIDE && jeu[i][j] != JOUEUR) {
+		if (jeu[i][j] != MUR && jeu[i][j] != VIDE && jeu[i][j] != JOUEUR && jeu[i][j] != ADVERSAIRE) {
 			jeu[i][j] = CAISSE;
 			k++;
 		}
@@ -85,7 +85,7 @@ void Level::generate(int nombreCaisses) {
 
 	for (int l = 0; l < TAILLE_JEU; l++) {
 		for (int m = 0; m < TAILLE_JEU; m++) {
-			if (jeu[l][m] != MUR && jeu[l][m] != CAISSE && jeu[l][m] != JOUEUR) {
+			if (jeu[l][m] != MUR && jeu[l][m] != CAISSE && jeu[l][m] != JOUEUR && jeu[i][j] != ADVERSAIRE) {
 				jeu[l][m] = VIDE;
 			}
 		}
