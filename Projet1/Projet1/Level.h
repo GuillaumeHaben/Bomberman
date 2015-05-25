@@ -31,7 +31,7 @@ private:
 	int niveau;
 	Case_plateau* * jeu;
 	Joueur* prncp;
-	Adversaire* scnd;
+	Adversaire* ennemi;
 
 	SDL_Surface* img[3];
 
