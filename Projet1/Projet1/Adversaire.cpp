@@ -110,7 +110,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 		}
 		else{
 			if (jeu[p_colone][p_line + 1] == MUR || jeu[p_colone][p_line + 1] == CAISSE) {
-				if (jeu[p_colone][p_line - 1] == CAISSE) {
+				if (jeu[p_colone][p_line + 1] == CAISSE) {
 					jeu[p_colone][p_line] = ADVERSAIRE_BOMBE;
 					if (nb_bombes < NB_BOMBES_MAX){
 						Bombe nouvelle_bombe(p_colone, p_line);
@@ -168,7 +168,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 		}
 		else{
 			if (jeu[p_colone + 1][p_line] == MUR || jeu[p_colone + 1][p_line] == CAISSE) {
-				if (jeu[p_colone][p_line - 1] == CAISSE) {
+				if (jeu[p_colone + 1][p_line] == CAISSE) {
 					jeu[p_colone][p_line] = ADVERSAIRE_BOMBE;
 					if (nb_bombes < NB_BOMBES_MAX){
 						Bombe nouvelle_bombe(p_colone, p_line);
@@ -226,7 +226,7 @@ int Adversaire::deplacement(int direction, Case_plateau* * jeu, Joueur *player){
 		}
 		else{
 			if (jeu[p_colone - 1][p_line] == MUR || jeu[p_colone - 1][p_line] == CAISSE) {
-				if (jeu[p_colone][p_line - 1] == CAISSE) {
+				if (jeu[p_colone - 1][p_line] == CAISSE) {
 					jeu[p_colone][p_line] = ADVERSAIRE_BOMBE;
 					if (nb_bombes < NB_BOMBES_MAX){
 						Bombe nouvelle_bombe(p_colone, p_line);
